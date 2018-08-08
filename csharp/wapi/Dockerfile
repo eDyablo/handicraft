@@ -4,6 +4,7 @@ COPY . .
 RUN dotnet build --output /usr/bin/e4d/handicraft/csharp/wapi
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
+LABEL e4d.handicraft.csharp.wapi.version="0.0.1"
 COPY --from=build /usr/bin/e4d/handicraft/csharp/wapi /usr/bin/e4d/handicraft/csharp/wapi
 EXPOSE 80/tcp
 ENTRYPOINT [ "dotnet", "/usr/bin/e4d/handicraft/csharp/wapi/wapi.dll" ]
