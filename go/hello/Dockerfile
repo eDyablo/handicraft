@@ -1,10 +1,7 @@
-FROM golang AS build
-WORKDIR /usr/src/e4d/handicraft/go/hello
-COPY . .
-RUN go build -o /usr/bin/e4d/handicraft/go/hello/hello
+FROM addword/go-build AS build
 
 FROM scratch
 LABEL e4d.handicraft.go.hello.version="0.0.1"
-WORKDIR /usr/bin/e4d/handicraft/go/hello
-COPY --from=build /usr/bin/e4d/handicraft/go/hello .
-ENTRYPOINT [ "/usr/bin/e4d/handicraft/go/hello/hello" ]
+WORKDIR /usr/bin/app
+COPY --from=build /usr/app/bin .
+ENTRYPOINT [ "./hello" ]
