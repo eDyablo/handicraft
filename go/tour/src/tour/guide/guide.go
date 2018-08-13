@@ -1,9 +1,9 @@
 package main
 
 import (
-  "stringer"
-  "exercise_stringer"
-  "error"
+  "tour/stringer"
+  "tour/exercise_stringer"
+  "tour/error"
 )
 
 func main() {
