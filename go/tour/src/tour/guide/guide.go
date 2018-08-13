@@ -6,7 +6,7 @@ import (
   "tour/methods"
   "tour/exercise/errors"
   "tour/stringer"
-  "tour/exercise_stringer"
+  stringer_exercise "tour/exercise/stringer"
   "tour/error"
 )
 
@@ -15,7 +15,7 @@ func main() {
   sandbox.Exercise()
   methods.Exercise()
   errors.Exercise()
-  stringer.Stringer()
-  exercise_stringer.ExerciseStringer()
+  stringer.Exercise()
+  stringer_exercise.Exercise()
   error.Exercise()
 }

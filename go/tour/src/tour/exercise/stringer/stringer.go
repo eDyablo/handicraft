@@ -1,4 +1,4 @@
-package exercise_stringer
+package stringer
 
 import (
   "fmt"
@@ -11,7 +11,7 @@ func (addr IPAddr) String() string {
       addr[0], addr[1], addr[2], addr[3])
 }
 
-func ExerciseStringer() {
+func Exercise() {
   hosts := map[string]IPAddr {
     "loopback": {127, 0, 0, 1},
     "googleDNS": {8, 8, 8, 8},
