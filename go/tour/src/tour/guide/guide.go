@@ -1,13 +1,14 @@
 package main
 
 import (
+	"tour/errors"
   "tour/hello"
   "tour/sandbox"
   "tour/methods"
-  "tour/exercise/errors"
   "tour/stringer"
   stringer_exercise "tour/exercise/stringer"
-  "tour/error"
+  "tour/errors"
+  errors_exercicse "tour/exercise/errors"
 )
 
 func main() {
@@ -17,5 +18,5 @@ func main() {
   errors.Exercise()
   stringer.Exercise()
   stringer_exercise.Exercise()
-  error.Exercise()
+  errors_exercicse.Exercise()
 }
