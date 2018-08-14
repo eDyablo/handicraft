@@ -1,4 +1,4 @@
-package error
+package errors
 
 import (
   "fmt"
@@ -19,7 +19,7 @@ func run() error {
   return &Error { time.Now(), "it didn't work" }
 }
 
-// Exercise runs the tour
+// Exercise does the exercise
 func Exercise() {
   if err := run(); err != nil {
     fmt.Println(err)
