@@ -8,6 +8,7 @@ import (
   stringer_exercise "tour/exercise/stringer"
   "tour/errors"
   errors_exercicse "tour/exercise/errors"
+  "tour/reader"
 )
 
 func main() {
@@ -18,4 +19,5 @@ func main() {
   stringer.Exercise()
   stringer_exercise.Exercise()
   errors_exercicse.Exercise()
+  reader.Exercise()
 }
