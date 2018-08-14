@@ -11,7 +11,7 @@ func (person Person) String() string {
   return fmt.Sprintf("%v (%v years)", person.Name, person.Age)
 }
 
-func Stringer() {
+func Exercise() {
   first := Person{"Arthur Dent", 42}
   second := Person{"Zaphod Beeblebrox", 9001}
   fmt.Println(first, second)

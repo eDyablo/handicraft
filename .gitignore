@@ -2,3 +2,4 @@
 *.code-*
 bin/
 obj/
+pkg/
