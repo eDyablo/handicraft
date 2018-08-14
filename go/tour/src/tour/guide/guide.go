@@ -1,7 +1,6 @@
 package main
 
 import (
-	"tour/errors"
   "tour/hello"
   "tour/sandbox"
   "tour/methods"
