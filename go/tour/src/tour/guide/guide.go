@@ -4,10 +4,11 @@ import (
   "tour/hello"
   "tour/sandbox"
   "tour/methods"
-  "tour/exercise/errors"
   "tour/stringer"
   stringer_exercise "tour/exercise/stringer"
-  "tour/error"
+  "tour/errors"
+  errors_exercicse "tour/exercise/errors"
+  "tour/reader"
 )
 
 func main() {
@@ -17,5 +18,6 @@ func main() {
   errors.Exercise()
   stringer.Exercise()
   stringer_exercise.Exercise()
-  error.Exercise()
+  errors_exercicse.Exercise()
+  reader.Exercise()
 }
