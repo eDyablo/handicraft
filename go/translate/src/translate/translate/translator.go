@@ -1,7 +1,7 @@
 package translate
 
 import (
-	"strings"
+  "strings"
   "net/http"
 
   "github.com/gorilla/mux"
