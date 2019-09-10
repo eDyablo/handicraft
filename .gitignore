@@ -3,3 +3,4 @@
 bin/
 obj/
 pkg/
+.DS_Store
