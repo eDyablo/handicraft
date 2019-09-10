@@ -1,4 +1,5 @@
-namespace prototype.Game {
+namespace prototype.Game
+{
   public abstract class GameObject {
     public GameMapPosition Position { get; protected set; }
 
