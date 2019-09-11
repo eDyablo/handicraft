@@ -1,5 +1,6 @@
 using Xunit;
 using FluentAssertions;
+using Moq;
 
 namespace prototype.Game
 {
@@ -55,6 +56,13 @@ namespace prototype.Game
       var source = new GameCharacter { HitPoints = 1.0f };
       var clone = source.Clone() as GameCharacter;
       clone.HitPoints.Should().Be(1.0f);
+    }
+
+    [Fact]
+    public void Clone_shares_model_with_source() {
+      var source = new GameCharacter { Model = Mock.Of<GameCharacterModel>() };
+      var clone = source.Clone() as GameCharacter;
+      clone.Model.Should().BeSameAs(source.Model);
     }
   }
 }

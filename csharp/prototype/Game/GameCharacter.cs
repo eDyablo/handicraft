@@ -5,6 +5,7 @@ namespace prototype.Game
   public class GameCharacter : GameObject {
     public string Name { get; set; }
     public float HitPoints { get; set; }
+    public GameCharacterModel Model { get; set; }
 
     public GameCharacter() {
       Position = new GameMapPosition();
@@ -14,6 +15,7 @@ namespace prototype.Game
       return new GameCharacter {
         Name = Name,
         HitPoints = HitPoints,
+        Model = Model,
         Position = GameMapPosition.CopyFrom(Position),
       };
     }
