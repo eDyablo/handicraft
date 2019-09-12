@@ -22,7 +22,7 @@ namespace prototype.Game
       var character = new GameCharacter();
       character.MoveTo(GameMapPosition.FromCoordinates(1, 2));
       character.Position.Should().Match<GameMapPosition>(p =>
-        p.Latitude == 1 && p.Longetude == 2
+        p.Latitude == 1 && p.Longitude == 2
       );
     }
 
@@ -40,7 +40,7 @@ namespace prototype.Game
       var clone = source.Clone() as GameCharacter;
       clone.Position.Should().Match<GameMapPosition>(p =>
         p.Latitude == source.Position.Latitude
-        && p.Longetude == source.Position.Longetude
+        && p.Longitude == source.Position.Longitude
       );
     }
 
