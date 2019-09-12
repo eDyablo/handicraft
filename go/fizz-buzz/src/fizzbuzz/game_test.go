@@ -29,7 +29,7 @@ var cases = []testCase {
   {15, "FizzBuzz"},
 }
 
-func Test_answer_for_1_is_1(test *testing.T) {
+func Test_answers(test *testing.T) {
   for i := 0; i < len(cases); i++ {
     c := cases[i]
     if answer := AnswerFor(c.number); answer != c.answer {
