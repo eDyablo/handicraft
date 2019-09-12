@@ -30,10 +30,9 @@ var cases = []testCase {
 }
 
 func Test_answers(test *testing.T) {
-  for i := 0; i < len(cases); i++ {
-    c := cases[i]
-    if answer := AnswerFor(c.number); answer != c.answer {
-      test.Errorf("AnswerFor(%d) = '%s', want '%s'", c.number, answer, c.answer)
+  for _, tc := range cases {
+    if answer := AnswerFor(tc.number); answer != tc.answer {
+      test.Errorf("AnswerFor(%d) = '%s', want '%s'", tc.number, answer, tc.answer)
     }
   }
 }
