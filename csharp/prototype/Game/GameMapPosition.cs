@@ -1,8 +1,6 @@
-using System;
-
 namespace prototype.Game
 {
-  public class GameMapPosition {
+    public class GameMapPosition {
     public int Latitude { get; private set; }
 
     public int Longitude { get; private set; }

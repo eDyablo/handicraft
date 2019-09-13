@@ -1,8 +1,6 @@
-using System;
-
 namespace prototype.Game
 {
-  public class GameCharacter : GameObject {
+    public class GameCharacter : GameObject {
     public string Name { get; set; }
     public float HitPoints { get; set; }
     public GameCharacterModel Model { get; set; }
