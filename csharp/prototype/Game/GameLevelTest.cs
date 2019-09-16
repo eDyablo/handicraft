@@ -1,7 +1,8 @@
 using Xunit;
 using Moq;
 
-namespace prototype.Game {
+namespace prototype.Game
+{
   public class GameLevelTest {
     [Fact]
     public void Builds_itself_using_provided_prototypes() {

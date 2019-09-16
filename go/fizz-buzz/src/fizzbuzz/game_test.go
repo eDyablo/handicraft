@@ -29,11 +29,10 @@ var cases = []testCase {
   {15, "FizzBuzz"},
 }
 
-func Test_answer_for_1_is_1(test *testing.T) {
-  for i := 0; i < len(cases); i++ {
-    c := cases[i]
-    if answer := AnswerFor(c.number); answer != c.answer {
-      test.Errorf("AnswerFor(%d) = '%s', want '%s'", c.number, answer, c.answer)
+func Test_answers(test *testing.T) {
+  for _, tc := range cases {
+    if answer := AnswerFor(tc.number); answer != tc.answer {
+      test.Errorf("AnswerFor(%d) = '%s', want '%s'", tc.number, answer, tc.answer)
     }
   }
 }

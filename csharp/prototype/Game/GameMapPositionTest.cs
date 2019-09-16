@@ -8,14 +8,14 @@ namespace prototype.Game
     public void Newly_created_has_zero_coordinates() {
       var position = new GameMapPosition();
       position.Should().Match<GameMapPosition>(p =>
-        p.Longetude == 0 && p.Latitude == 0);
+        p.Longitude == 0 && p.Latitude == 0);
     }
 
     [Fact]
     public void Created_from_coordinates_stores_them() {
       var position = GameMapPosition.FromCoordinates(1, 2);
       position.Should().Match<GameMapPosition>(p =>
-        p.Latitude == 1 && p.Longetude == 2);
+        p.Latitude == 1 && p.Longitude == 2);
     }
 
     [Fact]

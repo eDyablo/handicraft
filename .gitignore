@@ -4,3 +4,8 @@ bin/
 obj/
 pkg/
 .DS_Store
+__pycache__
+.pytest_cache
+*.pyc
+.venv
+*.exe
