@@ -5,4 +5,6 @@ set -o pipefail
 
 . test.sh
 echo
-node program.js
+node program
+echo
+node compose-mail
