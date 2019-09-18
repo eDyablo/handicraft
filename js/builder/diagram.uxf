@@ -306,7 +306,7 @@ group=3</panel_attributes>
     <panel_attributes>bg=yellow
 /DocumentBuilder/
 --
-/buildTitle()/
+/buildHeading()/
 /buildParagraph()/
 
 group=3</panel_attributes>
@@ -323,7 +323,7 @@ group=3</panel_attributes>
     <panel_attributes>bg=orange
 MarkdownBuilder
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getMarkdown()
 group=3</panel_attributes>
@@ -366,7 +366,7 @@ group=3</panel_attributes>
     <panel_attributes>bg=orange
 HtmlBuilder
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getHtml()
 group=3</panel_attributes>
@@ -398,7 +398,7 @@ group=3</panel_attributes>
     <panel_attributes>bg=orange
 DomBuilder
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getDom()
 group=3</panel_attributes>
@@ -454,7 +454,7 @@ MultiDocBuilder
 --
 builders
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getDocuments()
 group=4</panel_attributes>
@@ -471,9 +471,9 @@ group=4</panel_attributes>
     <panel_attributes>bg=blue
 fg=yellow
 valign=center
-buildTitle()
+buildHeading()
   for b in builders
-    b.buildTitle()
+    b.buildHeading()
 group=4</panel_attributes>
     <additional_attributes/>
   </element>
@@ -685,7 +685,7 @@ group=1</panel_attributes>
     <panel_attributes>bg=yellow
 /DocumentBuilder/
 --
-/buildTitle()/
+/buildHeading()/
 /buildParagraph()/
 
 group=1</panel_attributes>
@@ -715,7 +715,7 @@ group=1</panel_attributes>
     <panel_attributes>bg=orange
 HtmlBuilder
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getHtml()
 group=1</panel_attributes>
@@ -845,7 +845,7 @@ group=6</panel_attributes>
     <panel_attributes>bg=yellow
 /DocumentBuilder/
 --
-/buildTitle()/
+/buildHeading()/
 /buildParagraph()/
 
 group=6</panel_attributes>
@@ -947,7 +947,7 @@ group=6</panel_attributes>
     <panel_attributes>bg=orange
 HtmlBuilder
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getHtml()
 group=6</panel_attributes>
@@ -964,7 +964,7 @@ group=6</panel_attributes>
     <panel_attributes>bg=orange
 DomBuilder
 --
-buildTitle()
+buildHeading()
 buildParagraph()
 getDom()
 group=6</panel_attributes>
