@@ -15,8 +15,10 @@ module.exports = class TextBuilder extends DocumentBuilder {
   }
 
   buildHeading(text) {
-    this.text += text + '\n'
-      + '='.repeat(text.length) + '\n';
+    if (text) {
+      this.text += text + '\n'
+        + '='.repeat(text.length) + '\n';
+    }
   }
 
   getText() {

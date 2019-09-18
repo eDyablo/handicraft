@@ -31,4 +31,10 @@ describe('text builder', () => {
       '',
     ].join('\n'));
   });
+
+  it ('does not add heading when its text is empty', () => {
+    builder.buildHeading();
+    builder.buildHeading('');
+    expect(builder.getText()).toEqual('');
+  });
 });
