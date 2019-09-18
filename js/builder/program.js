@@ -28,7 +28,8 @@ function toText(markdown) {
   return builder.getText();
 }
 
-console.log('DOM\n')
-console.log(toDom(markdown))
-console.log('\ntext\n')
+console.log('DOM\n');
+console.log(toDom(markdown));
+
+console.log('\ntext\n');
 console.log(toText(markdown));
