@@ -5,6 +5,6 @@ set -o pipefail
 
 . test.sh
 echo
-node program
+node represent-markdown
 echo
 node compose-mail
