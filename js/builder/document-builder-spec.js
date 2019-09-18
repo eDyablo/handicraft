@@ -14,14 +14,14 @@ describe('document builder', () => {
 });
 
 describe('document builder inherited', () => {
-  class TheBuilder extends DocumentBuilder {}
+  class InheritedBuilder extends DocumentBuilder {}
 
   const methodMustBeImplemented = new Error('the method must be implemented');
 
   var builder;
 
   beforeEach(() => {
-    builder = new TheBuilder();
+    builder = new InheritedBuilder();
   });
 
   it('must implement build paragraph method', () => {
