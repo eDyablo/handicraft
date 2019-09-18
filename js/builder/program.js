@@ -1,5 +1,6 @@
-const MarkdownReader = require('./markdown-reader.js')
-const DomBuilder = require('./dom-builder.js')
+const MarkdownReader = require('./markdown-reader')
+const DomBuilder = require('./dom-builder')
+const TextBuilder = require('./text-builder');
 
 const markdown = `
 # greeting
@@ -12,9 +13,22 @@ i am a js code
 good bye
 `
 
-const builder = new DomBuilder();
-const reader = new MarkdownReader(builder);
-reader.read(markdown)
-const document = builder.getDom();
+function toDom(markdown) {
+  const builder = new DomBuilder();
+  const reader = new MarkdownReader(builder);
+  reader.read(markdown)
+  const document = builder.getDom();
+  return document.body.innerHTML;
+}
 
-console.log(document.body.innerHTML);
+function toText(markdown) {
+  const builder = new TextBuilder();
+  const reader = new MarkdownReader(builder);
+  reader.read(markdown)
+  return builder.getText();
+}
+
+console.log('DOM\n')
+console.log(toDom(markdown))
+console.log('\ntext\n')
+console.log(toText(markdown));
