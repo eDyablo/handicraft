@@ -23,4 +23,9 @@ describe('html builder', () => {
     builder.buildParagraph('');
     expect(builder.getHtml()).toEqual('');
   });
+
+  it('does not add heading when its text is empty', () => {
+    builder.buildHeading('');
+    expect(builder.getHtml()).toEqual('');
+  });
 });

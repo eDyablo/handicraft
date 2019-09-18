@@ -15,7 +15,9 @@ module.exports = class HtmlBuilder extends DocumentBuilder {
   }
 
   buildHeading(text) {
-    this.text += '<h1>' + text + '</h1>';
+    if (text) {
+      this.text += '<h1>' + text + '</h1>';
+    }
   }
 
   getHtml() {
