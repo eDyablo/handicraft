@@ -22,9 +22,11 @@ module.exports = class DomBuilder extends DocumentBuilder {
   }
 
   buildHeading(text) {
-    const heading = this.document.createElement("h1");
-    heading.textContent = text;
-    this.document.body.appendChild(heading);
+    if (text) {
+      const heading = this.document.createElement("h1");
+      heading.textContent = text;
+      this.document.body.appendChild(heading);
+    }
   }
 
   getDom() {

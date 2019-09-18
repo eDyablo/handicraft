@@ -28,4 +28,11 @@ describe('dom builder', () => {
     expect(dom.body.getElementsByTagName('h1')[0].textContent)
       .toEqual('heading');
   });
+
+  it('does not add heading when its text is empty', () => {
+    builder.buildHeading();
+    builder.buildHeading('');
+    const dom = builder.getDom();
+    expect(dom.body.getElementsByTagName('h1').length).toEqual(0);
+  });
 });
