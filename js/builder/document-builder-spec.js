@@ -1,6 +1,6 @@
 'use strict';
 
-const DocumentBuilder = require('./document-builder.js');
+const DocumentBuilder = require('./document-builder');
 
 describe('document builder', () => {
   it('constructor should throw', () => {

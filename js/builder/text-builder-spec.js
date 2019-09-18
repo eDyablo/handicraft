@@ -1,6 +1,6 @@
 'use strict';
 
-const TextBuilder = require('./text-builder.js')
+const TextBuilder = require('./text-builder')
 
 describe('text builder', () => {
   var builder

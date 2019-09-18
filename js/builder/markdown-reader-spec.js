@@ -1,7 +1,7 @@
 'use strict';
 
-const MarkdownReader = require('./markdown-reader.js');
-const DocumentBuilder = require('./document-builder.js');
+const MarkdownReader = require('./markdown-reader');
+const DocumentBuilder = require('./document-builder');
 
 describe('markdown reader', () => {
   class BuilderStub extends DocumentBuilder {}

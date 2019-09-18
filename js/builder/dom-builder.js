@@ -1,6 +1,6 @@
 'use strict';
 
-const DocumentBuilder = require('./document-builder.js');
+const DocumentBuilder = require('./document-builder');
 
 const { JSDOM } = require("jsdom");
 

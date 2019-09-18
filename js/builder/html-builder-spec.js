@@ -1,6 +1,6 @@
 'use strict';
 
-const HtmlBuilder = require('./html-builder.js');
+const HtmlBuilder = require('./html-builder');
 
 describe('html builder', () => {
   var builder;
