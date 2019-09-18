@@ -1,6 +1,6 @@
 'use strict';
 
-const DomBuilder = require('./dom-builder')
+const DomBuilder = require('./dom-builder');
 
 describe('dom builder', () => {
   var builder;
