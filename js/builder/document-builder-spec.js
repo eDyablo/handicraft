@@ -3,12 +3,17 @@
 const DocumentBuilder = require('./document-builder');
 
 describe('document builder', () => {
-  it('constructor should throw', () => {
-    expect(function() { new DocumentBuilder() }).toThrow();
+  it('throws when instantiated directly', () => {
+    expect(() => { new DocumentBuilder() }).toThrow();
   });
+
+  it('does not throw when instantiated via inheritance', () => {
+    class Inherited extends DocumentBuilder {}
+    expect(() => { new Inherited() }).not.toThrow();
+  })
 });
 
-describe('document builder inherited class', () => {
+describe('document builder inherited', () => {
   class TheBuilder extends DocumentBuilder {}
 
   const methodMustBeImplemented = new Error('the method must be implemented');
