@@ -17,8 +17,7 @@ function toDom(markdown) {
   const builder = new DomBuilder();
   const reader = new MarkdownReader(builder);
   reader.read(markdown)
-  const document = builder.getDom();
-  return document.body.innerHTML;
+  return builder.getDom().body.innerHTML;
 }
 
 function toText(markdown) {
