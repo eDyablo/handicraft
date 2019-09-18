@@ -37,11 +37,11 @@ function toHtml(markdown) {
   return builder.getHtml();
 }
 
-console.log('DOM\n');
+console.log('markdown to DOM\n');
 console.log(toDom(markdown));
 
-console.log('\ntext\n');
+console.log('\nmarkdown to text\n');
 console.log(toText(markdown));
 
-console.log('\nHTML\n');
+console.log('\nmarkdown to HTML\n');
 console.log(toHtml(markdown));
