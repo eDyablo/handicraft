@@ -9,7 +9,9 @@ module.exports = class HtmlBuilder extends DocumentBuilder {
   }
 
   buildParagraph(text) {
-    this.text += '<p>' + text + '</p>';
+    if (text) {
+      this.text += '<p>' + text + '</p>';
+    }
   }
 
   buildHeading(text) {

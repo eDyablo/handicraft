@@ -18,4 +18,9 @@ describe('html builder', () => {
     builder.buildHeading('heading');
     expect(builder.getHtml()).toContain('<h1>heading</h1>');
   });
+
+  it('does not add paragraph when input is empty', () => {
+    builder.buildParagraph('');
+    expect(builder.getHtml()).toEqual('');
+  });
 });
