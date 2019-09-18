@@ -9,3 +9,5 @@ __pycache__
 *.pyc
 .venv
 *.exe
+node_modules
+package-lock.json
