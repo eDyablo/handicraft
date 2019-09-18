@@ -9,17 +9,17 @@ describe('html builder', () => {
     builder = new HtmlBuilder();
   });
 
-  it('build paragraph adds paragraph', () => {
+  it('adds paragraph to html', () => {
     builder.buildParagraph('paragraph');
     expect(builder.getHtml()).toContain('<p>paragraph</p>');
   })
 
-  it('build heading adds heading', () => {
+  it('adds heading to html', () => {
     builder.buildHeading('heading');
     expect(builder.getHtml()).toContain('<h1>heading</h1>');
   });
 
-  it('does not add paragraph when input is empty', () => {
+  it('does not add paragraph when its text is empty', () => {
     builder.buildParagraph('');
     expect(builder.getHtml()).toEqual('');
   });
