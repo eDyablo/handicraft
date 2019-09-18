@@ -32,7 +32,7 @@ describe('markdown reader', () => {
     expect(builder.buildParagraph).toHaveBeenCalledWith('second');
   });
 
-  it('builds heading for line that strarts with "# "', () => {
+  it('builds heading for line that starts with "# "', () => {
     spyOn(builder, 'buildHeading');
     reader.read('# heading');
     expect(builder.buildHeading).toHaveBeenCalledWith('heading');
