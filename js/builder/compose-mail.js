@@ -7,7 +7,8 @@ const builder = new TextBuilder();
 const composer = new MailComposer(builder, {
   from: 'Ed',
   to: 'Santa',
-  body: 'Would you kindly do me a favor and ...'
+  body: 'Would you kindly do me a favor and ...',
+  header: 'ACME Inc.',
 });
 composer.compose();
 const mail = builder.getText();
