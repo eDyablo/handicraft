@@ -1,6 +1,6 @@
 'use strict';
 
-const MarkdownReader = require('./markdown-reader');
+const MarkdownTranslator = require('./markdown-reader');
 const DomBuilder = require('./dom-builder');
 const TextBuilder = require('./text-builder');
 const HtmlBuilder = require('./html-builder');
@@ -18,22 +18,22 @@ good bye
 
 function toDom(markdown) {
   const builder = new DomBuilder();
-  const reader = new MarkdownReader(builder);
-  reader.read(markdown);
+  const translator = new MarkdownTranslator(builder);
+  translator.translate(markdown);
   return builder.getDom().body.innerHTML;
 }
 
 function toText(markdown) {
   const builder = new TextBuilder();
-  const reader = new MarkdownReader(builder);
-  reader.read(markdown);
+  const translator = new MarkdownTranslator(builder);
+  translator.translate(markdown);
   return builder.getText();
 }
 
 function toHtml(markdown) {
   const builder = new HtmlBuilder();
-  const reader = new MarkdownReader(builder);
-  reader.read(markdown);
+  const translator = new MarkdownTranslator(builder);
+  translator.translate(markdown);
   return builder.getHtml();
 }
 

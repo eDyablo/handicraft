@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = class MarkdownReader {
+module.exports = class MarkdownTranslator {
   constructor(builder) {
     this.builder = builder;
   }
 
-  read(markdown) {
+  translate(markdown) {
     if (markdown) {
       const lines = markdown.split('\n');
       lines.forEach(line => {
