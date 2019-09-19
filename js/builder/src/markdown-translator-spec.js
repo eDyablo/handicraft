@@ -1,6 +1,6 @@
 'use strict';
 
-const MarkdownTranslator = require('./markdown-reader');
+const MarkdownTranslator = require('./markdown-translator');
 const DocumentBuilder = require('./document-builder');
 
 describe('markdown translator', () => {
