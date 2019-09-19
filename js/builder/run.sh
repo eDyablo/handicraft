@@ -5,6 +5,6 @@ set -o pipefail
 
 . test.sh
 echo
-node represent-markdown
+node src/represent-markdown
 echo
-node compose-mail
+node src/compose-mail
