@@ -1,6 +1,6 @@
 'use strict';
 
-const MarkdownTranslator = require('./markdown-reader');
+const MarkdownTranslator = require('./markdown-translator');
 const DomBuilder = require('./dom-builder');
 const TextBuilder = require('./text-builder');
 const HtmlBuilder = require('./html-builder');
