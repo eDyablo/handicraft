@@ -2,9 +2,9 @@ import sys
 import text_printing as tp
 
 def print_text(printer):
-  printer.print("hello world!")
+  printer.print("hello world")
   printer.line_feed()
-  printer.print("how are you?")
+  printer.print("how are you")
   printer.line_feed()
   printer.line_feed()
 
@@ -26,6 +26,7 @@ def run():
     tp.QuotedTextPrinter(tp.NumberedTextPrinter(raw_printer)),
     tp.NumberedTextPrinter(tp.QuotedTextPrinter(raw_printer)),
     tp.NumberedTextPrinter(tp.DentedTextPrinter(tp.QuotedTextPrinter(raw_printer))),
+    tp.ReversedTextPrinter(tp.CapitalizedTextPrinter(tp.ReversedTextPrinter(raw_printer))),
   ]
 
   for printer in printers:
