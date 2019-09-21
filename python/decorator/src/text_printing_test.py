@@ -2,12 +2,14 @@ import unittest
 import text_printing as tp
 import io
 
+
 class TestCase(unittest.TestCase):
   def setUp(self):
     self.output = io.StringIO()
 
   def read_output(self):
     return self.output.getvalue()
+
 
 class TextPrinterTest(TestCase):
   def setUp(self):
@@ -26,6 +28,7 @@ class TextPrinterTest(TestCase):
     self.printer.line_feed()
     self.assertEqual(self.read_output(), "\n")
 
+
 class NumberedTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
@@ -41,6 +44,7 @@ class NumberedTextPrinterTest(TestCase):
     self.printer.print("second")
     self.assertEqual("1 first\n2 second", self.read_output())
 
+
 class CapitalizedTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
@@ -50,6 +54,7 @@ class CapitalizedTextPrinterTest(TestCase):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "Text")
 
+
 class DentedTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
@@ -58,6 +63,7 @@ class DentedTextPrinterTest(TestCase):
   def test_prints_dented_text(self):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "t e x t")
+
 
 class QuotedTextPrinterTest(TestCase):
   def setUp(self):
@@ -69,6 +75,7 @@ class QuotedTextPrinterTest(TestCase):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "`text`")
 
+
 class ReversedTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
@@ -77,6 +84,7 @@ class ReversedTextPrinterTest(TestCase):
   def test_prints_reversed_text(self):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "txet")
+
 
 class TitledTextPrinterTest(TestCase):
   def setUp(self):
@@ -87,6 +95,7 @@ class TitledTextPrinterTest(TestCase):
     self.printer.print("the text")
     self.assertEqual(self.read_output(), "The Text")
 
+
 class UpperTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
@@ -96,6 +105,7 @@ class UpperTextPrinterTest(TestCase):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "TEXT")
 
+
 class LowerTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
@@ -104,6 +114,7 @@ class LowerTextPrinterTest(TestCase):
   def test_prints_text_with_upper_letters(self):
     self.printer.print("TEXT")
     self.assertEqual(self.read_output(), "text")
+
 
 class TiedTextPrinterTest(TestCase):
   def setUp(self):

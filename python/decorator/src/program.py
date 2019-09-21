@@ -1,6 +1,7 @@
 import sys
 import text_printing as tp
 
+
 def print_text(printer):
   printer.print("hello world")
   printer.line_feed()
@@ -32,6 +33,7 @@ def run():
 
   for printer in printers:
     print_text(printer)
+
 
 if __name__ == "__main__":
   run()
