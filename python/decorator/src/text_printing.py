@@ -9,9 +9,21 @@ class TextPrinter:
   def line_feed(self):
     self.output.write("\n")
 
-class NumberedTextPrinter(TextPrinter):
+
+class TextPrinterDecorator:
   def __init__(self, printer):
     self.printer = printer
+
+  def print(self, text):
+    return self.printer.print(text)
+
+  def line_feed(self):
+    return self.printer.line_feed()
+
+
+class NumberedTextPrinter(TextPrinterDecorator):
+  def __init__(self, printer):
+    super().__init__(printer)
     self.counter = 0
 
   def print(self, text):
@@ -20,48 +32,34 @@ class NumberedTextPrinter(TextPrinter):
     #self.printer.print(str(self.counter) + " ")
     #self.printer.print(text)
 
-  def line_feed(self):
-    return self.printer.line_feed()
 
-class CapitalizedTextPrinter(TextPrinter):
+class CapitalizedTextPrinter(TextPrinterDecorator):
   def __init__(self, printer):
-    self.printer = printer
+    super().__init__(printer)
 
   def print(self, text):
     self.printer.print(text.capitalize())
 
-  def line_feed(self):
-    return self.printer.line_feed()
 
-class DentedTextPrinter(TextPrinter):
+class DentedTextPrinter(TextPrinterDecorator):
   def __init__(self, printer):
-    self.printer = printer
+    super().__init__(printer)
 
   def print(self, text):
     self.printer.print(' '.join(list(text)))
 
-  def line_feed(self):
-    return self.printer.line_feed()
 
-class QuotedTextPrinter(TextPrinter):
+class QuotedTextPrinter(TextPrinterDecorator):
   def __init__(self, printer):
-    self.printer = printer
+    super().__init__(printer)
 
   def print(self, text):
     self.printer.print("`" + text + "`")
 
-  def line_feed(self):
-    return self.printer.line_feed()
 
-class ReversedTextPrinter(TextPrinter):
+class ReversedTextPrinter(TextPrinterDecorator):
   def __init__(self, printer):
-    self.printer = printer
+    super().__init__(printer)
 
   def print(self, text):
     self.printer.print(text[::-1])
-
-  def line_feed(self):
-    return self.printer.line_feed()
-
-if __name__ == "__main__":
-  pass
