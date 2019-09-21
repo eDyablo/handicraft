@@ -3,6 +3,4 @@
 set -o errexit
 set -o pipefail
 
-pytest
-
-python src/program.py
+test_result=$(pytest) && python src/program.py || echo "${test_result}"
