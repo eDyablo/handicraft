@@ -88,3 +88,17 @@ class LowerTextPrinter(TextPrinterDecorator):
 
   def print(self, text):
     self.printer.print(text.lower())
+
+
+class TiedTextPrinter(TextPrinterDecorator):
+  def __init__(self, first, second):
+    super().__init__(first)
+    self.second = second
+
+  def print(self, text):
+    self.printer.print(text)
+    self.second.print(text)
+
+  def line_feed(self):
+    self.printer.line_feed()
+    self.second.line_feed()

@@ -104,3 +104,17 @@ class LowerTextPrinterTest(TestCase):
   def test_prints_text_with_upper_letters(self):
     self.printer.print("TEXT")
     self.assertEqual(self.read_output(), "text")
+
+class TiedTextPrinterTest(TestCase):
+  def setUp(self):
+    super().setUp()
+    self.printer = tp.TiedTextPrinter(
+      tp.TextPrinter(self.output), tp.TextPrinter(self.output))
+
+  def test_prints_to_both_coupled_printers(self):
+    self.printer.print("text")
+    self.assertEqual(self.read_output(), "texttext")
+
+  def test_feeds_line_on_both_coupled_printers(self):
+    self.printer.line_feed()
+    self.assertEqual(self.read_output(), "\n\n")
