@@ -52,9 +52,10 @@ class DentedTextPrinter(TextPrinterDecorator):
 class QuotedTextPrinter(TextPrinterDecorator):
   def __init__(self, printer):
     super().__init__(printer)
+    self.quote = "'"
 
   def print(self, text):
-    self.printer.print("`" + text + "`")
+    self.printer.print(self.quote + text + self.quote)
 
 
 class ReversedTextPrinter(TextPrinterDecorator):

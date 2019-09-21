@@ -63,6 +63,7 @@ class QuotedTextPrinterTest(TestCase):
   def setUp(self):
     super().setUp()
     self.printer = tp.QuotedTextPrinter(tp.TextPrinter(self.output))
+    self.printer.quote = "`"
 
   def test_prints_quoted_text(self):
     self.printer.print("text")
