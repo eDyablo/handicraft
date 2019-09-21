@@ -95,3 +95,12 @@ class UpperTextPrinterTest(TestCase):
   def test_prints_text_with_upper_letters(self):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "TEXT")
+
+class LowerTextPrinterTest(TestCase):
+  def setUp(self):
+    super().setUp()
+    self.printer = tp.LowerTextPrinter(tp.TextPrinter(self.output))
+
+  def test_prints_text_with_upper_letters(self):
+    self.printer.print("TEXT")
+    self.assertEqual(self.read_output(), "text")
