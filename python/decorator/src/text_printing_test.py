@@ -77,3 +77,21 @@ class ReversedTextPrinterTest(TestCase):
   def test_prints_reversed_text(self):
     self.printer.print("text")
     self.assertEqual(self.read_output(), "txet")
+
+class TitledTextPrinterTest(TestCase):
+  def setUp(self):
+    super().setUp()
+    self.printer = tp.TitledTextPrinter(tp.TextPrinter(self.output))
+
+  def test_prints_titled_text(self):
+    self.printer.print("the text")
+    self.assertEqual(self.read_output(), "The Text")
+
+class UpperTextPrinterTest(TestCase):
+  def setUp(self):
+    super().setUp()
+    self.printer = tp.UpperTextPrinter(tp.TextPrinter(self.output))
+
+  def test_prints_text_with_upper_letters(self):
+    self.printer.print("text")
+    self.assertEqual(self.read_output(), "TEXT")

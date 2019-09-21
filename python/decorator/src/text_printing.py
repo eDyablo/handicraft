@@ -64,3 +64,19 @@ class ReversedTextPrinter(TextPrinterDecorator):
 
   def print(self, text):
     self.printer.print(text[::-1])
+
+
+class TitledTextPrinter(TextPrinterDecorator):
+  def __init__(self, printer):
+    super().__init__(printer)
+
+  def print(self, text):
+    self.printer.print(text.title())
+
+
+class UpperTextPrinter(TextPrinterDecorator):
+  def __init__(self, printer):
+    super().__init__(printer)
+
+  def print(self, text):
+    self.printer.print(text.upper())
