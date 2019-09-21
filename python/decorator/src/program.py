@@ -27,6 +27,7 @@ def run():
     tp.NumberedTextPrinter(tp.QuotedTextPrinter(raw_printer)),
     tp.NumberedTextPrinter(tp.DentedTextPrinter(tp.QuotedTextPrinter(raw_printer))),
     tp.ReversedTextPrinter(tp.CapitalizedTextPrinter(tp.ReversedTextPrinter(raw_printer))),
+    tp.TiedTextPrinter(tp.UpperTextPrinter(raw_printer), tp.ReversedTextPrinter(raw_printer)),
   ]
 
   for printer in printers:
