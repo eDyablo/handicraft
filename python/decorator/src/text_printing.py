@@ -81,6 +81,7 @@ class UpperTextPrinter(TextPrinterDecorator):
   def print(self, text):
     self.printer.print(text.upper())
 
+
 class LowerTextPrinter(TextPrinterDecorator):
   def __init__(self, printer):
     super().__init__(printer)
