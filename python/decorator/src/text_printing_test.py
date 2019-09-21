@@ -129,3 +129,24 @@ class TiedTextPrinterTest(TestCase):
   def test_feeds_line_on_both_coupled_printers(self):
     self.printer.line_feed()
     self.assertEqual(self.read_output(), "\n\n")
+
+
+class StatsTextPrinterTest(TestCase):
+  def setUp(self):
+    super().setUp()
+    self.printer = tp.StatsTextPrinter(tp.TextPrinter(self.output))
+
+  def test_prints_text_intact(self):
+    self.printer.print("text")
+    self.assertEqual(self.read_output(), "text")
+
+  def test_feeds_one_line(self):
+    self.printer.line_feed()
+    self.assertEqual(self.read_output(), "\n")
+
+  def test_collects_number_of_printed_symbols(self):
+    self.printer.print("one")
+    self.printer.print("two")
+    self.printer.print("three")
+    self.assertEqual(self.printer.symbols_number,
+      len("one") + len("two") + len("three"))

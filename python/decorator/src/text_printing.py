@@ -102,3 +102,13 @@ class TiedTextPrinter(TextPrinterDecorator):
   def line_feed(self):
     self.printer.line_feed()
     self.second.line_feed()
+
+
+class StatsTextPrinter(TextPrinterDecorator):
+  def __init__(self, printer):
+    super().__init__(printer)
+    self.symbols_number = 0
+
+  def print(self, text):
+    self.printer.print(text)
+    self.symbols_number += len(text)
