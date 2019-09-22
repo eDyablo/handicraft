@@ -5,7 +5,7 @@ set -o pipefail
 
 venv_dir=".venv"
 
-test() {
+run_test() {
   . "${venv_dir}/bin/activate"
   test_result=$(pytest) && python "src/program.py" || echo "${test_result}"
 }
@@ -16,4 +16,4 @@ boot_strap() {
   pip install -r "requirements"
 }
 
-[ -d "${venv_dir}" ] && test || ( boot_strap && test )
+[ -d "${venv_dir}" ] && run_test || ( boot_strap && run_test )
