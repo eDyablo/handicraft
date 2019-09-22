@@ -11,3 +11,8 @@ func Test_signle_opening_parenthesis_is_non_balanced(test *testing.T) {
   if balanced("(") == false { return }
   test.Error()
 }
+
+func Test_signle_closing_parenthesis_is_non_balanced(test *testing.T) {
+  if balanced(")") == false { return }
+  test.Error()
+}
