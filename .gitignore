@@ -11,3 +11,5 @@ __pycache__
 *.exe
 node_modules
 package-lock.json
+.gradle/
+build/
