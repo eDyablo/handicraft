@@ -1,11 +1,7 @@
-class PipelineImpl {
-  void echo(String text) {
-  }
+abstract class PipelineImpl {
+  abstract void echo(String text)
 
-  String read(String path) {
-    ''
-  }
+  abstract String read(String path)
 
-  void write(String path, String text) {
-  }
+  abstract void write(String path, String text)
 }
