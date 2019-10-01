@@ -12,6 +12,4 @@ abstract class Pipeline {
   void write(String path, String text) {
     impl.write(path, text)
   }
-
-  abstract void run()
 }
