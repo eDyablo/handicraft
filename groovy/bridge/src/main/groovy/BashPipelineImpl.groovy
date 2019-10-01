@@ -1,4 +1,4 @@
-class BashPipelineImpl extends PipelineImpl {
+class BashPipelineImpl extends PosixBashPipelineImpl {
   void echo(String text) {
     println "bash\$ ${ text }"
   }
@@ -9,5 +9,6 @@ class BashPipelineImpl extends PipelineImpl {
   }
 
   void write(String path, String text) {
+    println "bash\$ writes ${ path }"
   }
 }
