@@ -1,4 +1,4 @@
-abstract class CheckoutStep extends PipelineStep {
+class CheckoutStep extends PipelineStep {
   void doStep() {
     impl.echo('checkout')
   }
