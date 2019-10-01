@@ -4,6 +4,7 @@ class PoshPipelineImpl extends PipelineImpl {
   }
 
   String read(String path) {
+    println "PowerShell: reads ${ path }"
     path
   }
 

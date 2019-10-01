@@ -4,6 +4,7 @@ class BashPipelineImpl extends PipelineImpl {
   }
 
   String read(String path) {
+    println "bash\$ reads ${ path }"
     path
   }
 

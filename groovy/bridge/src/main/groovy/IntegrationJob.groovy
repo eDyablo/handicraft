@@ -11,6 +11,7 @@ class IntegrationJob extends PipelineJob {
   }
 
   void build() {
+    read('requirements.txt')
     final BuildStep step = new BuildStep(impl: impl)
     step.doStep()
   }
