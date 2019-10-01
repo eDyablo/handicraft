@@ -1,5 +1,5 @@
 abstract class PipelineStep extends Pipeline {
-  abstract void do()
+  abstract void doStep()
   
-  abstract void undo()
+  abstract void undoStep()
 }
