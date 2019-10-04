@@ -177,6 +177,7 @@ group=4</panel_attributes>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+bridge
 r1=impl
 m2=1
 group=4</panel_attributes>
@@ -317,6 +318,7 @@ group=6</panel_attributes>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 r1=impl
 m2=1
+bridge
 group=6</panel_attributes>
     <additional_attributes>10.0;30.0;490.0;30.0</additional_attributes>
   </element>
