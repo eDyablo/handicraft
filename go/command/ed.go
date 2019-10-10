@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
   "./command"
   "os"
 )
@@ -22,6 +23,19 @@ func (ed *editor) Undo() {
   if ed.undo.HasCommands() {
     ed.undo.Dequeue().Execute(command.NullContext())
   }
+}
+
+func (ed *editor) Read(path string) (content []string) {
+  file, _ := os.Open(path)
+  defer file.Close()
+  scanner := bufio.NewScanner(file)
+  for scanner.Scan() {
+    content = append(content, scanner.Text())
+  }
+  return
+}
+
+func (ed *editor) Write(string, []string) {
 }
 
 func (ed *editor) run() {

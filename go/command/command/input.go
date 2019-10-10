@@ -16,7 +16,7 @@ type Input struct {
 
 // Execute runs the command
 func (command *Input) Execute(context Context) {
-  verb, _ := command.readInput()
+  verb, options := command.readInput()
   switch verb {
   case "a":
     context.Enqueue(&Append { Reader: command.Reader, Text: command.Text })
@@ -25,6 +25,7 @@ func (command *Input) Execute(context Context) {
       "d\tdelete\n",
       "p\tprint\n",
       "q\tquit\n",
+      "r\tread\n",
       "u\tundo\n",
     )
   case "d":
@@ -33,6 +34,12 @@ func (command *Input) Execute(context Context) {
     context.Enqueue(&Print { Writer: command.Writer, Text: command.Text })
   case "q":
     context.Enqueue(&Quit { Code: 0 })
+  case "r":
+    context.Enqueue(&Read {
+      File: strings.SplitN(options, " ", 2)[0],
+      FileSystem: context.(FileSystem),
+      Text: command.Text,
+    })
   case "u":
     context.Undo()
   default:
@@ -44,7 +51,10 @@ func (command *Input) Execute(context Context) {
 func (command *Input) readInput() (verb string, options string) {
   line, _ := bufio.NewReader(command.Reader).ReadString('\n')
   line = strings.Trim(line, "\n")
-  words := strings.SplitN(line, " ", 2)
-  verb = words[0]
+  parts := strings.SplitN(line, " ", 2)
+  verb = parts[0]
+  if len(parts) > 1 {
+    options = parts[1]
+  }
   return
 }

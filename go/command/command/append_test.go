@@ -5,22 +5,6 @@ import (
   "testing"
 )
 
-type TestContext struct {
-  command     Command
-  undoCommand Command
-}
-
-func (context *TestContext) Enqueue(command Command) {
-  context.command = command
-}
-
-func (context *TestContext) EnqueueUndo(command Command) {
-  context.undoCommand = command
-}
-
-func (context *TestContext) Undo() {
-}
-
 func Test_append_adds_one_empty_line_when_input_is_empty(test *testing.T) {
   reader := strings.NewReader("")
   text := []string{}
