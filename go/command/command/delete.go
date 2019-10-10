@@ -11,13 +11,13 @@ type Delete struct {
 // Execute runs the command
 func (command *Delete) Execute(context Context) {
   text := command.Text
-  from := command.From
-  number :=  command.Number
+  begin := command.From
+  end :=  begin + command.Number
   if len(*command.Text) > 0 {
-    *command.Text = append((*text)[0:from], (*text)[from + number:]...)
+    *command.Text = append((*text)[0:begin], (*text)[end:]...)
     context.EnqueueUndo(&AppendText {
       Text: text,
-      Lines: (*text)[from:from+number],
+      Lines: (*text)[begin:end],
     })
   }
 }
