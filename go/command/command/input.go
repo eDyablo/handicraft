@@ -29,7 +29,11 @@ func (command *Input) Execute(context Context) {
       "u\tundo\n",
     )
   case "d":
-    context.Enqueue(&Delete { Text: command.Text, Number: 1 })
+    context.Enqueue(&Delete {
+      Text: command.Text,
+      From: len(*command.Text) - 1,
+      Number: 1,
+    })
   case "p":
     context.Enqueue(&Print { Writer: command.Writer, Text: command.Text })
   case "q":
