@@ -42,7 +42,7 @@ func (ed *editor) run() {
 }
 
 func main() {
-  text := []string{}
+  text := []string {}
   ed := editor {
     main: command.NewQueue(),
     undo: command.NewQueue(),

@@ -6,7 +6,7 @@ import (
 
 func Test_delete_does_not_delete_line_when_from_and_number_are_not_specified(test *testing.T) {
   // Arrange
-  text := []string {"line"}
+  text := []string { "line" }
   cmd := Delete { Text: &text }
   // Act
   cmd.Execute(&TestContext {})
@@ -18,23 +18,27 @@ func Test_delete_does_not_delete_line_when_from_and_number_are_not_specified(tes
 
 func Test_delete_deletes_numer_of_first_lines_when_from_is_not_specified(test *testing.T) {
   // Arrange
-  text := []string {"one", "two", "three", "four"}
+  text := []string { "one", "two", "three", "four" }
   cmd := Delete { Text: &text, Number: 2 }
   // Act
   cmd.Execute(&TestContext {})
   // Assert
-  if len(text) == 2 && text[0] == "three" && text[1] == "four" { return }
+  if len(text) == 2 &&
+    text[0] == "three" &&
+    text[1] == "four" { return }
   test.Error(text)
 }
 
 func Test_delete_specified_number_of_lines_starting_from_line_specified_by_from(test *testing.T) {
   // Arrange
-  text := []string {"one", "two", "three", "four"}
+  text := []string { "one", "two", "three", "four" }
   cmd := Delete { Text: &text, From: 1, Number: 2 }
   // Act
   cmd.Execute(&TestContext {})
   // Assert
-  if len(text) == 2 && text[0] == "one" && text[1] == "four" { return }
+  if len(text) == 2 &&
+    text[0] == "one" &&
+    text[1] == "four" { return }
   test.Error(text)
 }
 
