@@ -14,7 +14,7 @@ func Test_queue_has_no_commands_when_created(test *testing.T) {
   queue := NewQueue()
   // Assert
   if queue.HasCommands() == false {return}
-  test.Fail()
+  test.Error(queue.commands)
 }
 
 func Test_queue_enqueue_adds_commands_in_order(test *testing.T) {

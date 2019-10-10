@@ -17,7 +17,9 @@ func NullContext() Context {
 type nullContext struct {}
 
 func (*nullContext) Enqueue(Command) { }
+
 func (*nullContext) EnqueueUndo(Command) { }
+
 func (*nullContext) Undo() { }
 
 // TestContext inplement Context that holds only one command
