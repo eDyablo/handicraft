@@ -35,9 +35,6 @@ func (ed *editor) Read(path string) (content []string) {
   return
 }
 
-func (ed *editor) Write(string, []string) {
-}
-
 func (ed *editor) run() {
   for ed.main.HasCommands() {
     ed.main.Dequeue().Execute(ed)
