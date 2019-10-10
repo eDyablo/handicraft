@@ -21,12 +21,13 @@ func (command *Input) Execute(context Context) {
   case "a":
     context.Enqueue(&Append { Reader: command.Reader, Text: command.Text })
   case "h":
-    fmt.Print("a\tappend\n",
-      "d\tdelete\n",
-      "p\tprint\n",
-      "q\tquit\n",
-      "r\tread\n",
-      "u\tundo\n",
+    fmt.Print(
+      "a\t\tappend\n",
+      "d\t\tdelete\n",
+      "p\t\tprint\n",
+      "q\t\tquit\n",
+      "r [file]\tread\n",
+      "u\t\tundo\n",
     )
   case "d":
     context.Enqueue(&Delete {
