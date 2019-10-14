@@ -1,4 +1,4 @@
-from structure import ArtifactRepository
+from repository import ArtifactRepository
 
 class NexusRepository(ArtifactRepository):
   pass

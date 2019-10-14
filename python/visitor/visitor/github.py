@@ -1,4 +1,4 @@
-from structure import ArtifactRepository, SourceRepository
+from repository import ArtifactRepository, SourceRepository
 
 class GithubRepository(SourceRepository):
   pass

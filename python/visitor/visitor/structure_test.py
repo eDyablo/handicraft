@@ -1,6 +1,7 @@
 import unittest
 from structure import Infrastructure
 
+
 class TestComponent:
   def __init__(self, id):
     self.id = id
@@ -8,12 +9,14 @@ class TestComponent:
   def AcceptVisitor(self, visitor):
     visitor.VisitComponent(self)
 
+
 class TestVisitor:
   def __init__(self):
     self.log = []
 
   def VisitComponent(self, component):
     self.log.append(component.id)
+
 
 class InfrastructureTest(unittest.TestCase):
   def setUp(self):
@@ -33,5 +36,5 @@ class InfrastructureTest(unittest.TestCase):
     self.infra.AddComponent(TestComponent(2))
     self.infra.AddComponent(TestComponent(3))
     visitor = TestVisitor()
-    self.infra.Visit(visitor)
+    self.infra.AcceptVisitor(visitor)
     self.assertEqual(visitor.log, [1, 2, 3])

@@ -1,9 +1,13 @@
 class RepositoryAuditor:
+  def __init__(self):
+    self.source_repository_number = 0
+    self.artifact_repository_number = 0
+
   def VisitSourceRepository(self, repository):
-    pass
+    self.source_repository_number += 1
 
   def VisitArtifactRepository(self, repository):
-    pass
+    self.artifact_repository_number += 1
 
 
 class SourceAnalyzer:
