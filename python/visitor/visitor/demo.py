@@ -16,17 +16,17 @@ class Demo:
     self.report()
 
   def load(self):
-    self.infra.AddComponent(GithubRepository("core"))
-    self.infra.AddComponent(GithubRepository("config"))
-    self.infra.AddComponent(GithubArtifactRepository("docker"))
-    self.infra.AddComponent(NexusRepository("debug-pypi"))
-    self.infra.AddComponent(GithubArtifactRepository("pypi"))
-    self.infra.AddComponent(NexusRepository("debug-nuget"))
-    self.infra.AddComponent(GithubArtifactRepository("nuget"))
+    self.infra.add_component(GithubRepository("core"))
+    self.infra.add_component(GithubRepository("config"))
+    self.infra.add_component(GithubArtifactRepository("docker"))
+    self.infra.add_component(NexusRepository("debug-pypi"))
+    self.infra.add_component(GithubArtifactRepository("pypi"))
+    self.infra.add_component(NexusRepository("debug-nuget"))
+    self.infra.add_component(GithubArtifactRepository("nuget"))
 
   def analyze(self):
-    self.infra.AcceptVisitor(self.auditor)
-    self.infra.AcceptVisitor(self.analyzer)
+    self.infra.accept_visitor(self.auditor)
+    self.infra.accept_visitor(self.analyzer)
 
   def report(self):
     print("source repositories:\t", self.auditor.source_repository_number)

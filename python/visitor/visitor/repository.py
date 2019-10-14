@@ -7,16 +7,19 @@ class SourceRepository(Repository):
   def __init__(self, name):
     super().__init__(name)
 
-  def AcceptVisitor(self, visitor):
-    visitor.VisitSourceRepository(self)
+  def list_revisions(self):
+    pass
+
+  def accept_visitor(self, visitor):
+    visitor.visit_source_repository(self)
 
 
 class ArtifactRepository(Repository):
   def __init__(self, name):
     super().__init__(name)
 
-  def ListArtifacts(self):
+  def list_artifacts(self):
     return []
 
-  def AcceptVisitor(self, visitor):
-    visitor.VisitArtifactRepository(self)
+  def accept_visitor(self, visitor):
+    visitor.visit_artifact_repository(self)

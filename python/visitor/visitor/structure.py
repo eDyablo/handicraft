@@ -2,9 +2,9 @@ class Infrastructure:
   def __init__(self):
     self.components = []
 
-  def AddComponent(self, component):
+  def add_component(self, component):
     self.components.append(component)
 
-  def AcceptVisitor(self, visitor):
+  def accept_visitor(self, visitor):
     for component in self.components:
-      component.AcceptVisitor(visitor)
+      component.accept_visitor(visitor)
