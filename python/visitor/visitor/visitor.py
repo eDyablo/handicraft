@@ -18,7 +18,7 @@ class SourceAnalyzer:
     artifacts = repository.list_artifacts() 
 
 
-class SourceSyncronizer:
+class SourceSynchronizer:
   def visit_source_repository(self, repository):
     repository.sync()
 

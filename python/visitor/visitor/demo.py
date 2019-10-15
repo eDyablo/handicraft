@@ -1,5 +1,5 @@
 from structure import Infrastructure
-from visitor import RepositoryAuditor, SourceAnalyzer, SourceSyncronizer, ArtifactRetirement
+from visitor import RepositoryAuditor, SourceAnalyzer, SourceSynchronizer, ArtifactRetirement
 from nexus import NexusRepository
 from github import GithubRepository, GithubArtifactRepository
 
@@ -9,7 +9,7 @@ class Demo:
     self.infra = Infrastructure()
     self.auditor = RepositoryAuditor()
     self.analyzer = SourceAnalyzer()
-    self.syncronizer = SourceSyncronizer()
+    self.synchronizer = SourceSynchronizer()
     self.retirement = ArtifactRetirement()
 
   def run(self):
@@ -29,7 +29,7 @@ class Demo:
   def analyze(self):
     self.infra.accept_visitor(self.auditor)
     self.infra.accept_visitor(self.analyzer)
-    self.infra.accept_visitor(self.syncronizer)
+    self.infra.accept_visitor(self.synchronizer)
     self.infra.accept_visitor(self.retirement)
 
   def report(self):
