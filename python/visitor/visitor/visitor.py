@@ -12,7 +12,23 @@ class RepositoryAuditor:
 
 class SourceAnalyzer:
   def visit_source_repository(self, repository):
-    pass
+    revisions = repository.list_revisions()
+
+  def visit_artifact_repository(self, repository):
+    artifacts = repository.list_artifacts() 
+
+
+class SourceSyncronizer:
+  def visit_source_repository(self, repository):
+    repository.sync()
 
   def visit_artifact_repository(self, repository):
     pass
+
+
+class ArtifactRetirement:
+  def visit_source_repository(self, repository):
+    pass
+
+  def visit_artifact_repository(self, repository):
+    repository.retire_artifacts()

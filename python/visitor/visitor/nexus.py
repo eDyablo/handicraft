@@ -1,4 +1,5 @@
 from repository import ArtifactRepository
 
 class NexusRepository(ArtifactRepository):
-  pass
+  def retire_artifacts(self):
+    pass

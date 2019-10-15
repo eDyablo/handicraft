@@ -1,8 +1,10 @@
 from repository import ArtifactRepository, SourceRepository
 
 class GithubRepository(SourceRepository):
-  pass
+  def sync(self):
+    pass
 
 
 class GithubArtifactRepository(ArtifactRepository):
-  pass
+  def retire_artifacts(self):
+    pass
