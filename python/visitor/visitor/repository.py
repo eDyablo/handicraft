@@ -8,7 +8,7 @@ class SourceRepository(Repository):
     super().__init__(name)
 
   def list_revisions(self):
-    pass
+    return []
 
   def accept_visitor(self, visitor):
     visitor.visit_source_repository(self)

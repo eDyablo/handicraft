@@ -35,3 +35,4 @@ class Demo:
   def report(self):
     print("source repositories:\t", self.auditor.source_repository_number)
     print("artifact repositories:\t", self.auditor.artifact_repository_number)
+    print("artifacts:\t\t", self.auditor.artifact_number)
