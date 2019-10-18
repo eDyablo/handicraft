@@ -29,21 +29,22 @@ fontsize=20
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>390</x>
-      <y>230</y>
+      <x>290</x>
+      <y>300</y>
       <w>220</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Infrastructure
 --
-addComponent()</panel_attributes>
+addComponent()
+acceptVisitor()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>610</y>
+      <x>50</x>
+      <y>700</y>
       <w>210</w>
       <h>40</h>
     </coordinates>
@@ -54,8 +55,8 @@ addComponent()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>610</y>
+      <x>690</x>
+      <y>700</y>
       <w>200</w>
       <h>40</h>
     </coordinates>
@@ -65,8 +66,8 @@ addComponent()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>610</y>
+      <x>320</x>
+      <y>700</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -76,8 +77,8 @@ addComponent()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>450</y>
+      <x>40</x>
+      <y>540</y>
       <w>240</w>
       <h>90</h>
     </coordinates>
@@ -90,8 +91,8 @@ listRevisions()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>450</y>
+      <x>540</x>
+      <y>540</y>
       <w>240</w>
       <h>80</h>
     </coordinates>
@@ -104,8 +105,8 @@ listArtifacts()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>340</y>
+      <x>320</x>
+      <y>430</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -115,8 +116,8 @@ listArtifacts()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1160</x>
-      <y>370</y>
+      <x>1060</x>
+      <y>460</y>
       <w>310</w>
       <h>80</h>
     </coordinates>
@@ -129,8 +130,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1160</x>
-      <y>510</y>
+      <x>1060</x>
+      <y>600</y>
       <w>310</w>
       <h>80</h>
     </coordinates>
@@ -143,8 +144,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1370</x>
-      <y>210</y>
+      <x>1270</x>
+      <y>300</y>
       <w>310</w>
       <h>90</h>
     </coordinates>
@@ -157,8 +158,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
-      <y>120</y>
+      <x>300</x>
+      <y>190</y>
       <w>200</w>
       <h>70</h>
     </coordinates>
@@ -170,8 +171,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>180</y>
+      <x>390</x>
+      <y>250</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -181,8 +182,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>290</y>
+      <x>390</x>
+      <y>380</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -192,8 +193,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>290</y>
+      <x>1200</x>
+      <y>380</y>
       <w>240</w>
       <h>100</h>
     </coordinates>
@@ -203,8 +204,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>290</y>
+      <x>1200</x>
+      <y>380</y>
       <w>240</w>
       <h>240</h>
     </coordinates>
@@ -214,8 +215,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>370</y>
+      <x>150</x>
+      <y>460</y>
       <w>270</w>
       <h>100</h>
     </coordinates>
@@ -225,8 +226,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>370</y>
+      <x>390</x>
+      <y>460</y>
       <w>290</w>
       <h>100</h>
     </coordinates>
@@ -236,8 +237,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1570</x>
-      <y>510</y>
+      <x>1470</x>
+      <y>600</y>
       <w>310</w>
       <h>80</h>
     </coordinates>
@@ -250,8 +251,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1570</x>
-      <y>370</y>
+      <x>1470</x>
+      <y>460</y>
       <w>310</w>
       <h>80</h>
     </coordinates>
@@ -264,8 +265,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1510</x>
-      <y>290</y>
+      <x>1410</x>
+      <y>380</y>
       <w>230</w>
       <h>100</h>
     </coordinates>
@@ -275,8 +276,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1510</x>
-      <y>290</y>
+      <x>1410</x>
+      <y>380</y>
       <w>230</w>
       <h>240</h>
     </coordinates>
@@ -286,8 +287,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>520</y>
+      <x>460</x>
+      <y>610</y>
       <w>220</w>
       <h>110</h>
     </coordinates>
@@ -297,8 +298,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>520</y>
+      <x>650</x>
+      <y>610</y>
       <w>160</w>
       <h>110</h>
     </coordinates>
@@ -308,8 +309,8 @@ visitArtifactRepository()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>530</y>
+      <x>150</x>
+      <y>620</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
