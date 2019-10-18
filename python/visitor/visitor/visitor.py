@@ -29,8 +29,16 @@ class SourceSynchronizer:
 
 
 class ArtifactRetirement:
+  def __init__(self, epoch):
+    self.epoch = epoch
+    self.deleted_artifacts = []
+
   def visit_source_repository(self, repository):
     pass
 
   def visit_artifact_repository(self, repository):
-    artifacts = repository.list_artifacts()
+    for artifact in repository.list_artifacts():
+      published_epoch = artifact[2]
+      if (published_epoch < self.epoch):
+        repository.delete_artifact(artifact)
+        self.deleted_artifacts.append(artifact)

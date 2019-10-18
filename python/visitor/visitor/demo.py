@@ -10,7 +10,7 @@ class Demo:
     self.auditor = RepositoryAuditor()
     self.analyzer = SourceAnalyzer()
     self.synchronizer = SourceSynchronizer()
-    self.retirement = ArtifactRetirement()
+    self.retirement = ArtifactRetirement(1550000000)
 
   def run(self):
     self.load()
@@ -36,3 +36,6 @@ class Demo:
     print("source repositories:\t", self.auditor.source_repository_number)
     print("artifact repositories:\t", self.auditor.artifact_repository_number)
     print("artifacts:\t\t", self.auditor.artifact_number)
+    print("deleted artifacts:")
+    for artifact in self.retirement.deleted_artifacts:
+      print("  ", artifact[0], "\t" ,artifact[1])

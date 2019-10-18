@@ -21,5 +21,8 @@ class ArtifactRepository(Repository):
   def list_artifacts(self):
     return []
 
+  def delete_artifact(self, artifact):
+    pass
+
   def accept_visitor(self, visitor):
     visitor.visit_artifact_repository(self)
