@@ -8,20 +8,11 @@ namespace Turnstyle
   {
     public IList<string> ActionsLog = new List<string>();
 
-    public override void Unlock()
-    {
-      ActionsLog.Add("unlock");
-    }
+    public override void Unlock() => ActionsLog.Add("unlock");
 
-    public override void Alarm()
-    {
-      ActionsLog.Add("alarm");
-    }
+    public override void Alarm() => ActionsLog.Add("alarm");
 
-    public override void Lock()
-    {
-      ActionsLog.Add("lock");
-    }
+    public override void Lock() => ActionsLog.Add("lock");
   }
 
   public class LockedMachine
