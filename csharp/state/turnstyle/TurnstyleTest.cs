@@ -61,7 +61,7 @@ namespace Turnstyle
     }
 
     [Test]
-    public void Lockes_after_has_been_passed()
+    public void Gets_locked_after_it_has_been_passed()
     {
       Machine.Pass();
       Assert.That(Machine.ActionsLog, Is.EqualTo(new []{"lock"}));
