@@ -77,6 +77,14 @@ namespace Turnstyle
     }
 
     [Test]
+    public void Does_not_allow_to_pass_twice()
+    {
+      Machine.Pass();
+      Machine.Pass();
+      Assert.That(Machine.ActionsLog, Is.EqualTo(new []{"lock", "alarm"}));
+    }
+
+    [Test]
     public void Does_nothing_for_a_coin()
     {
       Machine.Coin();

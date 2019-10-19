@@ -9,6 +9,7 @@ namespace Turnstyle
     public override void Pass(Machine machine)
     {
       machine.Lock();
+      machine.State = new LockedState();
     }
   }
 }
