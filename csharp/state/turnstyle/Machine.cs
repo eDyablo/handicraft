@@ -2,7 +2,7 @@ namespace Turnstyle
 {
   public class Machine
   {
-    public State State;
+    public State State { get; internal set; }
 
     public bool GreenLightbulb { get; private set; }
 
