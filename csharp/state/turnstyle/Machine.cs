@@ -8,21 +8,26 @@ namespace Turnstyle
 
     public bool RedLightbulb { get; private set; }
 
+    public bool Latch { get; private set; }
+
     public virtual void Unlock()
     {
       GreenLightbulb = true;
       RedLightbulb = false;
+      Latch = false;
     }
 
     public virtual void Alarm()
     {
       RedLightbulb = true;
+      Latch = true;
     }
 
     public virtual void Lock()
     {
       RedLightbulb = true;
       GreenLightbulb = false;
+      Latch = true;
     }
 
     public void Coin() => State.Coin(this);
