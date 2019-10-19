@@ -2,6 +2,10 @@ namespace Turnstyle
 {
   public class Machine
   {
+    private const bool ON  = true;
+
+    private const bool OFF = false;
+
     public State State { get; internal set; }
 
     public bool GreenLightbulb { get; private set; }
@@ -12,22 +16,22 @@ namespace Turnstyle
 
     public virtual void Unlock()
     {
-      GreenLightbulb = true;
-      RedLightbulb = false;
-      Latch = false;
+      GreenLightbulb = ON;
+      RedLightbulb = OFF;
+      Latch = OFF;
     }
 
     public virtual void Alarm()
     {
-      RedLightbulb = true;
-      Latch = true;
+      RedLightbulb = ON;
+      Latch = ON;
     }
 
     public virtual void Lock()
     {
-      RedLightbulb = true;
-      GreenLightbulb = false;
-      Latch = true;
+      RedLightbulb = ON;
+      GreenLightbulb = OFF;
+      Latch = ON;
     }
 
     public void Coin() => State.Coin(this);
