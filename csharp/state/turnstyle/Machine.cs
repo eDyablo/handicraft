@@ -2,12 +2,7 @@ namespace Turnstyle
 {
   public class Machine
   {
-    State state;
-
-    public void SetState(State newState)
-    {
-      state = newState;
-    }
+    public State State;
 
     public virtual void Unlock()
     {
@@ -21,8 +16,8 @@ namespace Turnstyle
     {
     }
 
-    public void Coin() => state.Coin(this);
+    public void Coin() => State.Coin(this);
 
-    public void Pass() => state.Pass(this);
+    public void Pass() => State.Pass(this);
   }
 }

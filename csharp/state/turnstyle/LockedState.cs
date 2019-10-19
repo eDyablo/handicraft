@@ -5,7 +5,7 @@ namespace Turnstyle
     public override void Coin(Machine machine)
     {
       machine.Unlock();
-      machine.SetState(new UnlockedState());
+      machine.State = new UnlockedState();
     }
 
     public override void Pass(Machine machine)

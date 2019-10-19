@@ -32,7 +32,7 @@ namespace Turnstyle
     public void BeforeEachTest()
     {
       Machine = new TestableMachine();
-      Machine.SetState(new LockedState());
+      Machine.State = new LockedState();
     }
 
     [Test]
@@ -66,7 +66,7 @@ namespace Turnstyle
     public void BeforeEachTest()
     {
       Machine = new TestableMachine();
-      Machine.SetState(new UnlockedState());
+      Machine.State = new UnlockedState();
     }
 
     [Test]
