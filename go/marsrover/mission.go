@@ -36,11 +36,14 @@ func (mission *Mission) Explore() {
   if mission.hasPlan() {
     mission.readRange()
     if len(mission.Plan) > 1 {
-      mission.landRover()
-      if len(mission.Plan) > 2 {
-        mission.commandRover(mission.Plan[2])
+      for i := 1; i < len(mission.Plan); i++ {
+        mission.landRover(mission.Plan[i])
+        i++
+        if i < len(mission.Plan) {
+          mission.commandRover(mission.Plan[i])
+        }
+        mission.reportRover()
       }
-      mission.reportRover()
     }
   }
 }
@@ -56,8 +59,8 @@ func (mission *Mission) readRange() {
   mission.Range = Range { X: x, Y: y }
 }
 
-func (mission *Mission) landRover() {
-  items := strings.SplitN(mission.Plan[1], " ", 3)
+func (mission *Mission) landRover(record string) {
+  items := strings.SplitN(record, " ", 3)
   x,_ := strconv.Atoi(items[0])
   y,_ := strconv.Atoi(items[1])
   dir := []rune(items[2])[0]

@@ -146,3 +146,20 @@ func Test_exploration_plan_with_one_M_command_moves_west_orientes_rover_one_step
   if (mission.Result[0] == "0 0 W") { return }
   test.Error("Result is", mission.Result)
 }
+
+func Test_exploration_plan_with_M_commands_for_two_rovers_moves_the_rovers(test *testing.T) {
+  mission := Mission {
+    Plan: []string {
+      "1 1",
+      "0 0 N",
+      "M",
+      "1 1 S",
+      "M",
+    },
+  }
+  mission.Explore()
+  if (len(mission.Result) == 2 &&
+    mission.Result[0] == "0 1 N" &&
+    mission.Result[1] == "1 0 S") { return }
+  test.Error(mission.Result)
+}
