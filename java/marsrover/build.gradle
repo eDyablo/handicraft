@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+  jcenter()
+  maven  {
+    url 'https://repo.jenkins-ci.org/public/'
+  }
+}
+
+dependencies {
+  compile([])
+  testCompile (
+    [group: 'junit', name: 'junit', version: '4.12'],
+    [group: 'org.mockito', name: 'mockito-core', version: '2.+'],
+    [group: 'org.hamcrest', name: 'hamcrest-junit', version: '2.+'],
+  )
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src']
+    }
+  }
+  test {
+    java {
+      srcDirs = ['test']
+    }
+  }
+}
