@@ -38,8 +38,8 @@ public class Mission {
     yRange = Integer.parseInt(range[1]);
   }
 
-  private void commandRover(String program) {
-    for (Character command : program.toCharArray()) {
+  private void commandRover(String instructions) {
+    for (Character command : instructions.toCharArray()) {
       commandRover(command);
     }
   }
