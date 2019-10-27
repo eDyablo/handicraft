@@ -19,13 +19,17 @@ public class Mission {
             commandRover(command);
           }
         }
-        result.add(String.join(" ", rover));
+        reportRover();
       }
     }
   }
 
   private void landRover(String position) {
     rover = position.split(" ");
+  }
+
+  private void reportRover() {
+    result.add(String.join(" ", rover));
   }
   
   private void determineRange(String[] plan) {
