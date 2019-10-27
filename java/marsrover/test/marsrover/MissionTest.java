@@ -31,24 +31,24 @@ public class MissionTest {
     assertThat(mission.result, contains("1 1 N"));
   }
 
-  @Test public void exloration_plan_with_one_L_command_spins_north_oriented_rover_to_east() {
+  @Test public void exloration_plan_with_one_L_command_spins_north_oriented_rover_to_west() {
     mission.plan = new String[] {
       "1 1",
       "1 1 N",
       "L"
     };
     mission.explore();
-    assertThat(mission.result, contains("1 1 E"));
+    assertThat(mission.result, contains("1 1 W"));
   }
 
-  @Test public void exloration_plan_with_one_R_command_spins_north_oriented_rover_to_west() {
+  @Test public void exloration_plan_with_one_R_command_spins_north_oriented_rover_to_east() {
     mission.plan = new String[] {
       "1 1",
       "1 1 N",
       "R"
     };
     mission.explore();
-    assertThat(mission.result, contains("1 1 W"));
+    assertThat(mission.result, contains("1 1 E"));
   }
 
   @Test public void exloration_plan_with_one_M_command_moves_north_oriented_rover_one_step_towards_north() {
@@ -121,24 +121,24 @@ public class MissionTest {
     assertThat(mission.result, contains("0 0 S"));
   }
 
-  @Test public void exloration_plan_with_one_M_command_moves_west_oriented_rover_one_step_towards_west() {
-    mission.plan = new String[] {
-      "1 1",
-      "0 0 W",
-      "M"
-    };
-    mission.explore();
-    assertThat(mission.result, contains("1 0 W"));
-  }
-
   @Test public void exloration_plan_with_one_M_command_moves_east_oriented_rover_one_step_towards_east() {
     mission.plan = new String[] {
       "1 1",
-      "1 0 E",
+      "0 0 E",
       "M"
     };
     mission.explore();
-    assertThat(mission.result, contains("0 0 E"));
+    assertThat(mission.result, contains("1 0 E"));
+  }
+
+  @Test public void exloration_plan_with_one_M_command_moves_west_oriented_rover_one_step_towards_west() {
+    mission.plan = new String[] {
+      "1 1",
+      "1 0 W",
+      "M"
+    };
+    mission.explore();
+    assertThat(mission.result, contains("0 0 W"));
   }
 
   @Test public void exploration_plan_with_M_command_for_two_rovers_moves_the_rovers() {
@@ -151,5 +151,20 @@ public class MissionTest {
     };
     mission.explore();
     assertThat(mission.result, contains("0 1 N", "1 0 S"));
+  }
+
+  @Test public void explaration_with_plan_from_kata_gives_expected_result() {
+    mission.plan = new String[] {
+      "5 5",
+      "1 2 N",
+      "LMLMLMLMM",
+      "3 3 E",
+      "MMRMMRMRRM",
+    };
+    mission.explore();
+    assertThat(mission.result, contains(
+      "1 3 N",
+      "5 1 E"
+    ));
   }
 }

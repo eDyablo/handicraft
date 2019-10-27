@@ -58,24 +58,24 @@ public class Mission {
 
   private void spinRoverLeft() {
     if (rover[2].equals("N")) {
-      rover[2] = "E";
-    } else if (rover[2].equals("E")) {
-      rover[2] = "S";
-    } else if (rover[2].equals("S")) {
       rover[2] = "W";
     } else if (rover[2].equals("W")) {
+      rover[2] = "S";
+    } else if (rover[2].equals("S")) {
+      rover[2] = "E";
+    } else if (rover[2].equals("E")) {
       rover[2] = "N";
     }
   }
 
   private void spinRoverRight() {
     if (rover[2].equals("N")) {
-      rover[2] = "W";
-    } else if (rover[2].equals("W")) {
-      rover[2] = "S";
-    } else if (rover[2].equals("S")) {
       rover[2] = "E";
     } else if (rover[2].equals("E")) {
+      rover[2] = "S";
+    } else if (rover[2].equals("S")) {
+      rover[2] = "W";
+    } else if (rover[2].equals("W")) {
       rover[2] = "N";
     }
   }
@@ -87,9 +87,9 @@ public class Mission {
       ++y;
     } else if (rover[2].equals("S")) {
       --y;
-    } else if (rover[2].equals("W")) {
-      ++x;
     } else if (rover[2].equals("E")) {
+      ++x;
+    } else if (rover[2].equals("W")) {
       --x;
     }
     rover[0] = String.valueOf(x);
