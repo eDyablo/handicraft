@@ -13,12 +13,11 @@ public class Mission {
 	public void explore() {
     if (plan.length > 0) {
       determineRange();
-      if (plan.length > 1) {
-        landRover(plan[1]);
-        if (plan.length > 2) {
-          for (Character command : plan[2].toCharArray()) {
-            commandRover(command);
-          }
+      for (int i = 1; i < plan.length; ++i) {
+        landRover(plan[i]);
+        ++i;
+        if (i < plan.length) {
+          commandRover(plan[i]);
         }
         reportRover();
       }
@@ -37,6 +36,12 @@ public class Mission {
     String[] range = plan[0].split(" ");
     xRange = Integer.parseInt(range[0]);
     yRange = Integer.parseInt(range[1]);
+  }
+
+  private void commandRover(String program) {
+    for (Character command : program.toCharArray()) {
+      commandRover(command);
+    }
   }
 
   private void commandRover(Character command) {

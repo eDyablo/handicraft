@@ -140,4 +140,16 @@ public class MissionTest {
     mission.explore();
     assertThat(mission.result, contains("0 0 E"));
   }
+
+  @Test public void exploration_plan_with_M_command_for_two_rovers_moves_the_rovers() {
+    mission.plan = new String[] {
+      "1 1",
+      "0 0 N",
+      "M",
+      "1 1 S",
+      "M",
+    };
+    mission.explore();
+    assertThat(mission.result, contains("0 1 N", "1 0 S"));
+  }
 }
