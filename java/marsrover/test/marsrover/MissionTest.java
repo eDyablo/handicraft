@@ -99,4 +99,31 @@ public class MissionTest {
     });
     assertThat(mission.result, contains("0 0 N"));
   }
+
+  @Test public void exloration_plan_with_one_M_command_moves_south_oriented_rover_one_step_towards_south() {
+    mission.explore(new String[] {
+      "1 1",
+      "0 1 S",
+      "M"
+    });
+    assertThat(mission.result, contains("0 0 S"));
+  }
+
+  @Test public void exloration_plan_with_one_M_command_moves_west_oriented_rover_one_step_towards_west() {
+    mission.explore(new String[] {
+      "1 1",
+      "0 0 W",
+      "M"
+    });
+    assertThat(mission.result, contains("1 0 W"));
+  }
+
+  @Test public void exloration_plan_with_one_M_command_moves_east_oriented_rover_one_step_towards_east() {
+    mission.explore(new String[] {
+      "1 1",
+      "1 0 E",
+      "M"
+    });
+    assertThat(mission.result, contains("0 0 E"));
+  }
 }

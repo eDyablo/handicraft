@@ -67,8 +67,18 @@ public class Mission {
   }
 
   private void moveRover() {
+    int x = Integer.parseInt(rover[0]);
     int y = Integer.parseInt(rover[1]);
-    y++;
+    if (rover[2].equals("N")) {
+      ++y;
+    } else if (rover[2].equals("S")) {
+      --y;
+    } else if (rover[2].equals("W")) {
+      ++x;
+    } else if (rover[2].equals("E")) {
+      --x;
+    }
+    rover[0] = String.valueOf(x);
     rover[1] = String.valueOf(y);
   }
 }
