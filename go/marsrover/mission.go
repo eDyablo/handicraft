@@ -20,13 +20,25 @@ type Mission struct {
 
 // Explore does exploration
 func (mission *Mission) Explore() {
-  if len(mission.Plan) > 0 {
-    items := strings.SplitN(mission.Plan[0], " ", 2)
-    x,_ := strconv.Atoi(items[0])
-    y,_ := strconv.Atoi(items[1])
-    mission.Range = Range { X: x, Y: y }
+  if mission.hasPlan() {
+    mission.readRange()
     if len(mission.Plan) > 1 {
-      mission.Result = append(mission.Result, mission.Plan[1])
+      mission.landRover()
     }
   }
+}
+
+func (mission *Mission) hasPlan() bool {
+  return len(mission.Plan) > 0
+}
+
+func (mission *Mission) readRange() {
+  items := strings.SplitN(mission.Plan[0], " ", 2)
+  x,_ := strconv.Atoi(items[0])
+  y,_ := strconv.Atoi(items[1])
+  mission.Range = Range { X: x, Y: y }
+}
+
+func (mission *Mission) landRover() {
+  mission.Result = append(mission.Result, mission.Plan[1])
 }
