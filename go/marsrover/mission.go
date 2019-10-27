@@ -3,6 +3,7 @@ package marsrover
 import (
   "strings"
   "strconv"
+  "fmt"
 )
 
 // Range represents exploration mission range
@@ -16,6 +17,18 @@ type Mission struct {
   Plan   []string
   Result []string
   Range  Range
+  rover  Rover
+}
+
+// Rover represents rover placement
+type Rover struct {
+  X         int
+  Y         int
+  Direction string
+}
+
+func (rover *Rover) String() string {
+  return fmt.Sprint(rover.X, rover.Y, " ", rover.Direction)
 }
 
 // Explore does exploration
@@ -24,6 +37,11 @@ func (mission *Mission) Explore() {
     mission.readRange()
     if len(mission.Plan) > 1 {
       mission.landRover()
+      if len(mission.Plan) > 2 {
+        if mission.Plan[2] == "L" { mission.spinRoverLeft() }
+        if mission.Plan[2] == "R" { mission.spinRoverRight() }
+      }
+      mission.reportRover()
     }
   }
 }
@@ -40,5 +58,20 @@ func (mission *Mission) readRange() {
 }
 
 func (mission *Mission) landRover() {
-  mission.Result = append(mission.Result, mission.Plan[1])
+  items := strings.SplitN(mission.Plan[1], " ", 3)
+  x,_ := strconv.Atoi(items[0])
+  y,_ := strconv.Atoi(items[1])
+  mission.rover = Rover { X: x, Y: y, Direction: items[2] }
+}
+
+func (mission *Mission) spinRoverLeft() {
+  mission.rover.Direction = "W"
+}
+
+func (mission *Mission) spinRoverRight() {
+  mission.rover.Direction = "E"
+}
+
+func (mission *Mission) reportRover() {
+  mission.Result = append(mission.Result, mission.rover.String())
 }
