@@ -13,7 +13,7 @@ public class Mission {
     if (plan.length > 0) {
       determineRange(plan);
       if (plan.length > 1) {
-        rover = plan[1].split(" ");
+        landRover(plan[1]);
         if (plan.length > 2) {
           for (Character command : plan[2].toCharArray()) {
             commandRover(command);
@@ -22,6 +22,10 @@ public class Mission {
         result.add(String.join(" ", rover));
       }
     }
+  }
+
+  private void landRover(String position) {
+    rover = position.split(" ");
   }
   
   private void determineRange(String[] plan) {
