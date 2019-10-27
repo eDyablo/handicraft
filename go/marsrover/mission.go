@@ -24,11 +24,11 @@ type Mission struct {
 type Rover struct {
   X         int
   Y         int
-  Direction string
+  Direction rune
 }
 
 func (rover *Rover) String() string {
-  return fmt.Sprint(rover.X, rover.Y, " ", rover.Direction)
+  return fmt.Sprint(rover.X, rover.Y, " ", string(rover.Direction))
 }
 
 // Explore does exploration
@@ -60,24 +60,25 @@ func (mission *Mission) landRover() {
   items := strings.SplitN(mission.Plan[1], " ", 3)
   x,_ := strconv.Atoi(items[0])
   y,_ := strconv.Atoi(items[1])
-  mission.rover = Rover { X: x, Y: y, Direction: items[2] }
+  dir := []rune(items[2])[0]
+  mission.rover = Rover { X: x, Y: y, Direction: dir}
 }
 
 func (mission *Mission) spinRoverLeft() {
   switch mission.rover.Direction {
-  case "N": { mission.rover.Direction = "W" }
-  case "W": { mission.rover.Direction = "S" }
-  case "S": { mission.rover.Direction = "E" }
-  case "E": { mission.rover.Direction = "N" }
+  case 'N': { mission.rover.Direction = 'W' }
+  case 'W': { mission.rover.Direction = 'S' }
+  case 'S': { mission.rover.Direction = 'E' }
+  case 'E': { mission.rover.Direction = 'N' }
   }
 }
 
 func (mission *Mission) spinRoverRight() {
   switch mission.rover.Direction {
-  case "N": { mission.rover.Direction = "E" }
-  case "E": { mission.rover.Direction = "S" }
-  case "S": { mission.rover.Direction = "W" }
-  case "W": { mission.rover.Direction = "N" }
+  case 'N': { mission.rover.Direction = 'E' }
+  case 'E': { mission.rover.Direction = 'S' }
+  case 'S': { mission.rover.Direction = 'W' }
+  case 'W': { mission.rover.Direction = 'N' }
   }
 }
 
@@ -86,10 +87,18 @@ func (mission *Mission) commandRover(instructions string) {
     switch cmd {
     case 'L': { mission.spinRoverLeft() }
     case 'R': { mission.spinRoverRight() }
+    case 'M': { mission.moveRover() }
     }
   }
 }
 
 func (mission *Mission) reportRover() {
   mission.Result = append(mission.Result, mission.rover.String())
+}
+
+func (mission *Mission) moveRover() {
+  switch mission.rover.Direction {
+  case 'N': { mission.rover.Y++ }
+  case 'S': { mission.rover.Y-- }
+  }
 }

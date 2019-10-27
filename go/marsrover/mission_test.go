@@ -94,3 +94,29 @@ func Test_exploration_plan_with_four_R_commands_does_full_rover_rotation(test *t
   if (mission.Result[0] == "0 0 N") { return }
   test.Error("Result is", mission.Result)
 }
+
+func Test_exloration_plan_with_one_M_command_moves_north_oriented_rover_one_step_towards_north(test *testing.T) {
+  mission := Mission {
+    Plan: []string {
+      "1 1",
+      "0 0 N",
+      "M",
+    },
+  }
+  mission.Explore()
+  if (mission.Result[0] == "0 1 N") { return }
+  test.Error("Result is", mission.Result)
+}
+
+func Test_exloration_plan_with_one_M_command_moves_south_oriented_rover_one_step_towards_south(test *testing.T) {
+  mission := Mission {
+    Plan: []string {
+      "1 1",
+      "0 1 S",
+      "M",
+    },
+  }
+  mission.Explore()
+  if (mission.Result[0] == "0 0 S") { return }
+  test.Error("Result is", mission.Result)
+}
