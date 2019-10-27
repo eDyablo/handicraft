@@ -100,5 +100,7 @@ func (mission *Mission) moveRover() {
   switch mission.rover.Direction {
   case 'N': { mission.rover.Y++ }
   case 'S': { mission.rover.Y-- }
+  case 'E': { mission.rover.X++ }
+  case 'W': { mission.rover.X-- }
   }
 }

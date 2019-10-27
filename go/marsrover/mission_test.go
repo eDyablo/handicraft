@@ -120,3 +120,29 @@ func Test_exloration_plan_with_one_M_command_moves_south_oriented_rover_one_step
   if (mission.Result[0] == "0 0 S") { return }
   test.Error("Result is", mission.Result)
 }
+
+func Test_exploration_plan_with_one_M_command_moves_east_orientes_rover_one_step_towards_east(test *testing.T) {
+  mission := Mission {
+    Plan: []string {
+      "1 1",
+      "0 0 E",
+      "M",
+    },
+  }
+  mission.Explore()
+  if (mission.Result[0] == "1 0 E") { return }
+  test.Error("Result is", mission.Result)
+}
+
+func Test_exploration_plan_with_one_M_command_moves_west_orientes_rover_one_step_towards_west(test *testing.T) {
+  mission := Mission {
+    Plan: []string {
+      "1 1",
+      "1 0 W",
+      "M",
+    },
+  }
+  mission.Explore()
+  if (mission.Result[0] == "0 0 W") { return }
+  test.Error("Result is", mission.Result)
+}
