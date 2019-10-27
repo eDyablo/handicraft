@@ -38,8 +38,10 @@ func (mission *Mission) Explore() {
     if len(mission.Plan) > 1 {
       mission.landRover()
       if len(mission.Plan) > 2 {
-        if mission.Plan[2] == "L" { mission.spinRoverLeft() }
-        if mission.Plan[2] == "R" { mission.spinRoverRight() }
+        for _, cmd := range mission.Plan[2] {
+          if cmd == 'L' { mission.spinRoverLeft() }
+          if cmd == 'R' { mission.spinRoverRight() }
+        }
       }
       mission.reportRover()
     }
@@ -65,11 +67,21 @@ func (mission *Mission) landRover() {
 }
 
 func (mission *Mission) spinRoverLeft() {
-  mission.rover.Direction = "W"
+  switch mission.rover.Direction {
+  case "N": { mission.rover.Direction = "W" }
+  case "W": { mission.rover.Direction = "S" }
+  case "S": { mission.rover.Direction = "E" }
+  case "E": { mission.rover.Direction = "N" }
+  }
 }
 
 func (mission *Mission) spinRoverRight() {
-  mission.rover.Direction = "E"
+  switch mission.rover.Direction {
+  case "N": { mission.rover.Direction = "E" }
+  case "E": { mission.rover.Direction = "S" }
+  case "S": { mission.rover.Direction = "W" }
+  case "W": { mission.rover.Direction = "N" }
+  }
 }
 
 func (mission *Mission) reportRover() {
