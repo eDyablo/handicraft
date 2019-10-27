@@ -1,6 +1,8 @@
 package marsrover;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Mission {
@@ -11,35 +13,35 @@ public class Mission {
   private String[] rover;
 
 	public void explore() {
-    if (plan.length > 0) {
-      determineRange();
-      for (int i = 1; i < plan.length; ++i) {
-        landRover(plan[i]);
-        ++i;
-        if (i < plan.length) {
-          commandRover(plan[i]);
-        }
-        reportRover();
+    Iterator<String> record = Arrays.asList(plan).iterator();
+    if (record.hasNext()) {
+      determineRange(record.next());
+    }
+    while (record.hasNext()) {
+      landRover(record.next());
+      if (record.hasNext()) {
+        commandRover(record.next());
       }
+      reportRover();
     }
   }
 
-  private void landRover(String position) {
-    rover = position.split(" ");
+  private void landRover(String record) {
+    rover = record.split(" ");
   }
 
   private void reportRover() {
     result.add(String.join(" ", rover));
   }
   
-  private void determineRange() {
-    String[] range = plan[0].split(" ");
+  private void determineRange(String record) {
+    String[] range = record.split(" ");
     xRange = Integer.parseInt(range[0]);
     yRange = Integer.parseInt(range[1]);
   }
 
-  private void commandRover(String instructions) {
-    for (Character command : instructions.toCharArray()) {
+  private void commandRover(String record) {
+    for (Character command : record.toCharArray()) {
       commandRover(command);
     }
   }
