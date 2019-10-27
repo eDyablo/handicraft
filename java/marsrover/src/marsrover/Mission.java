@@ -6,12 +6,13 @@ import java.util.List;
 public class Mission {
   public int xRange;
   public int yRange;
+  public String[] plan;
   public List<String> result = new ArrayList<String>();
   private String[] rover;
 
-	public void explore(String[] plan) {
+	public void explore() {
     if (plan.length > 0) {
-      determineRange(plan);
+      determineRange();
       if (plan.length > 1) {
         landRover(plan[1]);
         if (plan.length > 2) {
@@ -32,7 +33,7 @@ public class Mission {
     result.add(String.join(" ", rover));
   }
   
-  private void determineRange(String[] plan) {
+  private void determineRange() {
     String[] range = plan[0].split(" ");
     xRange = Integer.parseInt(range[0]);
     yRange = Integer.parseInt(range[1]);
