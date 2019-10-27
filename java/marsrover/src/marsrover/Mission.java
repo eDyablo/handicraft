@@ -47,6 +47,10 @@ public class Mission {
       rover[2] = "E";
     } else if (rover[2].equals("E")) {
       rover[2] = "S";
+    } else if (rover[2].equals("S")) {
+      rover[2] = "W";
+    } else if (rover[2].equals("W")) {
+      rover[2] = "N";
     }
   }
 
@@ -55,6 +59,10 @@ public class Mission {
       rover[2] = "W";
     } else if (rover[2].equals("W")) {
       rover[2] = "S";
+    } else if (rover[2].equals("S")) {
+      rover[2] = "E";
+    } else if (rover[2].equals("E")) {
+      rover[2] = "N";
     }
   }
 

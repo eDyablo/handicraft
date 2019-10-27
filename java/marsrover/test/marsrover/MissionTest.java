@@ -81,4 +81,22 @@ public class MissionTest {
     });
     assertThat(mission.result, contains("0 0 S"));
   }
+
+  @Test public void exloration_plan_with_four_L_commands_do_full_rover_rotation() {
+    mission.explore(new String[] {
+      "1 1",
+      "0 0 N",
+      "LLLL"
+    });
+    assertThat(mission.result, contains("0 0 N"));
+  }
+
+  @Test public void exloration_plan_with_four_R_commands_do_full_rover_rotation() {
+    mission.explore(new String[] {
+      "1 1",
+      "0 0 N",
+      "RRRR"
+    });
+    assertThat(mission.result, contains("0 0 N"));
+  }
 }
