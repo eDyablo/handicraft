@@ -8,10 +8,18 @@ class Mission {
 
   void explore() {
     if (plan) {
-      final def range = plan.first().split(' ')
-      rangeX = Integer.parseInt(range[0])
-      rangeY = Integer.parseInt(range[1])
-      result << plan[1]
+      readRange()
+      landRover()
     }
+  }
+
+  void readRange() {
+    final def range = plan.first().split(' ')
+    rangeX = Integer.parseInt(range[0])
+    rangeY = Integer.parseInt(range[1])
+  }
+
+  void landRover() {
+    result << plan[1]
   }
 }
