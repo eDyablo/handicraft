@@ -1,0 +1,4 @@
+package numeral
+
+class Numeral {
+}
