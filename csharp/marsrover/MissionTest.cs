@@ -76,5 +76,17 @@ namespace Marsrover
       mission.Explore();
       Assert.AreEqual(new [] { "1 0 E"}, mission.Result);
     }
+
+    [Test]
+    public void Plan_with_R_and_M_commands_correctly_places_north_oriented_rover()
+    {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 0 N",
+        "RM",
+      };
+      mission.Explore();
+      Assert.AreEqual(new string[] { "1 0 E" }, mission.Result);
+    }
   }
 }
