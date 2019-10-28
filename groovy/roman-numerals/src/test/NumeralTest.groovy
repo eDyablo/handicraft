@@ -7,10 +7,11 @@ import static org.hamcrest.Matchers.*;
 class NumeralTest {
   @Test void converts_arabic_numeral_to_roman_numeral() {
     final def tests = [
-      [ 1, 'I'],
-      [ 2, 'II'],
-      [ 3, 'III'],
-      [10, 'X'],
+      [  1, 'I'],
+      [  2, 'II'],
+      [  3, 'III'],
+      [ 10, 'X'],
+      [100, 'C'],
     ]
     tests.each { arabic, roman ->
       assertThat("\n     For: ${ arabic }",
