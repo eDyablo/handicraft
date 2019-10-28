@@ -64,9 +64,14 @@ namespace Marsrover
       }
       else if (Plan[2] == "M")
       {
-        var x = int.Parse(rover[0]);
-        rover[0] = (x + 1).ToString();
+        MoveRover();
       }
+    }
+
+    private void MoveRover()
+    {
+      var x = int.Parse(rover[0]);
+      rover[0] = (x + 1).ToString();
     }
 
     private void ReportRover()
