@@ -30,7 +30,14 @@ namespace Marsrover
           LandRover();
           if (Plan.Length > 2)
           {
-            rover[2] = "E";
+            if (Plan[2] == "R")
+            {
+              rover[2] = "E";
+            }
+            else if (Plan[2] == "L")
+            {
+              rover[2] = "W";
+            }
           }
           ReportRover();
         }

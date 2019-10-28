@@ -51,5 +51,16 @@ namespace Marsrover
       mission.Explore();
       Assert.AreEqual(new [] { "0 0 E" }, mission.Result);
     }
+
+    [Test]
+    public void Plan_with_one_L_command_spins_north_rotated_rover_to_west() {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 0 N",
+        "L",
+      };
+      mission.Explore();
+      Assert.AreEqual(new [] { "0 0 W" }, mission.Result);
+    }
   }
 }
