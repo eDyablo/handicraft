@@ -25,7 +25,12 @@ namespace Marsrover
         ReadRange();
         if (Plan.Length > 1)
         {
-          result.Add(Plan[1]);
+          var fields = Plan[1].Split(" ", 3);
+          if (Plan.Length > 2)
+          {
+            fields[2] = "E";
+          }
+          result.Add(string.Join(" ", fields));
         }
       }
     }

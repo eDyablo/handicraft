@@ -4,7 +4,13 @@ namespace Marsrover
 {
   public class MissionTest
   {
-    Mission mission = new Mission();
+    Mission mission;
+
+    [SetUp]
+    public void BeforeEachTest()
+    {
+      mission = new Mission();
+    }
 
     [Test]
     public void Exploration_without_a_plan_gives_no_result()
@@ -33,6 +39,17 @@ namespace Marsrover
       };
       mission.Explore();
       Assert.AreEqual(new [] { "1 2 N" }, mission.Result);
+    }
+
+    [Test]
+    public void Plan_with_one_R_command_spins_north_rotated_rover_to_east() {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 0 N",
+        "R",
+      };
+      mission.Explore();
+      Assert.AreEqual(new [] { "0 0 E" }, mission.Result);
     }
   }
 }
