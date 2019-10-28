@@ -1,19 +1,19 @@
 package numeral
 
 class Numeral {
+  static def digits = [
+    [100, 'C'],
+    [ 10, 'X'],
+    [  1, 'I'],
+  ]
+
   static String toRoman(int arabic) {
     final def roman = new StringBuilder()
-    while (arabic >= 100) {
-      roman << 'C'
-      arabic -= 100
-    }
-    while (arabic >= 10) {
-      roman << 'X'
-      arabic -= 10
-    }
-    while (arabic >= 1) {
-      roman << 'I'
-      arabic -= 1
+    digits.each { arabicDigit, romanDigit ->
+      while (arabic >= arabicDigit) {
+        roman << romanDigit
+        arabic -= arabicDigit
+      }
     }
     return roman
   }
