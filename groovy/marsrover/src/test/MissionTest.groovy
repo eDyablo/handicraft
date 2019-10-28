@@ -136,4 +136,19 @@ class MissionTest {
       '0 0 W',
     ))
   }
+
+  @Test public void explaration_with_plan_from_kata_gives_expected_result() {
+    mission.plan = [
+      "5 5",
+      "1 2 N",
+      "LMLMLMLMM",
+      "3 3 E",
+      "MMRMMRMRRM",
+    ]
+    mission.explore()
+    assertThat(mission.result, contains(
+      "1 3 N",
+      "5 1 E"
+    ))
+  }
 }
