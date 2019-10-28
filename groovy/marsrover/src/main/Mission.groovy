@@ -76,9 +76,12 @@ class Mission {
   void moveRover() {
     if (roverDir == 'N') {
       roverY++
-    }
-    if (roverDir == 'S') {
+    } else if (roverDir == 'S') {
       roverY--
+    } else if (roverDir == 'E') {
+      roverX++
+    } else if (roverDir == 'W') {
+      roverX--
     }
   }
 
