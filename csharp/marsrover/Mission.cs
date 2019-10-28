@@ -89,7 +89,13 @@ namespace Marsrover
 
     private void SpinRoverLeft()
     {
-      rover[2] = "W";
+      switch (rover[2])
+      {
+        case "N": rover[2] = "W"; break;
+        case "W": rover[2] = "S"; break;
+        case "S": rover[2] = "E"; break;
+        case "E": rover[2] = "N"; break;
+      }
     }
 
     private void ReportRover()
