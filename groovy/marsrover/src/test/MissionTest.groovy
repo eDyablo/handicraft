@@ -121,4 +121,19 @@ class MissionTest {
     mission.explore()
     assertThat(mission.result, contains('0 0 W'))
   }
+
+  @Test void exploration_plan_with_M_commands_for_two_rovers_moves_each_rover() {
+    mission.plan = [
+      '1 1',
+      '0 0 N',
+      'M',
+      '1 0 W',
+      'M',
+    ]
+    mission.explore()
+    assertThat(mission.result, contains(
+      '0 1 N',
+      '0 0 W',
+    ))
+  }
 }

@@ -8,13 +8,14 @@ class Mission {
   int roverY
   String roverDir
   final List<String> result = new ArrayList<String>()
+  int step
 
   void explore() {
     if (plan) {
       readRange()
-      if (plan[1]) {
+      while (plan[step]) {
         landRover()
-        if (plan[2]) {
+        if (plan[step]) {
           commandRover()
         }
         reportRover()
@@ -23,20 +24,24 @@ class Mission {
   }
 
   void readRange() {
-    def (x, y) = plan.first().split(' ')
+    step = 0
+    def (x, y) = plan[step].split(' ')
     rangeX = Integer.parseInt(x)
     rangeY = Integer.parseInt(y)
+    step++
   }
 
   void landRover() {
-    def (x, y, dir) = plan[1].split(' ')
+    def (x, y, dir) = plan[step].split(' ')
     roverX = Integer.parseInt(x)
     roverY = Integer.parseInt(y)
     roverDir = dir
+    step++
   }
 
   void commandRover() {
-    plan[2].each { commandRover(it) }
+    plan[step].each { commandRover(it) }
+    step++
   }
 
   void commandRover(String command) {
