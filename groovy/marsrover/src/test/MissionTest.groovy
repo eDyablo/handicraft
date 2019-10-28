@@ -31,4 +31,14 @@ class MissionTest {
     mission.explore()
     assertThat(mission.result, contains('1 2 N'))
   }
+
+  @Test void one_L_command_in_the_plan_spins_north_oriented_rover_to_west() {
+    mission.plan = [
+      '1 1',
+      '0 0 N',
+      'L',
+    ]
+    mission.explore()
+    assertThat(mission.result, contains('0 0 W'))
+  }
 }
