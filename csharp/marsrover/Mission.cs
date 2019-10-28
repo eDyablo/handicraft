@@ -18,6 +18,8 @@ namespace Marsrover
       public int Y { get; set; }
     }
 
+    public string[] rover;
+
     public void Explore()
     {
       if (Plan != null && Plan.Length > 0)
@@ -25,12 +27,12 @@ namespace Marsrover
         ReadRange();
         if (Plan.Length > 1)
         {
-          var fields = Plan[1].Split(" ", 3);
+          LandRover();
           if (Plan.Length > 2)
           {
-            fields[2] = "E";
+            rover[2] = "E";
           }
-          result.Add(string.Join(" ", fields));
+          ReportRover();
         }
       }
     }
@@ -43,6 +45,16 @@ namespace Marsrover
         X = int.Parse(fields[0]),
         Y = int.Parse(fields[1]),
       };
+    }
+
+    private void LandRover()
+    {
+      rover = Plan[1].Split(" ", 3);
+    }
+
+    private void ReportRover()
+    {
+      result.Add(string.Join(" ", rover));
     }
   }
 }
