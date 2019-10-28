@@ -65,7 +65,7 @@ namespace Marsrover
       switch (command)
       {
         case 'R': SpinRoverRight(); break;
-        case 'L': rover[2] = "W"; break;
+        case 'L': SpinRoverLeft(); break;
         case 'M': MoveRover(); break;
       }
     }
@@ -94,6 +94,11 @@ namespace Marsrover
       {
         rover[2] = "N";
       }
+    }
+
+    private void SpinRoverLeft()
+    {
+      rover[2] = "W";
     }
 
     private void ReportRover()
