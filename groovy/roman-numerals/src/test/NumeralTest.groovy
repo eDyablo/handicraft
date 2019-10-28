@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 class NumeralTest {
-  @Test void failure() {
-    assertThat(1, is(equalTo(0)))
+  @Test void converts_arabic_1_to_roman_I() {
+    assertThat(Numeral.toRoman(1), is(equalTo('I')))
   }
 }
