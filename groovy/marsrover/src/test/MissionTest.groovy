@@ -14,12 +14,21 @@ class MissionTest {
 
   @Test void mission_gets_its_ranges_from_the_plan() {
     mission.plan = [
-      '1 2'
+      '1 2',
     ]
     mission.explore()
     assertThat(mission, allOf(
       hasProperty('rangeX', is(equalTo(1))),
       hasProperty('rangeY', is(equalTo(2))),
     ))
+  }
+
+  @Test void lands_rover_when_there_is_one_in_the_plan() {
+    mission.plan = [
+      '1 1',
+      '1 2 N',
+    ]
+    mission.explore()
+    assertThat(mission.result, contains('1 2 N'))
   }
 }

@@ -11,6 +11,7 @@ class Mission {
       final def range = plan.first().split(' ')
       rangeX = Integer.parseInt(range[0])
       rangeY = Integer.parseInt(range[1])
+      result << plan[1]
     }
   }
 }
