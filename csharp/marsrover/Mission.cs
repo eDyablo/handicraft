@@ -18,12 +18,7 @@ namespace Marsrover
     {
       if (Plan != null && Plan.Length > 0)
       {
-        var fields = Plan[0].Split(" ", 2);
-        Range = new RangeType
-        {
-          X = int.Parse(fields[0]),
-          Y = int.Parse(fields[1]),
-        };
+        ReadRange();
       }
     }
 
@@ -33,6 +28,16 @@ namespace Marsrover
       {
         return new string[] {};
       }
+    }
+
+    private void ReadRange()
+    {
+      var fields = Plan[0].Split(" ", 2);
+      Range = new RangeType
+      {
+        X = int.Parse(fields[0]),
+        Y = int.Parse(fields[1]),
+      };
     }
   }
 }

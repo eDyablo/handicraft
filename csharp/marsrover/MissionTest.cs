@@ -13,7 +13,8 @@ namespace Marsrover
     }
 
     [Test]
-    public void Reads_exploration_range_from_the_plan() {
+    public void Reads_exploration_range_from_the_plan()
+    {
       var mission = new Mission();
       mission.Plan = new string[] {
         "1 2",
