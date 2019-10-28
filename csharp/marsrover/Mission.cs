@@ -72,8 +72,16 @@ namespace Marsrover
 
     private void MoveRover()
     {
-      var x = int.Parse(rover[0]);
-      rover[0] = (x + 1).ToString();
+      if (rover[2] == "E")
+      {
+        var x = int.Parse(rover[0]);
+        rover[0] = (x + 1).ToString();
+      }
+      else if (rover[2] == "W")
+      {
+        var x = int.Parse(rover[0]);
+        rover[0] = (x - 1).ToString();
+      }
     }
 
     private void SpinRoverRight()
