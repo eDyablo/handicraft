@@ -44,7 +44,7 @@ class Mission {
         spinRoverRight()
       }
       if (cmd == 'M') {
-        roverY++
+        moveRover()
       }
     }
   }
@@ -55,6 +55,15 @@ class Mission {
 
   void spinRoverRight() {
     roverDir = 'E'
+  }
+
+  void moveRover() {
+    if (roverDir == 'N') {
+      roverY++
+    }
+    if (roverDir == 'S') {
+      roverY--
+    }
   }
 
   void reportRover() {
