@@ -62,7 +62,15 @@ class Mission {
   }
 
   void spinRoverRight() {
-    roverDir = 'E'
+    if (roverDir == 'N') {
+      roverDir = 'E'
+    } else if (roverDir == 'E') {
+      roverDir = 'S'
+    } else if (roverDir == 'S') {
+      roverDir = 'W'
+    } else if (roverDir == 'W') {
+      roverDir = 'N'
+    }
   }
 
   void moveRover() {
