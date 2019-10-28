@@ -4,9 +4,13 @@ namespace Marsrover
 {
   public class Mission
   {
+    private List<string> result = new List<string>();
+
     public string[] Plan { private get; set; }
 
     public RangeType Range { get; private set; }
+
+    public IEnumerable<string> Result { get => result; }
 
     public struct RangeType
     {
@@ -19,14 +23,10 @@ namespace Marsrover
       if (Plan != null && Plan.Length > 0)
       {
         ReadRange();
-      }
-    }
-
-    public IEnumerable<string> Result
-    {
-      get
-      {
-        return new string[] {};
+        if (Plan.Length > 1)
+        {
+          result.Add(Plan[1]);
+        }
       }
     }
 
