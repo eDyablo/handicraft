@@ -88,5 +88,17 @@ namespace Marsrover
       mission.Explore();
       Assert.AreEqual(new string[] { "1 0 E" }, mission.Result);
     }
+
+    [Test]
+    public void Four_R_commands_do_full_rover_rotation()
+    {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 0 N",
+        "RRRR",
+      };
+      mission.Explore();
+      Assert.AreEqual(new string[] { "0 0 N" }, mission.Result);
+    }
   }
 }

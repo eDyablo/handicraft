@@ -64,7 +64,7 @@ namespace Marsrover
     {
       switch (command)
       {
-        case 'R': rover[2] = "E"; break;
+        case 'R': SpinRoverRight(); break;
         case 'L': rover[2] = "W"; break;
         case 'M': MoveRover(); break;
       }
@@ -74,6 +74,26 @@ namespace Marsrover
     {
       var x = int.Parse(rover[0]);
       rover[0] = (x + 1).ToString();
+    }
+
+    private void SpinRoverRight()
+    {
+      if (rover[2] == "N")
+      {
+        rover[2] = "E";
+      }
+      else if (rover[2] == "E")
+      {
+        rover[2] = "S";
+      }
+      else if (rover[2] == "S")
+      {
+        rover[2] = "W";
+      }
+      else if (rover[2] == "W")
+      {
+        rover[2] = "N";
+      }
     }
 
     private void ReportRover()
