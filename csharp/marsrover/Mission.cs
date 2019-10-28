@@ -78,21 +78,12 @@ namespace Marsrover
 
     private void SpinRoverRight()
     {
-      if (rover[2] == "N")
+      switch (rover[2])
       {
-        rover[2] = "E";
-      }
-      else if (rover[2] == "E")
-      {
-        rover[2] = "S";
-      }
-      else if (rover[2] == "S")
-      {
-        rover[2] = "W";
-      }
-      else if (rover[2] == "W")
-      {
-        rover[2] = "N";
+        case "N": rover[2] = "E"; break;
+        case "E": rover[2] = "S"; break;
+        case "S": rover[2] = "W"; break;
+        case "W": rover[2] = "N"; break;
       }
     }
 
