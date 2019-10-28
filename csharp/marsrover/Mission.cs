@@ -56,12 +56,17 @@ namespace Marsrover
     {
       foreach (var command in Plan[2])
       {
-        switch (command)
-        {
-          case 'R': rover[2] = "E"; break;
-          case 'L': rover[2] = "W"; break;
-          case 'M': MoveRover(); break;
-        }
+        CommandRover(command);
+      }
+    }
+
+    private void CommandRover(char command)
+    {
+      switch (command)
+      {
+        case 'R': rover[2] = "E"; break;
+        case 'L': rover[2] = "W"; break;
+        case 'M': MoveRover(); break;
       }
     }
 
