@@ -42,11 +42,9 @@ class Mission {
   void commandRover(String command) {
     if (command == 'L') {
       spinRoverLeft()
-    }
-    if (command == 'R') {
+    } else if (command == 'R') {
       spinRoverRight()
-    }
-    if (command == 'M') {
+    } else if (command == 'M') {
       moveRover()
     }
   }
