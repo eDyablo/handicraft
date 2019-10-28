@@ -42,7 +42,8 @@ namespace Marsrover
     }
 
     [Test]
-    public void Plan_with_one_R_command_spins_north_rotated_rover_to_east() {
+    public void Plan_with_one_R_command_spins_north_rotated_rover_to_east()
+    {
       mission.Plan = new string[] {
         "1 1",
         "0 0 N",
@@ -53,7 +54,8 @@ namespace Marsrover
     }
 
     [Test]
-    public void Plan_with_one_L_command_spins_north_rotated_rover_to_west() {
+    public void Plan_with_one_L_command_spins_north_rotated_rover_to_west()
+    {
       mission.Plan = new string[] {
         "1 1",
         "0 0 N",
@@ -61,6 +63,18 @@ namespace Marsrover
       };
       mission.Explore();
       Assert.AreEqual(new [] { "0 0 W" }, mission.Result);
+    }
+
+    [Test]
+    public void Plan_with_one_M_command_moves_east_oriented_rover_one_step_towards_east()
+    {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 0 E",
+        "M",
+      };
+      mission.Explore();
+      Assert.AreEqual(new [] { "1 0 E"}, mission.Result);
     }
   }
 }
