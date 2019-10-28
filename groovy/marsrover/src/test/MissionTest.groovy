@@ -81,4 +81,14 @@ class MissionTest {
     mission.explore()
     assertThat(mission.result, contains('0 0 S'))
   }
+
+  @Test void four_L_commands_in_the_plan_do_full_rotation_of_rover() {
+    mission.plan = [
+      '1 1',
+      '0 0 N',
+      'LLLL',
+    ]
+    mission.explore()
+    assertThat(mission.result, contains('0 0 N'))
+  }
 }
