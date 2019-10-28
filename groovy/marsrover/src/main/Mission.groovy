@@ -15,9 +15,9 @@ class Mission {
       if (plan[1]) {
         landRover()
         if (plan[2]) {
-          roverDir = 'W'
+          commandRover()
         }
-        result << [roverX, roverY, roverDir].join(' ')
+        reportRover()
       }
     }
   }
@@ -33,5 +33,26 @@ class Mission {
     roverX = Integer.parseInt(x)
     roverY = Integer.parseInt(y)
     roverDir = dir
+  }
+
+  void commandRover() {
+    if (plan[2] == 'L') {
+      spinRoverLeft()
+    }
+    if (plan[2] == 'R') {
+      spinRoverRight()
+    }
+  }
+
+  void spinRoverLeft() {
+    roverDir = 'W'
+  }
+
+  void spinRoverRight() {
+    roverDir = 'E'
+  }
+
+  void reportRover() {
+    result << [roverX, roverY, roverDir].join(' ')
   }
 }
