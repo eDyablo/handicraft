@@ -124,5 +124,17 @@ namespace Marsrover
       mission.Explore();
       Assert.AreEqual(new [] { "0 0 W"}, mission.Result);
     }
+
+    [Test]
+    public void Plan_with_one_M_command_moves_north_oriented_rover_one_step_towards_north()
+    {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 0 N",
+        "M",
+      };
+      mission.Explore();
+      Assert.AreEqual(new [] { "0 1 N"}, mission.Result);
+    }
   }
 }
