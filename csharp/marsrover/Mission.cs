@@ -54,17 +54,11 @@ namespace Marsrover
 
     private void CommandRover()
     {
-      if (Plan[2] == "R")
+      switch (Plan[2])
       {
-        rover[2] = "E";
-      }
-      else if (Plan[2] == "L")
-      {
-        rover[2] = "W";
-      }
-      else if (Plan[2] == "M")
-      {
-        MoveRover();
+        case "R": rover[2] = "E"; break;
+        case "L": rover[2] = "W"; break;
+        case "M": MoveRover(); break;
       }
     }
 
