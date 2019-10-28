@@ -2,9 +2,10 @@ package numeral
 
 class Numeral {
   static def digits = [
-    [100, 'C'],
-    [ 10, 'X'],
-    [  1, 'I'],
+    [1000, 'M'],
+    [ 100, 'C'],
+    [  10, 'X'],
+    [   1, 'I'],
   ]
 
   static String toRoman(int arabic) {
