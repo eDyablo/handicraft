@@ -36,16 +36,18 @@ class Mission {
   }
 
   void commandRover() {
-    plan[2].each { cmd ->
-      if (cmd == 'L') {
-        spinRoverLeft()
-      }
-      if (cmd == 'R') {
-        spinRoverRight()
-      }
-      if (cmd == 'M') {
-        moveRover()
-      }
+    plan[2].each { commandRover(it) }
+  }
+
+  void commandRover(String command) {
+    if (command == 'L') {
+      spinRoverLeft()
+    }
+    if (command == 'R') {
+      spinRoverRight()
+    }
+    if (command == 'M') {
+      moveRover()
     }
   }
 
