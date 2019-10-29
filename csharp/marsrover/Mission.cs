@@ -79,6 +79,7 @@ namespace Marsrover
       case "E": x++; break;
       case "W": x--; break;
       case "N": y++; break;
+      case "S": y--; break;
       }
       rover[0] = x.ToString();
       rover[1] = y.ToString();
