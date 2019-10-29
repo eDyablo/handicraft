@@ -38,12 +38,7 @@ namespace Marsrover
 
     private void LandRover()
     {
-      var fields = Plan[1].Split(" ", 3);
-      rover = new Rover {
-        X = int.Parse(fields[0]),
-        Y = int.Parse(fields[1]),
-        Direction = fields[2][0],
-      };
+      rover = Plan[1].ToRover();
     }
 
     private void CommandRover()
