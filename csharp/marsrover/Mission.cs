@@ -19,6 +19,11 @@ namespace Marsrover
     public const char EAST = 'E';
     public const char WEST = 'W';
 
+    public const char LEFT = 'L';
+    public const char RIGHT = 'R';
+
+    public const char MOVE = 'M';
+
     public struct RangeType
     {
       public int X { get; set; }
@@ -83,9 +88,9 @@ namespace Marsrover
     {
       switch (command)
       {
-        case 'R': SpinRoverRight(); break;
-        case 'L': SpinRoverLeft(); break;
-        case 'M': MoveRover(); break;
+        case RIGHT: SpinRoverRight(); break;
+        case LEFT: SpinRoverLeft(); break;
+        case MOVE: MoveRover(); break;
       }
     }
 
