@@ -76,10 +76,10 @@ namespace Marsrover
       var y = int.Parse(rover[1]);
       switch (rover[2])
       {
-      case "E": x++; break;
-      case "W": x--; break;
-      case "N": y++; break;
-      case "S": y--; break;
+        case "E": x++; break;
+        case "W": x--; break;
+        case "N": y++; break;
+        case "S": y--; break;
       }
       rover[0] = x.ToString();
       rover[1] = y.ToString();
