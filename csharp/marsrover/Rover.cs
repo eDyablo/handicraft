@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Marsrover
 {
   public struct Rover
@@ -13,7 +15,10 @@ namespace Marsrover
   {
     public static Rover ToRover(this string text)
     {
-      var fields = text.Split(" ", 3);
+      return ToRover(text.Split(" ", 3));
+    }
+    public static Rover ToRover(this IList<string> fields)
+    {
       return new Rover
       {
         X = int.Parse(fields[0]),

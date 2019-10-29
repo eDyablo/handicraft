@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Marsrover
 {
   public struct Range
@@ -10,7 +12,11 @@ namespace Marsrover
   {
     public static Range ToRange(this string text)
     {
-      var fields = text.Split(" ", 2);
+      return ToRange(text.Split(" ", 2));
+    }
+
+    public static Range ToRange(this IList<string> fields)
+    {
       return new Range
       {
         X = int.Parse(fields[0]),
