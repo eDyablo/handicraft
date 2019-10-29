@@ -4,6 +4,7 @@ namespace Marsrover
 {
   public class Mission
   {
+    private Rover rover;
     private List<string> result = new List<string>();
 
     public string[] Plan { private get; set; }
@@ -11,8 +12,6 @@ namespace Marsrover
     public Range Range { get; private set; }
 
     public IEnumerable<string> Result { get => result; }
-
-    private Rover rover;
 
     public void Explore()
     {
