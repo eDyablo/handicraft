@@ -15,7 +15,7 @@ namespace Marsrover
 
     public void Explore()
     {
-      if (Plan != null && Plan.Length > 0)
+      if (HasPlan())
       {
         ReadRange();
         if (Plan.Length > 1)
@@ -28,6 +28,11 @@ namespace Marsrover
           ReportRover();
         }
       }
+    }
+
+    public bool HasPlan()
+    {
+      return Plan != null && Plan.Length > 0;
     }
 
     private void ReadRange()
