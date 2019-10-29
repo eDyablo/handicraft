@@ -17,15 +17,19 @@ namespace Marsrover
     {
       if (HasPlan())
       {
-        ReadRange();
-        if (Plan.Length > 1)
+        var record = Plan.GetEnumerator();
+        if (record.MoveNext())
         {
-          LandRover();
-          if (Plan.Length > 2)
+          ReadRange(record.Current as string);
+          while (record.MoveNext())
           {
-            CommandRover();
+            LandRover(record.Current as string);
+            if (record.MoveNext())
+            {
+              CommandRover(record.Current as string);
+            }
+            ReportRover();
           }
-          ReportRover();
         }
       }
     }
@@ -35,19 +39,19 @@ namespace Marsrover
       return Plan != null && Plan.Length > 0;
     }
 
-    private void ReadRange()
+    private void ReadRange(string record)
     {
-      Range = Plan[0].ToRange();
+      Range = record.ToRange();
     }
 
-    private void LandRover()
+    private void LandRover(string record)
     {
-      rover = Plan[1].ToRover();
+      rover = record.ToRover();
     }
 
-    private void CommandRover()
+    private void CommandRover(string record)
     {
-      foreach (var command in Plan[2])
+      foreach (var command in record)
       {
         CommandRover(command);
       }

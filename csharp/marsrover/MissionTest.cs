@@ -148,5 +148,18 @@ namespace Marsrover
       mission.Explore();
       Assert.AreEqual(new [] { "0 0 S"}, mission.Result);
     }
+
+    [Test]
+    public void Plan_with_two_rovers_lands_the_rovers()
+    {
+      mission.Plan = new string[] {
+        "1 1",
+        "0 1 E",
+        "",
+        "1 0 W",
+      };
+      mission.Explore();
+      Assert.AreEqual(new [] { "0 1 E", "1 0 W" }, mission.Result);
+    }
   }
 }
