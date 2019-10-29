@@ -33,12 +33,7 @@ namespace Marsrover
 
     private void ReadRange()
     {
-      var fields = Plan[0].Split(" ", 2);
-      Range = new Range
-      {
-        X = int.Parse(fields[0]),
-        Y = int.Parse(fields[1]),
-      };
+      Range = Plan[0].ToRange();
     }
 
     private void LandRover()
