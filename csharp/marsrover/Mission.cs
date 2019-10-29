@@ -74,18 +74,14 @@ namespace Marsrover
     {
       var x = int.Parse(rover[0]);
       var y = int.Parse(rover[1]);
-      if (rover[2] == "E")
+      switch (rover[2])
       {
-        rover[0] = (x + 1).ToString();
+      case "E": x++; break;
+      case "W": x--; break;
+      case "N": y++; break;
       }
-      else if (rover[2] == "W")
-      {
-        rover[0] = (x - 1).ToString();
-      }
-      else if (rover[2] == "N")
-      {
-        rover[1] = (y + 1).ToString();
-      }
+      rover[0] = x.ToString();
+      rover[1] = y.ToString();
     }
 
     private void SpinRoverRight()
