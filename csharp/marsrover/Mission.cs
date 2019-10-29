@@ -30,15 +30,6 @@ namespace Marsrover
       public int Y { get; set; }
     }
 
-    public struct Rover
-    {
-      public int X { get; set; }
-
-      public int Y { get; set; }
-
-      public char Direction { get; set; }
-    }
-
     public void Explore()
     {
       if (Plan != null && Plan.Length > 0)
