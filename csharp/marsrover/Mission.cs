@@ -14,10 +14,6 @@ namespace Marsrover
 
     private Rover rover;
 
-    public const char LEFT = 'L';
-    public const char RIGHT = 'R';
-    public const char MOVE = 'M';
-
     public void Explore()
     {
       if (Plan != null && Plan.Length > 0)
@@ -67,9 +63,9 @@ namespace Marsrover
     {
       switch (command)
       {
-        case RIGHT: SpinRoverRight(); break;
-        case LEFT: SpinRoverLeft(); break;
-        case MOVE: MoveRover(); break;
+        case Command.RIGHT: SpinRoverRight(); break;
+        case Command.LEFT: SpinRoverLeft(); break;
+        case Command.MOVE: MoveRover(); break;
       }
     }
 
