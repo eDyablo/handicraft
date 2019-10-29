@@ -14,6 +14,11 @@ namespace Marsrover
 
     private Rover rover;
 
+    public const char NORTH = 'N';
+    public const char SOUTH = 'S';
+    public const char EAST = 'E';
+    public const char WEST = 'W';
+
     public struct RangeType
     {
       public int X { get; set; }
@@ -88,10 +93,10 @@ namespace Marsrover
     {
       switch (rover.Direction)
       {
-        case 'E': rover.X++; break;
-        case 'W': rover.X--; break;
-        case 'N': rover.Y++; break;
-        case 'S': rover.Y--; break;
+        case EAST: rover.X++; break;
+        case WEST: rover.X--; break;
+        case NORTH: rover.Y++; break;
+        case SOUTH: rover.Y--; break;
       }
     }
 
@@ -99,10 +104,10 @@ namespace Marsrover
     {
       switch (rover.Direction)
       {
-        case 'N': rover.Direction = 'E'; break;
-        case 'E': rover.Direction = 'S'; break;
-        case 'S': rover.Direction = 'W'; break;
-        case 'W': rover.Direction = 'N'; break;
+        case NORTH: rover.Direction = EAST; break;
+        case EAST: rover.Direction = SOUTH; break;
+        case SOUTH: rover.Direction = WEST; break;
+        case WEST: rover.Direction = NORTH; break;
       }
     }
 
@@ -110,10 +115,10 @@ namespace Marsrover
     {
       switch (rover.Direction)
       {
-        case 'N': rover.Direction = 'W'; break;
-        case 'W': rover.Direction = 'S'; break;
-        case 'S': rover.Direction = 'E'; break;
-        case 'E': rover.Direction = 'N'; break;
+        case NORTH: rover.Direction = WEST; break;
+        case WEST: rover.Direction = SOUTH; break;
+        case SOUTH: rover.Direction = EAST; break;
+        case EAST: rover.Direction = NORTH; break;
       }
     }
 
