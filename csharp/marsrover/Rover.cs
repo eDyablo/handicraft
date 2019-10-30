@@ -13,18 +13,15 @@ namespace Marsrover
 
   public static class RoverConvertion
   {
-    public static Rover ToRover(this string text)
-    {
-      return ToRover(text.Split(" ", 3));
-    }
-    public static Rover ToRover(this IList<string> fields)
-    {
-      return new Rover
+    public static Rover ToRover(this string text) =>
+      ToRover(text.Split(" ", 3));
+
+    public static Rover ToRover(this IList<string> fields) =>
+      new Rover
       {
         X = int.Parse(fields[0]),
         Y = int.Parse(fields[1]),
         Direction = fields[2][0],
       };
-    }
   }
 }
