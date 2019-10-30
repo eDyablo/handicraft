@@ -7,7 +7,7 @@ namespace Marsrover
     private Rover rover;
     private List<string> result = new List<string>();
 
-    public string[] Plan { private get; set; }
+    public IList<string> Plan { private get; set; }
 
     public Range Range { get; private set; }
 
@@ -20,13 +20,13 @@ namespace Marsrover
         var record = Plan.GetEnumerator();
         if (record.MoveNext())
         {
-          ReadRange(record.Current as string);
+          ReadRange(record.Current);
           while (record.MoveNext())
           {
-            LandRover(record.Current as string);
+            LandRover(record.Current);
             if (record.MoveNext())
             {
-              CommandRover(record.Current as string);
+              CommandRover(record.Current);
             }
             ReportRover();
           }
@@ -36,7 +36,7 @@ namespace Marsrover
 
     public bool HasPlan()
     {
-      return Plan != null && Plan.Length > 0;
+      return Plan != null;
     }
 
     private void ReadRange(string record)
