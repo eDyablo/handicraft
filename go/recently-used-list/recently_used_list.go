@@ -18,8 +18,10 @@ func (list *RecentlyUsedList) Add(item string) {
   foundAt := list.find(item)
   restAt := foundAt + 1
   if restAt > size { restAt = size }
+  beforeFound := list.items[0:foundAt]
+  aterFound := list.items[restAt:]
   list.items = append([]string {item},
-    append(list.items[0:foundAt], list.items[restAt:]...)...)
+    append(beforeFound, aterFound...)...)
 }
 
 // Get returns an item by its index in the list
