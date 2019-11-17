@@ -22,7 +22,7 @@ class NumeralTest {
       [ 'MCMXC', 1990],
       ['MMVIII', 2008],
       [  'XCIX', 99],
-      [ 'XLVII', 47] ,
+      [ 'XLVII', 47],
     ]
     tests.each { roman, arabic ->
       assertThat("\n     For: ${ roman }",
