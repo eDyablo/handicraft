@@ -14,7 +14,7 @@ class Numeral {
     int arabic
     int delta
     roman.each { symbol ->
-      final int newDelta = digits[symbol]
+      final int newDelta = digits[symbol] ?: 0
       arabic += newDelta
       if (newDelta > delta) {
         arabic -= 2 * delta
