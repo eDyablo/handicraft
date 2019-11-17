@@ -13,8 +13,12 @@ func (list *RecentlyUsedList) Size() uint {
 
 // Add adds an item to the list
 func (list *RecentlyUsedList) Add(item string) {
+  size := uint(len(list.items))
   foundAt := list.find(item)
-  list.items = append([]string {item}, list.items[0:foundAt]...)
+  restAt := foundAt + 1
+  if restAt > size { restAt = size }
+  list.items = append([]string {item},
+    append(list.items[0:foundAt], list.items[restAt:]...)...)
 }
 
 // Get returns an item by its index in the list

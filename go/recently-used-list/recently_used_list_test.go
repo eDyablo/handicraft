@@ -34,3 +34,15 @@ func Test_does_not_add_the_same_item_twice_to_empty_list(test *testing.T) {
   if list.Size() == 1 { return }
   test.Error(list)
 }
+
+func Test_does_not_add_the_same_item_twice_to_no_empty_list(test *testing.T) {
+  // Arrange
+  list := RecentlyUsedList {}
+  list.Add("first")
+  // Act
+  list.Add("second")
+  list.Add("second")
+  // Assert
+  if list.Size() == 2 { return }
+  test.Error(list)
+}
