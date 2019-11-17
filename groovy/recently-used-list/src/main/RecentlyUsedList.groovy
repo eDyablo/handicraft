@@ -1,15 +1,16 @@
 class RecentlyUsedList {
-  String item
+  def items = []
 
   int getSize() {
     0
   }
 
   void add(String item) {
-    this.item = item
+    items = [item] + items
+    println items
   }
 
   String getAt(int index) {
-    this.item
+    items[index]
   }
 }
