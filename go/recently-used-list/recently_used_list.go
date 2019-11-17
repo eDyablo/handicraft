@@ -6,9 +6,21 @@ type RecentlyUsedList struct {
   item []string
 }
 
+// Size returns number of items in the list
+func (list *RecentlyUsedList) Size() uint {
+  return uint(len(list.item))
+}
+
 // Add adds an item to the list
 func (list *RecentlyUsedList) Add(item string) {
-  list.item = append([]string {item}, list.item...)
+  found := len(list.item)
+  for i, ci := range list.item {
+    if ci == item {
+      found = i
+      break
+    }
+  }
+  list.item = append([]string {item}, list.item[0:found]...)
 }
 
 // Get returns an item by its index in the list
