@@ -13,6 +13,7 @@ func (list *RecentlyUsedList) Size() uint {
 
 // Add adds an item to the list
 func (list *RecentlyUsedList) Add(item string) {
+  if item == "" { return }
   size := uint(len(list.items))
   foundAt := list.find(item)
   restAt := foundAt + 1

@@ -54,3 +54,13 @@ func Test_does_not_add_the_same_item_twice_to_no_empty_list(test *testing.T) {
   }
   test.Error(list)
 }
+
+func Test_does_not_allow_to_add_empty_string(test *testing.T) {
+  // Arrange
+  list := RecentlyUsedList {}
+  // Act
+  list.Add("")
+  // Assert
+  if list.Size() == 0 { return }
+  test.Error(list)
+}
