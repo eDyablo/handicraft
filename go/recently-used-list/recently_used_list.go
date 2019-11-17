@@ -13,6 +13,16 @@ func (list *RecentlyUsedList) Size() uint {
 
 // Add adds an item to the list
 func (list *RecentlyUsedList) Add(item string) {
+  foundAt := list.find(item)
+  list.items = append([]string {item}, list.items[0:foundAt]...)
+}
+
+// Get returns an item by its index in the list
+func (list *RecentlyUsedList) Get(index uint) string {
+  return list.items[index]
+}
+
+func (list *RecentlyUsedList) find(item string) uint {
   foundAt := len(list.items)
   for index, listItem := range list.items {
     if item == listItem {
@@ -20,10 +30,5 @@ func (list *RecentlyUsedList) Add(item string) {
       break
     }
   }
-  list.items = append([]string {item}, list.items[0:foundAt]...)
-}
-
-// Get returns an item by its index in the list
-func (list *RecentlyUsedList) Get(index uint) string {
-  return list.items[index]
+  return uint(foundAt)
 }
