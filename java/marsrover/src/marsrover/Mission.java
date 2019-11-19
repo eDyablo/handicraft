@@ -11,7 +11,7 @@ public class Mission {
   private String[] rover;
   private int step;
 
-	public void explore() {
+  public void explore() {
     startMission();
     if (missionContinues()) {
       determineRange();
