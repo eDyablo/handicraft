@@ -1,8 +1,6 @@
 package marsrover;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class Mission {
@@ -11,39 +9,51 @@ public class Mission {
   public String[] plan;
   public List<String> result = new ArrayList<String>();
   private String[] rover;
+  private int step;
 
 	public void explore() {
-    Iterator<String> record = Arrays.asList(plan).iterator();
-    if (record.hasNext()) {
-      determineRange(record.next());
+    startMission();
+    if (missionContinues()) {
+      determineRange();
     }
-    while (record.hasNext()) {
-      landRover(record.next());
-      if (record.hasNext()) {
-        commandRover(record.next());
+    while (missionContinues()) {
+      landRover();
+      if (missionContinues()) {
+        commandRover();
       }
       reportRover();
     }
   }
 
-  private void landRover(String record) {
-    rover = record.split(" ");
+  private void startMission() {
+    step = 0;
+  }
+
+  private boolean missionContinues() {
+    return step < plan.length;
+  }
+
+  private void landRover() {
+    rover = plan[step].split(" ");
+    step++;
   }
 
   private void reportRover() {
     result.add(String.join(" ", rover));
   }
   
-  private void determineRange(String record) {
-    String[] range = record.split(" ");
+  private void determineRange() {
+    String[] range = plan[step].split(" ");
     xRange = Integer.parseInt(range[0]);
     yRange = Integer.parseInt(range[1]);
+    step++;
   }
 
-  private void commandRover(String record) {
-    for (Character command : record.toCharArray()) {
+  private void commandRover() {
+    for (Character command : plan[step].toCharArray()) {
       commandRover(command);
     }
+    step++;
   }
 
   private void commandRover(Character command) {
