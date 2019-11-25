@@ -6,12 +6,7 @@ class RecentlyUsedList {
   }
 
   void add(String item) {
-    items = items.inject([item]) { result, current ->
-      if (current != item) {
-        result << current
-      }
-      result
-    }
+    items = [item] + items.findAll { it != item }
   }
 
   String getAt(int index) {
