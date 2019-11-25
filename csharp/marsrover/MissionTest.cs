@@ -161,5 +161,18 @@ namespace Marsrover
       mission.Explore();
       Assert.AreEqual(new [] { "0 1 E", "1 0 W" }, mission.Result);
     }
+
+    [Test]
+    public void Explaration_with_plan_from_kata_gives_expected_result() {
+      mission.Plan = new string[] {
+        "5 5",
+        "1 2 N",
+        "LMLMLMLMM",
+        "3 3 E",
+        "MMRMMRMRRM",
+      };
+      mission.Explore();
+      Assert.AreEqual(new [] { "1 3 N", "5 1 E" }, mission.Result);
+    }
   }
 }
