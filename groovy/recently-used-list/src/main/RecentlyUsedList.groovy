@@ -6,7 +6,9 @@ class RecentlyUsedList {
   }
 
   void add(String item) {
-    items = [item] + items.findAll { it != item }
+    if (item) {
+      items = [item] + items.findAll { it != item }
+    }
   }
 
   String getAt(int index) {

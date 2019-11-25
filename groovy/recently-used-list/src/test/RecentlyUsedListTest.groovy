@@ -33,4 +33,10 @@ class RecentlyUsedListTest {
     list.add('first')
     assertThat(list.items, contains('first', 'second'))
   }
+
+  @Test void adding_empty_item_results_nothing() {
+    list.add('')
+    list.add(null)
+    assertThat(list.items, is(empty()))
+  }
 }
