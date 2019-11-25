@@ -26,4 +26,11 @@ class RecentlyUsedListTest {
     assertThat(list.size, is(equalTo(1)))
     assertThat(list[0], is(equalTo('the same')))
   }
+
+  @Test void adding_existing_item_to_the_list_results_in_the_item_moved_to_the_beginning() {
+    list.add('first')
+    list.add('second')
+    list.add('first')
+    assertThat(list.items, contains('first', 'second'))
+  }
 }
