@@ -2,12 +2,13 @@ class RecentlyUsedList {
   def items = []
 
   int getSize() {
-    0
+    items.size()
   }
 
   void add(String item) {
+    if (item in items)
+      return
     items = [item] + items
-    println items
   }
 
   String getAt(int index) {

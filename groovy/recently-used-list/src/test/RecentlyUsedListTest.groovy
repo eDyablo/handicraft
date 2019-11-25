@@ -19,4 +19,11 @@ class RecentlyUsedListTest {
     list.add('second')
     assertThat(list[1], is(equalTo('first')))
   }
+
+  @Test void adding_the_same_item_twice_to_an_empty_list_resuls_in_one_item_added() {
+    list.add('the same')
+    list.add('the same')
+    assertThat(list.size, is(equalTo(1)))
+    assertThat(list[0], is(equalTo('the same')))
+  }
 }
