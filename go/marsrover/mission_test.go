@@ -163,3 +163,20 @@ func Test_exploration_plan_with_M_commands_for_two_rovers_moves_the_rovers(test 
     mission.Result[1] == "1 0 S") { return }
   test.Error(mission.Result)
 }
+
+func Test_exploration_with_plan_from_the_kata_gives_correct_results(test *testing.T) {
+  mission := Mission {
+    Plan: []string {
+      "5 5",
+      "1 2 N",
+      "LMLMLMLMM",
+      "3 3 E",
+      "MMRMMRMRRM",
+    },
+  }
+  mission.Explore()
+  if (len(mission.Result) == 2 &&
+    mission.Result[0] == "1 3 N" &&
+    mission.Result[1] == "5 1 E") { return }
+  test.Error(mission.Result)
+}

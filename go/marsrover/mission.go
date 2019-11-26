@@ -18,6 +18,7 @@ type Mission struct {
   Result []string
   Range  Range
   rover  Rover
+  step   int
 }
 
 // Rover represents rover placement
@@ -34,16 +35,14 @@ func (rover *Rover) String() string {
 // Explore does exploration
 func (mission *Mission) Explore() {
   if mission.hasPlan() {
+    mission.start()
     mission.readRange()
-    if len(mission.Plan) > 1 {
-      for i := 1; i < len(mission.Plan); i++ {
-        mission.landRover(mission.Plan[i])
-        i++
-        if i < len(mission.Plan) {
-          mission.commandRover(mission.Plan[i])
-        }
-        mission.reportRover()
+    for mission.continues() {
+      mission.landRover()
+      if mission.continues() {
+        mission.commandRover()
       }
+      mission.reportRover()
     }
   }
 }
@@ -52,19 +51,42 @@ func (mission *Mission) hasPlan() bool {
   return len(mission.Plan) > 0
 }
 
+func (mission *Mission) start() {
+  mission.step = 0
+}
+
+func (mission *Mission) continues() bool {
+  return mission.step < len(mission.Plan)
+}
+
 func (mission *Mission) readRange() {
   items := strings.SplitN(mission.Plan[0], " ", 2)
   x,_ := strconv.Atoi(items[0])
   y,_ := strconv.Atoi(items[1])
   mission.Range = Range { X: x, Y: y }
+  mission.step++
 }
 
-func (mission *Mission) landRover(record string) {
+func (mission *Mission) landRover() {
+  record := mission.Plan[mission.step]
   items := strings.SplitN(record, " ", 3)
   x,_ := strconv.Atoi(items[0])
   y,_ := strconv.Atoi(items[1])
   dir := []rune(items[2])[0]
   mission.rover = Rover { X: x, Y: y, Direction: dir}
+  mission.step++
+}
+
+func (mission *Mission) commandRover() {
+  instructions := mission.Plan[mission.step]
+  for _, cmd := range instructions {
+    switch cmd {
+    case 'L': { mission.spinRoverLeft() }
+    case 'R': { mission.spinRoverRight() }
+    case 'M': { mission.moveRover() }
+    }
+  }
+  mission.step++
 }
 
 func (mission *Mission) spinRoverLeft() {
@@ -85,20 +107,6 @@ func (mission *Mission) spinRoverRight() {
   }
 }
 
-func (mission *Mission) commandRover(instructions string) {
-  for _, cmd := range instructions {
-    switch cmd {
-    case 'L': { mission.spinRoverLeft() }
-    case 'R': { mission.spinRoverRight() }
-    case 'M': { mission.moveRover() }
-    }
-  }
-}
-
-func (mission *Mission) reportRover() {
-  mission.Result = append(mission.Result, mission.rover.String())
-}
-
 func (mission *Mission) moveRover() {
   switch mission.rover.Direction {
   case 'N': { mission.rover.Y++ }
@@ -106,4 +114,8 @@ func (mission *Mission) moveRover() {
   case 'E': { mission.rover.X++ }
   case 'W': { mission.rover.X-- }
   }
+}
+
+func (mission *Mission) reportRover() {
+  mission.Result = append(mission.Result, mission.rover.String())
 }
