@@ -6,19 +6,19 @@ type digit struct {
 }
 
 var digits []digit = []digit {
-  { arabic: 1000, roman: "M" },
-  { arabic: 900,  roman: "CM" },
-  { arabic: 500,  roman: "D" },
-  { arabic: 400,  roman: "CD" },
-  { arabic: 100,  roman: "C" },
-  { arabic: 90,   roman: "XC" },
-  { arabic: 50,   roman: "L" },
-  { arabic: 40,   roman: "XL" },
-  { arabic: 10,   roman: "X" },
-  { arabic: 9,    roman: "IX" },
-  { arabic: 5,    roman: "V" },
-  { arabic: 4,    roman: "IV" },
-  { arabic: 1,    roman: "I" },
+  { 1000, "M" },
+  {  900, "CM" },
+  {  500, "D" },
+  {  400, "CD" },
+  {  100, "C" },
+  {   90, "XC" },
+  {   50, "L" },
+  {   40, "XL" },
+  {   10, "X" },
+  {    9, "IX" },
+  {    5, "V" },
+  {    4, "IV" },
+  {    1, "I" },
 }
 
 // ArabicToRoman converts arabic numeral to roman numeral
