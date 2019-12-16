@@ -11,42 +11,28 @@ func (strategy *testStrategy) Respond(interrogaton Interrogation) Testimony {
   return Testimony {}
 }
 
-func Test_increases_round_number(t *testing.T) {
-  investigation := Investigation {
-    Dave: &Prisoner { Strategy: &testStrategy {} },
-    Henry: &Prisoner { Strategy: &testStrategy {} },
-  }
-  investigation.MakeRound()
-  if investigation.Round != 1 {
-    t.Error(investigation)
-  }
-}
-
 func Test_interrogates_Dave_as_a_witness_and_Henry_as_an_accomplice(t *testing.T) {
   strategy := testStrategy {}
-  investigation := Investigation {
-    Dave: &Prisoner { Name: "Dave", Strategy: &strategy },
-    Henry: &Prisoner { Name: "Henry", Strategy: &strategy },
-  }
+  Dave := Prisoner { Name: "Dave", Strategy: &strategy }
+  Henry := Prisoner { Name: "Henry", Strategy: &strategy }
+  investigation := NewInvestigation(&Dave, &Henry)
   investigation.MakeRound()
-  if len(strategy.interrogations) == 0 ||
-    strategy.interrogations[0].Witness != investigation.Dave  ||
-    strategy.interrogations[0].Accomplice != investigation.Henry {
+  if len(strategy.interrogations) < 1 ||
+    strategy.interrogations[0].Witness != &Dave  ||
+    strategy.interrogations[0].Accomplice != &Henry {
     t.Error("interrogated:", strategy.interrogations)
   }
 }
 
 func Test_interrogates_Henry_as_a_witness_and_Dave_as_an_accomplice(t *testing.T) {
   strategy := testStrategy {}
-  investigation := Investigation {
-    Dave: &Prisoner { Name: "Dave", Strategy: &strategy },
-    Henry: &Prisoner { Name: "Henry", Strategy: &strategy },
-  }
+  Dave := Prisoner { Name: "Dave", Strategy: &strategy }
+  Henry := Prisoner { Name: "Henry", Strategy: &strategy }
+  investigation := NewInvestigation(&Dave, &Henry)
   investigation.MakeRound()
   if len(strategy.interrogations) < 2 ||
-    strategy.interrogations[1].Witness != investigation.Henry  ||
-    strategy.interrogations[1].Accomplice != investigation.Dave {
+    strategy.interrogations[1].Witness != &Henry  ||
+    strategy.interrogations[1].Accomplice != &Dave {
     t.Error("interrogated:", strategy.interrogations)
   }
 }
-

@@ -1,13 +1,23 @@
 package dilemma
 
 type Investigation struct {
-  Dave *Prisoner
-  Henry *Prisoner
+  Prisoners []*Prisoner
   Round int
 }
 
+func NewInvestigation(prisoners ...*Prisoner) *Investigation {
+  return &Investigation { Prisoners: prisoners }
+}
+
 func (investigation *Investigation) MakeRound() {
-  investigation.Dave.Respond(Interrogation { Witness: investigation.Dave, Accomplice: investigation.Henry })
-  investigation.Henry.Respond(Interrogation { Witness: investigation.Henry, Accomplice: investigation.Dave })
+  prisoners := investigation.Prisoners
+  prisoners[0].Respond(Interrogation {
+    Witness: prisoners[0],
+    Accomplice: prisoners[1],
+  })
+  prisoners[1].Respond(Interrogation {
+    Witness: prisoners[1],
+    Accomplice: prisoners[0],
+  })
   investigation.Round ++
 }
