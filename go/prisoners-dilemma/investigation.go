@@ -3,7 +3,6 @@ package dilemma
 // Investigation represents an investigation
 type Investigation struct {
   Prisoners []*Prisoner
-  Round int
 }
 
 // NewInvestigation creates an investigation against the prisoners
@@ -22,5 +21,11 @@ func (investigation *Investigation) MakeRound() {
     Witness: prisoners[1],
     Accomplice: prisoners[0],
   })
-  investigation.Round ++
+}
+
+// Hold holds the investigation by conducting the number of interrogations
+func (investigation *Investigation) Hold(number int) {
+  for round := 0; round < number; round++ {
+    investigation.MakeRound()
+  }
 }
