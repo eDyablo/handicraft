@@ -1,7 +1,8 @@
 package dilemma
 
 type Prisoner struct {
-  strategy PrisonerStrategy
+  Name string
+  Strategy PrisonerStrategy
 }
 
 func (prisoner *Prisoner) RemainSilent(accomplice *Prisoner) Testimony {
@@ -13,5 +14,9 @@ func (prisoner *Prisoner) Testify(accomplice *Prisoner) Testimony {
 }
 
 func (prisoner *Prisoner) Respond(interrogation Interrogation) Testimony {
-  return prisoner.strategy.Respond(interrogation)
+  return prisoner.Strategy.Respond(interrogation)
+}
+
+func (prisoner Prisoner) String() string {
+  return prisoner.Name
 }
