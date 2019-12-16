@@ -5,7 +5,7 @@ type TitForTatStrategy struct {
 
 func (strategy *TitForTatStrategy) Respond(interrogation Interrogation) Testimony {
   if interrogation.Witness == interrogation.Suspect {
-    return Testimony { Suspect: interrogation.Accomplice }
+    return interrogation.Witness.Testify(interrogation.Accomplice)
   }
-  return Testimony {}
+  return interrogation.Witness.RemainSilent(interrogation.Accomplice)
 }
