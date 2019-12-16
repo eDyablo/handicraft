@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Interrogation represents an interrogation
 type Interrogation struct {
   Witness *Prisoner
   Accomplice *Prisoner
