@@ -7,11 +7,10 @@ class AnagramBreeder {
     if (size == 1) {
       return [origin] as String[]
     }
-    (0..size-1).inject([]) { anagrams, i ->
+    (0..<size).inject([]) { anagrams, i ->
       breed(origin.take(i) + origin.drop(i+1)).each { forebear ->
         anagrams << origin[i] + forebear
-      }
-      anagrams
+      }; anagrams
     } as String[]
   }
 }
