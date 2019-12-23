@@ -63,5 +63,6 @@ class AnagramBreederTest {
 
   @Test void breeds_for_n_letters_word() {
     assert 'hamcrest' in breeder.breed2('matchers')
+    //breeder.breed2('abcdefghij')
   }
 }

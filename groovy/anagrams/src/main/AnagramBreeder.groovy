@@ -15,18 +15,17 @@ class AnagramBreeder {
   }
 
   def breed2(String origin='') {
-    def anagrams = origin.split('') as ArrayList<String>
-    def (int begin, int end) = [0, anagrams.size()]
+    def anagrams = origin.split('')
     (1..<origin.size()).each {
-      anagrams[begin..<end].each { s ->
-        origin.findAll { c ->
-          !s.contains(c)
-        }.each { c ->
-          anagrams << (s + c)
+      anagrams = anagrams.inject([]) { result, word ->
+        origin.each { letter ->
+          if (!word.contains(letter)) {
+            result.add(word + letter)
+          }
         }
+        result
       }
-      (begin, end) = [end, anagrams.size()]
     }
-    return anagrams[begin..<end]
+    return anagrams
   }
 }
