@@ -17,13 +17,13 @@ class AnagramBreeder {
   def breed2(String origin='') {
     def anagrams = origin.split('')
     (1..<origin.size()).each {
-      anagrams = anagrams.inject([]) { result, word ->
+      anagrams = anagrams.inject([]) { breeds, forebear ->
         origin.each { letter ->
-          if (!word.contains(letter)) {
-            result.add(word + letter)
+          if (!forebear.contains(letter)) {
+            breeds.add(forebear + letter)
           }
         }
-        result
+        breeds
       }
     }
     return anagrams
