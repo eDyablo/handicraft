@@ -13,4 +13,20 @@ class AnagramBreeder {
       }; anagrams
     } as String[]
   }
+
+  def breed2(String origin='') {
+    def anagrams = origin.split('') as ArrayList<String>
+    def (int begin, int end) = [0, anagrams.size()]
+    (1..<origin.size()).each {
+      anagrams[begin..<end].each { s ->
+        origin.findAll { c ->
+          !s.contains(c)
+        }.each { c ->
+          anagrams << (s + c)
+        }
+      }
+      (begin, end) = [end, anagrams.size()]
+    }
+    return anagrams[begin..<end]
+  }
 }

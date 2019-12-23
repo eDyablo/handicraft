@@ -6,17 +6,20 @@ class AnagramBreederTest {
 
   @Test
   void breeds_no_words_for_no_word() {
-    assertArrayEquals([] as String[], breeder.breed())
+    assert [] == breeder.breed()
+    assert [] == breeder.breed2()
   }
   
   @Test
   void breeds_one_word_equal_to_origin_when_it_has_one_letter() {
-    assertArrayEquals(['a'] as String[], breeder.breed('a'))
+    assert ['a'] == breeder.breed('a')
+    assert ['a'] == breeder.breed2('a')
   }
   
   @Test
   void breeds_for_word_with_two_letters() {
     assert ['ab', 'ba'] == breeder.breed('ab')
+    assert ['ab', 'ba'] == breeder.breed2('ab')
   }
   
   @Test
@@ -27,6 +30,7 @@ class AnagramBreederTest {
       'cab', 'cba',
     ]
     assert expected == breeder.breed('abc')
+    assert expected == breeder.breed2('abc')
   }
   
   @Test
@@ -38,6 +42,7 @@ class AnagramBreederTest {
       'obir', 'obri', 'oibr', 'oirb', 'orbi', 'orib',
     ]
     assert expected == breeder.breed('biro')
+    assert expected == breeder.breed2('biro')
   }
   
   @Test
@@ -53,5 +58,10 @@ class AnagramBreederTest {
       'boair', 'boari', 'boiar', 'boira', 'borai', 'boria',
     ]
     assert expected == breeder.breed('abiro').take(expected.size())
+    assert expected == breeder.breed2('abiro').take(expected.size())
+  }
+
+  @Test void breeds_for_n_letters_word() {
+    assert 'hamcrest' in breeder.breed2('matchers')
   }
 }
