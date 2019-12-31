@@ -15,15 +15,18 @@ class AnagramBreeder {
   }
 
   def breed2(String origin='') {
-    def anagrams = origin.split('')
+    def anagrams = origin.split('').findAll()
     (1..<origin.size()).each {
-      anagrams = anagrams.inject([]) { breeds, forebear ->
+      def breeds = anagrams.inject([]) { breeds, forebear ->
         origin.each { letter ->
           if (!forebear.contains(letter)) {
             breeds.add(forebear + letter)
           }
         }
         breeds
+      }
+      if (breeds.size()) {
+        anagrams = breeds
       }
     }
     return anagrams
