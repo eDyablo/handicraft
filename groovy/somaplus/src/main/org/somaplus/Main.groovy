@@ -14,5 +14,6 @@ class Main {
     domainActors.send(new AskOperatorMessage(
       question: 'who are you?'
     ))
+    domainActors.dispatch()
   }
 }

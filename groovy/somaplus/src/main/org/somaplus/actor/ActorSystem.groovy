@@ -1,8 +1,11 @@
 package org.somaplus.actor
 
+import java.util.concurrent.LinkedBlockingQueue
+
 class ActorSystem {
   final String id
   final List<Actor> actors = []
+  final Queue messageQueue = new LinkedBlockingQueue()
 
   ActorSystem(String id, Class[] actorTypes) {
     this.id = id
@@ -12,6 +15,14 @@ class ActorSystem {
   }
 
   void send(Object[] messages) {
-    actors*.send(messages)
+    messages.each {
+      messageQueue.add(it)
+    }
+  }
+
+  void dispatch() {
+    while(messageQueue.size()) {
+      actors*.send(messageQueue.poll())
+    }
   }
 }
