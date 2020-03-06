@@ -21,7 +21,7 @@ class ConsoleOperatorActor extends Actor {
   }
 
   void handleAskOperatorMessage(message) {
-    output.print(message.question + ' ')
+    output.print("${ message.question } ")
     final answer = input.newReader().readLine()
     system.send(
       new OperatorAnswerMessage(
@@ -29,7 +29,7 @@ class ConsoleOperatorActor extends Actor {
         answer: answer,
       ),
       new DisplayTextMessage(
-        text: "hello " + answer,
+        text: "hello ${ answer }",
       ),
     )
   }
