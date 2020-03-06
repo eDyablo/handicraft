@@ -12,6 +12,10 @@ class Main {
       ConsoleOperatorActor,
       CommandControllerActor,
     )
-    domainActors.dispatch(new AskCommandMessage())
+    domainActors.dispatch(
+      new DisplayTextMessage(text: 'Somaplus 1.0.0'),
+      new DisplayTextMessage(text: 'Type "help"'),
+      new AskCommandMessage(),
+    )
   }
 }
