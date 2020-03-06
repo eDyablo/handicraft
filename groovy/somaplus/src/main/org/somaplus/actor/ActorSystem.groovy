@@ -20,7 +20,8 @@ class ActorSystem {
     }
   }
 
-  void dispatch() {
+  void dispatch(Object[] messages) {
+    send(messages)
     while(messageQueue.size()) {
       actors*.send(messageQueue.poll())
     }

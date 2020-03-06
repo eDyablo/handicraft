@@ -12,7 +12,6 @@ class Main {
       ConsoleOperatorActor,
       CommandControllerActor,
     )
-    domainActors.send(new AskCommandMessage())
-    domainActors.dispatch()
+    domainActors.dispatch(new AskCommandMessage())
   }
 }
