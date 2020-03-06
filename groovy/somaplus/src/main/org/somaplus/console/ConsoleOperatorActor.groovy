@@ -7,6 +7,7 @@ class ConsoleOperatorActor extends Actor {
   ConsoleOperatorActor(ActorSystem system) {
     super(system)
     receive(
+      AskCommandMessage,
       AskOperatorMessage,
       DisplayTextMessage,
     )
@@ -22,19 +23,24 @@ class ConsoleOperatorActor extends Actor {
 
   void handleAskOperatorMessage(message) {
     output.print("${ message.question } ")
-    final answer = input.newReader().readLine()
     system.send(
       new OperatorAnswerMessage(
         question: message.question,
-        answer: answer,
-      ),
-      new DisplayTextMessage(
-        text: "hello ${ answer }",
-      ),
+        answer: input.newReader().readLine(),
+      )
     )
   }
 
   void handleDisplayTextMessage(message) {
-    System.out.println(message.text)
+    output.println(message.text)
+  }
+
+  void handleAskCommandMessage(message) {
+    output.print("${ message.prompt } ")
+    system.send(
+      new CommandEnteredMessage(
+        command: input.newReader().readLine()
+      )
+    )
   }
 }

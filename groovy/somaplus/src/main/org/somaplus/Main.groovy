@@ -10,10 +10,9 @@ class Main {
       'domain',
       CardsManagerActor,
       ConsoleOperatorActor,
+      CommandControllerActor,
     )
-    domainActors.send(new AskOperatorMessage(
-      question: 'who are you?'
-    ))
+    domainActors.send(new AskCommandMessage())
     domainActors.dispatch()
   }
 }
