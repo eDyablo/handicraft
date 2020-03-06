@@ -4,5 +4,5 @@ import groovy.transform.MapConstructor
 
 @MapConstructor
 class AskCommandMessage {
-  final String prompt = 'somaplus>'
+  final String prompt = '>'
 }
