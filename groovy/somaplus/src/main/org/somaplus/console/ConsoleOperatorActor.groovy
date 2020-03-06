@@ -29,7 +29,7 @@ class ConsoleOperatorActor extends Actor {
         answer: answer,
       ),
       new DisplayTextMessage(
-        text: "hello " + answer
+        text: "hello " + answer,
       ),
     )
   }
