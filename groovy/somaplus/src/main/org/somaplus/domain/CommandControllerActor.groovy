@@ -11,11 +11,11 @@ class CommandControllerActor extends Actor {
   void handleCommandEnteredMessage(message) {
     switch(message.command) {
       case 'help':
-      system.send(new DisplayTextMessage(text: '''\
-      Commands:
-        help    Display help information
-        quit    Exit the application
-      '''.stripIndent().trim()))
+      system.send(new DisplayTextMessage(text: '''
+        Commands:
+          help    Display help information
+          quit    Exit the application
+        '''.stripIndent().trim()))
       break
     }
     if (message.command != 'quit') {
