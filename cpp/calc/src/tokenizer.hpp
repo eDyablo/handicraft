@@ -24,21 +24,11 @@ struct token_t {
   token_kind kind;
   std::vector<symbol_t> symbols;
 
-  char const* description() const {
-    static const auto map = std::map<token_kind, char const*> {
-      { unknown, "unknown" },
-      { unrecognized, "unrecognized" },
-      { number, "number" },
-      { operation, "operation" },
-      { open_bracket, "open_bracket" },
-      { close_bracket, "close_bracket" },
-      { whitespace, "whitespace" },
-    };
-    return map.at(kind);
-  }
+  static std::map<token_kind, char const*> kind_to_name;
 
-  bool is_number() const {
-    return kind == number;
+  char const* description() const {
+    auto const& found = kind_to_name.find(kind);
+    return found != kind_to_name.end() ? (*found).second : "unknown";
   }
 
   void append(symbol_t const& symbol) {
@@ -47,6 +37,16 @@ struct token_t {
 
   template <typename>
   friend std::ostream& operator<<(std::ostream& stream, token_t const& token);
+};
+
+template <typename C>
+std::map<token_kind, char const*> token_t<C>::kind_to_name = {
+  { unrecognized, "unrecognized" },
+  { number, "number" },
+  { operation, "operation" },
+  { open_bracket, "open_bracket" },
+  { close_bracket, "close_bracket" },
+  { whitespace, "whitespace" },
 };
 
 template <typename C>
