@@ -13,9 +13,9 @@ enum token_kind {
   whitespace,
 };
 
-template <typename C>
+template <typename Symbol>
 struct token_t {
-  typedef C symbol_t;
+  typedef Symbol symbol_t;
   typedef std::vector<symbol_t> vector_t;
 
   token_kind kind;
@@ -36,8 +36,8 @@ struct token_t {
   friend std::ostream& operator<<(std::ostream& stream, token_t const& token);
 };
 
-template <typename C>
-std::map<token_kind, char const*> token_t<C>::kind_to_name = {
+template <typename Symbol>
+std::map<token_kind, char const*> token_t<Symbol>::kind_to_name = {
   { unrecognized, "unrecognized" },
   { number, "number" },
   { operation, "operation" },
@@ -46,12 +46,12 @@ std::map<token_kind, char const*> token_t<C>::kind_to_name = {
   { whitespace, "whitespace" },
 };
 
-template <typename C>
-std::ostream& operator<<(std::ostream& stream, token_t<C> const& token) {
+template <typename Symbol>
+std::ostream& operator<<(std::ostream& stream, token_t<Symbol> const& token) {
   stream << token.description();
   if (!token.symbols.empty()) {
     stream << "('";
-    std::copy(token.symbols.cbegin(), token.symbols.cend(), std::ostream_iterator<C>(stream));
+    std::copy(token.symbols.cbegin(), token.symbols.cend(), std::ostream_iterator<Symbol>(stream));
     stream << "')";
   }
   return stream;

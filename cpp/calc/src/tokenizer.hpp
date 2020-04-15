@@ -1,9 +1,9 @@
 #include "token.hpp"
 #include <map>
 
-template <typename C>
+template <typename Symbol>
 struct tokenizer_t {
-  typedef C symbol_t;
+  typedef Symbol symbol_t;
   typedef struct token_t<symbol_t> token_t;
 
   static std::map<symbol_t, token_kind> symbol_to_token;
@@ -32,8 +32,8 @@ struct tokenizer_t {
   }
 };
 
-template<typename C>
-std::map<typename tokenizer_t<C>::symbol_t, token_kind> tokenizer_t<C>::symbol_to_token = {
+template<typename Symbol>
+std::map<typename tokenizer_t<Symbol>::symbol_t, token_kind> tokenizer_t<Symbol>::symbol_to_token = {
   { symbol_t('0'), number },
   { symbol_t('1'), number },
   { symbol_t('2'), number },
