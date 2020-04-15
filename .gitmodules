@@ -1,3 +1,6 @@
 [submodule "cpp/googletest"]
 	path = cpp/googletest
 	url = https://github.com/google/googletest.git
+[submodule "cpp/jamplus"]
+	path = cpp/jamplus
+	url = https://github.com/jamplus/jamplus.git
