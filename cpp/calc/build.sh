@@ -2,8 +2,10 @@
 
 set -o errexit
 
-iid_file="build/idd"
+script_dir="$(cd "$(dirname "${0}")"; pwd)"
 
 mkdir -p "build"
 
-docker build --iidfile="${iid_file}" .
+iid_file="build/idd"
+
+docker build --iidfile="${iid_file}" --file="Dockerfile" .
