@@ -1,4 +1,7 @@
+#pragma once
+
 #include "token.hpp"
+#include <functional>
 #include <map>
 
 namespace calc {
@@ -8,29 +11,36 @@ namespace calc {
     typedef struct token_t<symbol_t> token_t;
 
     static std::map<symbol_t, token_kind> symbol_to_token;
+    
+    static std::vector<token_kind> continuation_token_kinds;
+
+    token_t token;
 
     static token_kind kind_of(symbol_t const& symbol) {
       auto const& found = symbol_to_token.find(symbol);
       return found != symbol_to_token.end() ? (*found).second : unrecognized;
     }
 
-    template<typename InputIterator, typename OutputIterator>
-    void tokenize(InputIterator first, InputIterator last, OutputIterator result) {
-      auto token = token_t();
-      for (auto iter = first; iter != last; ++iter) {
-        auto const& symbol = *iter;
-        auto const kind = kind_of(symbol);
-        if (unknown == token.kind) {
-          token = token_t { kind, { symbol } };
-        } else if (kind == token.kind) {
-          token.append(symbol);
-        } else {
-          *result = token;
-          token = token_t { kind, { symbol } };
-        }
+    token_t make_token(symbol_t const& symbol) {
+      return token_t { kind_of(symbol), { symbol } };
+    }
+
+    bool is_continuation(token_t const& new_token) {
+      using namespace std;
+      return new_token.kind == token.kind &&
+        any_of(continuation_token_kinds.cbegin(), continuation_token_kinds.cend(),
+          bind(std::equal_to<token_kind>(), new_token.kind, placeholders::_1));
+    }
+
+    token_t tokenize(symbol_t const& symbol) {
+      auto new_token = make_token(symbol);
+      if (is_continuation(new_token)) {
+        token.append(symbol);
+        return token_t();
+      } else {
+        std::swap(token, new_token);
+        return new_token;
       }
-      if (token.kind != unknown)
-        *result = token;
     }
   };
 
@@ -56,4 +66,25 @@ namespace calc {
     { symbol_t(' '), whitespace },
     { symbol_t('\t'), whitespace },
   };
+
+  template<typename Symbol>
+  std::vector<token_kind> tokenizer_t<Symbol>::continuation_token_kinds = {
+    number,
+    whitespace,
+  };
+
+  template<typename InputIterator, typename OutputIterator>
+  void tokenize(InputIterator first, InputIterator last, OutputIterator result) {
+    typedef typename std::iterator_traits<InputIterator>::value_type value_t;
+    auto tokenizer = tokenizer_t<value_t>();
+    for (auto iter = first; iter != last; ++iter) {
+      auto token = tokenizer.tokenize(*iter);
+      if (unknown != token.kind) {
+        *result = token;
+      }
+    }
+    if (unknown != tokenizer.token.kind) {
+      *result = tokenizer.token;
+    }
+  }
 }
