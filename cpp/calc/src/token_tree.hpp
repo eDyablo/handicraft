@@ -77,10 +77,6 @@ namespace calc {
     node_t& node(node_ref_t const& ref) {
       return nodes.at(ref);
     }
-
-    node_t& last_node() {
-      return nodes.back();
-    }
   };
 
   template<typename Symbol>
