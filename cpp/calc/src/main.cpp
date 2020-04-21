@@ -6,13 +6,18 @@
 #include <iterator>
 #include <sstream>
 
-int main(int argc, char const* argv[]) {
+double evaluate(char const* expression) {
   using namespace std;
   using namespace calc;
+  return evaluate(parse(tokenize(
+    &expression[0], &expression[strlen(expression)])));
+}
+
+int main(int argc, char const* argv[]) {
+  using namespace std;
   stringstream input;
-  copy(&argv[1], &argv[argc], ostream_iterator<char const*>(input));
-  input.seekp(0);
-  cout << evaluate(parse(tokenize(
-    istream_iterator<char>(input), istream_iterator<char>()))) << endl;
+  transform(&argv[1], &argv[argc],
+    ostream_iterator<double>(cout, " "), evaluate);
+  cout << endl;
   return 0;
 }
