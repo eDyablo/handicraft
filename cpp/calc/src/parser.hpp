@@ -69,4 +69,9 @@ namespace calc {
     for_each(first, last, bind(&parser_t::parse, &parser, placeholders::_1));
     return parser.tree;
   }
+
+  template<typename Token>
+  auto parse(std::vector<Token> const& tokens) {
+    return parse(tokens.cbegin(), tokens.cend());
+  }
 }

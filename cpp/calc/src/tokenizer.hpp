@@ -2,7 +2,9 @@
 
 #include "token.hpp"
 #include <functional>
+#include <iterator>
 #include <map>
+#include <vector>
 
 namespace calc {
   template <typename Symbol>
@@ -86,5 +88,13 @@ namespace calc {
     if (unknown != tokenizer.token.kind) {
       *result = tokenizer.token;
     }
+  }
+
+  template<typename InputIterator>
+  auto tokenize(InputIterator first, InputIterator last) {
+    typedef typename std::iterator_traits<InputIterator>::value_type value_t;
+    std::vector<token_t<value_t>> tokens;
+    tokenize(first, last, std::back_inserter(tokens));
+    return tokens;
   }
 }
