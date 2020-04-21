@@ -1,3 +1,4 @@
+#include "evaluator.hpp"
 #include "parser.hpp"
 #include "tokenizer.hpp"
 #include <cstring>
@@ -16,12 +17,13 @@ int main(int argc, char const* argv[]) {
       back_inserter(tokens));
 
     tokenize(&argv[1][0], &argv[1][strlen(argv[1])],
-      std::ostream_iterator<token_t<char>>(cout, " "));
-      
+      std::ostream_iterator<token_t<char>>(cout, " "));    
     cout << endl;
 
     auto tree = parse(tokens.cbegin(), tokens.cend());
     cout << tree << endl;
+
+    cout << argv[1] << " = " << evaluate(tree) << endl;
   }
   return 0;
 }
