@@ -2,4 +2,4 @@
 
 set -o errexit
 
-g++ -std=c++14 src/main.cpp -o calc
+g++ -std=c++14 src/main.cpp -o build/calc
