@@ -38,7 +38,7 @@ namespace calc {
           tree.node(current).token = token;
           tree.root = current;
         } else {
-          if (token.contains('*') || token.contains('/')) {
+          if (higher_precedence(token, tree.node(current).token)) {
             new_node.left = tree.node(current).right;
             auto const right = tree.add(new_node);
             tree.node(current).right = right;
@@ -50,6 +50,12 @@ namespace calc {
           }
         }
       }
+    }
+
+    bool higher_precedence(token_t const& first, token_t const& second) {
+      auto const& first_symbol = first.symbols.front();
+      auto const& second_symbol = second.symbols.front(); 
+      return first_symbol == '/' || (first_symbol == '*' && second_symbol != '/');
     }
   };
 
