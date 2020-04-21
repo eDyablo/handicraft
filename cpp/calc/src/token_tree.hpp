@@ -77,6 +77,10 @@ namespace calc {
     node_t& node(node_ref_t const& ref) {
       return nodes.at(ref);
     }
+
+    node_t const& node(node_ref_t const& ref) const {
+      return nodes.at(ref);
+    }
   };
 
   template<typename Symbol>
@@ -87,7 +91,7 @@ namespace calc {
   std::ostream& operator<<(std::ostream& stream, token_tree_t<Symbol> const& tree) {
     using namespace std;
     typedef typename token_tree_t<Symbol>::node_t node_t;
-    stream << "root:" << tree.root << " ";
+    stream << "r:" << tree.root << " ";
     copy(tree.nodes.cbegin(), tree.nodes.cend(), ostream_iterator<node_t>(stream, " "));
     return stream;
   }
