@@ -1,16 +1,20 @@
 #include "evaluator.hpp"
 #include "parser.hpp"
 #include "tokenizer.hpp"
+#include <algorithm>
 #include <cstring>
 #include <iostream>
 #include <iterator>
+#include <sstream>
 #include <vector>
 
 int main(int argc, char const* argv[]) {
   using namespace std;
   using namespace calc;
-  if (argc > 1) {
-    cout << evaluate(parse(tokenize(&argv[1][0], &argv[1][strlen(argv[1])]))) << endl;
-  }
+  stringstream input;
+  copy(&argv[1], &argv[argc], ostream_iterator<char const*>(input));
+  input.seekp(0);
+  cout << evaluate(parse(tokenize(
+    istream_iterator<char>(input), istream_iterator<char>()))) << endl;
   return 0;
 }
