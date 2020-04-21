@@ -64,8 +64,7 @@ namespace calc {
     using namespace std;
     typedef typename std::iterator_traits<InputIterator>::value_type token_t;
     typedef struct parser_t<token_t> parser_t;
-    auto bracket_count = 0;
-    auto parser = parser_t();
+    parser_t parser;
     for_each(first, last, bind(&parser_t::parse, &parser, placeholders::_1));
     return parser.tree;
   }
