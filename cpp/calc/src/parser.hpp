@@ -36,6 +36,7 @@ namespace calc {
       } else if (operation == token.kind) {
         if (unknown == tree.node(current).token.kind) {
           tree.node(current).token = token;
+          tree.root = current;
         } else {
           if (token.contains('*') || token.contains('/')) {
             new_node.left = tree.node(current).right;
@@ -43,8 +44,9 @@ namespace calc {
             tree.node(current).right = right;
             current = right;
           } else {
-            new_node.left = current;
+            new_node.left = tree.root;
             current = tree.add(new_node);
+            tree.root = current;
           }
         }
       }
