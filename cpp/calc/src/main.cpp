@@ -2,11 +2,9 @@
 #include "parser.hpp"
 #include "tokenizer.hpp"
 #include <algorithm>
-#include <cstring>
 #include <iostream>
 #include <iterator>
 #include <sstream>
-#include <vector>
 
 int main(int argc, char const* argv[]) {
   using namespace std;
