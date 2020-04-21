@@ -4,8 +4,7 @@
 #include <algorithm>
 #include <functional>
 #include <iterator>
-
-#include <iostream>
+#include <stack>
 
 namespace calc {
   template<typename Token>
@@ -15,9 +14,11 @@ namespace calc {
     typedef struct token_tree_t<symbol_t> tree_t;
     typedef typename tree_t::node_t node_t;
     typedef typename tree_t::node_ref_t node_ref_t;
+    typedef std::stack<node_ref_t> ref_stack_t;
 
     tree_t tree;
     node_ref_t current;
+    ref_stack_t root_stack;
 
     parser_t():
     current(tree.add(node_t(token_t()))) {
@@ -49,6 +50,15 @@ namespace calc {
             tree.root = current;
           }
         }
+      } else if (open_bracket == token.kind) {
+        root_stack.push(tree.root);
+        current = tree.add(node_t(token_t()));
+      } else if (close_bracket == token.kind) {
+        auto const sub_tree = tree.root;
+        tree.root = root_stack.top();
+        root_stack.pop();
+        tree.node(tree.root).right = sub_tree;
+        current = tree.root;
       }
     }
 
