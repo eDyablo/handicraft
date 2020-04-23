@@ -1,3 +1,3 @@
 #! /usr/bin/env bash
 
-cmake --build ./build && build/bin/cntwrd "${@}"
+./build/bin/cntwrd "${@}"
