@@ -4,8 +4,8 @@
 #include <string>
 
 template<typename CharT>
-struct basic_line_t {
-  typedef basic_line_t self;
+struct basic_textline_t {
+  typedef basic_textline_t self;
   typedef CharT char_t;
   typedef std::basic_string<char_t> text_t;
   typedef std::basic_istream<char_t> istream_t;
@@ -17,10 +17,10 @@ struct basic_line_t {
     return text;
   }
 
-  friend istream_t& operator>>(istream_t& input, basic_line_t& line) {
+  friend istream_t& operator>>(istream_t& input, basic_textline_t& line) {
     std::getline(input, line.text, '\n');
     return input;
   }
 };
 
-typedef basic_line_t<char> line_t;
+typedef basic_textline_t<char> textline_t;
