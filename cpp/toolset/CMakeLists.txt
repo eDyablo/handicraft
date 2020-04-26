@@ -4,5 +4,6 @@ project(toolset)
 
 add_subdirectory(src/cntln)
 add_subdirectory(src/cntwrd)
+add_subdirectory(src/rvln)
 add_subdirectory(src/rvwrd)
 add_subdirectory(src/wrdsz)
