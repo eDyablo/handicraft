@@ -10,7 +10,12 @@ using namespace gmtr;
 int main() {
   space3_t space;
 
-  cout << space.dimention;
+  cout << point2_t() << endl;
+  cout << point3_t() << endl;
+  cout << vector2_t() << endl;
+  cout << vector3_t() << endl;
+
+  cout << vector3_t().dot_product(vector3_t());
 
   cout << endl;
 

@@ -23,12 +23,16 @@ namespace gmtr {
       coords{0} {
     }
 
+    auto const& get_coords() const {
+      return coords;
+    }
+
     friend std::ostream& operator<<(std::ostream& stream, self_t const& point) {
       using namespace std;
       auto const& coords = point.coords;
       stream << "p(";
-      copy(&coords[0], &coords[point.dimention-1], ostream_iterator<coord_t>(stream, ","));
-      stream << coords[point.dimention-1] << ')';
+      copy(&coords[0], &coords[dimention-1], ostream_iterator<coord_t>(stream, ","));
+      stream << coords[dimention-1] << ')';
       return stream;
     }
   };
