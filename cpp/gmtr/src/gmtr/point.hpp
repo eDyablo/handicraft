@@ -14,14 +14,10 @@ namespace gmtr {
     typedef CoordT coord_t;
 
   private:
-    coord_t coords[DimN];
+    coord_t coords[DimN] = {0};
 
   public:
     static self_t const origin;
-
-    basic_point_t():
-      coords{0} {
-    }
 
     auto const& get_coords() const {
       return coords;
