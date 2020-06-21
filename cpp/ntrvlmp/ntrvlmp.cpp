@@ -38,8 +38,7 @@ public:
     if (!(endValue == val)) {
       auto inserted = m_map.emplace_hint(erased, keyBegin, val);
       m_map.emplace_hint(++inserted, keyEnd, endValue);
-    }
-    if (m_map.size() == 0) {
+    } else if (m_map.size() == 0) {
       m_map.emplace_hint(m_map.end(), std::numeric_limits<K>::lowest(), val);
     }
   }
@@ -491,8 +490,42 @@ TEST_CLASS(interval_map_test) {
 
     map.assign(1, max, 'b');
     Assert::AreEqual(3ui64, map.m_map.size());
-    map.assign(1, max, 'a');
-    Assert::AreEqual(1ui64, map.m_map.size());
     Assert::IsTrue(map.isCanonical());
+
+    map.assign(1, max, 'c');
+    Assert::AreEqual(3ui64, map.m_map.size());
+    Assert::IsTrue(map.isCanonical());
+
+    map.assign(1, max, 'a');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(1ui64, map.m_map.size());
+
+    map.assign(100, 200, 'b');
+    map.assign(300, 400, 'c');
+    map.assign(500, 600, 'd');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(7ui64, map.m_map.size());
+
+    map.assign(100 - 1, 200 + 1, 'b');
+    map.assign(300 - 1, 400 + 1, 'c');
+    map.assign(500 - 1, 600 + 1, 'd');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(7ui64, map.m_map.size());
+
+    map.assign(100 + 1, 200 - 1, 'b');
+    map.assign(300 + 1, 400 - 1, 'c');
+    map.assign(500 + 1, 600 - 1, 'd');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(7ui64, map.m_map.size());
+
+    map.assign(150, 151, 'c');
+    map.assign(350, 351, 'd');
+    map.assign(550, 551, 'b');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(13ui64, map.m_map.size());
+
+    map.assign(1, max, 'a');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(1ui64, map.m_map.size());
   }
 };
