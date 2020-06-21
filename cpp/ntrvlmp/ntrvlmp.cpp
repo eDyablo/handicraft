@@ -33,11 +33,8 @@ public:
       return;
     auto const begin = m_map.lower_bound(keyBegin);
     auto end = m_map.upper_bound(keyEnd);
-
     auto const endValue = (--end)->second;
-
     auto const erased = m_map.erase(begin, ++end);
-
     if (!(endValue == val)) {
       auto inserted = m_map.emplace_hint(erased, keyBegin, val);
       m_map.emplace_hint(++inserted, keyEnd, endValue);
