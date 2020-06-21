@@ -33,7 +33,9 @@ public:
     auto const begin = m_map.lower_bound(keyBegin); // Complexity: logarithmic in the size of the container
     auto end = m_map.upper_bound(keyEnd); // Complexity: logarithmic in the size of the container
     auto const endValue = (--end)->second; // Memorize value at the end of the interval
-    auto erased = m_map.erase(begin, ++end); // Complexity: Amortized O(N) where N has the value distance(q1, q2)
+    if (endValue == val)
+      return;
+    auto erased = m_map.erase(begin, ++end); // Complexity: Amortized O(distance(q1, q2))
     if (erased != m_map.end())
       --erased;
     auto const result = m_map.insert(erased, std::make_pair(keyBegin, val)); // Complexity: logarithmic in general, but amortized constant if t is inserted right before p.
@@ -56,6 +58,7 @@ TEST_CLASS(interval_map_test) {
   {
     auto map = interval_map<size_t, char>('a');
     Assert::AreEqual('a', map[numeric_limits<size_t>::lowest()]);
+    Assert::AreEqual(size_t(1), map.m_map.size());
   }
 
   TEST_METHOD(newly_created_map_returns_the_value_for_maximal_value_of_key)
@@ -335,5 +338,39 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('b', map[35]);
     Assert::AreEqual('a', map[45]);
     Assert::AreEqual(size_t(5), map.m_map.size());
+  }
+
+  TEST_METHOD(assign_of_initial_value_to_whole_range_has_no_effect) {
+    auto map = interval_map<size_t, char>('a');
+    map.assign(0, numeric_limits<size_t>::max(), 'a');
+    Assert::AreEqual(size_t(1), map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
+  }
+
+  TEST_METHOD(assign_of_initial_value_to_left_edge_has_no_effect) {
+    auto map = interval_map<size_t, char>('a');
+    auto const leftEdge = numeric_limits<size_t>::min();
+    map.assign(leftEdge, leftEdge + 1, 'a');
+    Assert::AreEqual(size_t(1), map.m_map.size());
+    Assert::AreEqual('a', map[leftEdge]);
+  }
+
+  TEST_METHOD(assign_of_initial_value_to_right_edge_has_no_effect) {
+    auto map = interval_map<size_t, char>('a');
+    auto const rightEdge = numeric_limits<size_t>::max();
+    map.assign(rightEdge - 1, rightEdge, 'a');
+    Assert::AreEqual(size_t(1), map.m_map.size());
+    Assert::AreEqual('a', map[rightEdge]);
+  }
+
+  TEST_METHOD(assign_of_initial_value_to_the_middle_has_no_effect) {
+    auto map = interval_map<size_t, char>('a');
+    auto constexpr leftEdge = numeric_limits<size_t>::min();
+    auto constexpr rightEdge = numeric_limits<size_t>::max();
+    auto constexpr gap = 10;
+    map.assign(leftEdge + gap, rightEdge - gap, 'a');
+    Assert::AreEqual(size_t(1), map.m_map.size());
+    Assert::AreEqual('a', map[rightEdge]);
   }
 };
