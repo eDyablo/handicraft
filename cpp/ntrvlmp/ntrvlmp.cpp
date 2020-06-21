@@ -398,21 +398,4 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', map[rightEdge]);
     Assert::AreEqual('a', map[leftEdge]);
   }
-
-  /*TEST_METHOD(complex) {
-    auto map = interval_map<size_t, char>('!');
-    auto leftEdge = numeric_limits<size_t>::min();
-    auto rightEdge = numeric_limits<size_t>::max();
-
-    map.assign(leftEdge, rightEdge, 'a');
-    Assert::AreEqual(size_t(1), map.m_map.size());
-    Assert::AreEqual('a', map[rightEdge]);
-    Assert::AreEqual('a', map[leftEdge]);
-
-    map.assign(++leftEdge, rightEdge--, 'b');
-    Assert::AreEqual(size_t(3), map.m_map.size());
-    
-    Assert::AreEqual('b', map[leftEdge]);
-    Assert::AreEqual('b', map[rightEdge]);
-  }*/
 };
