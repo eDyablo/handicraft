@@ -1,7 +1,8 @@
-#include "CppUnitTest.h"
-
-#include <map>
+#include <algorithm>
 #include <limits>
+#include <map>
+
+#include "CppUnitTest.h"
 
 template<class K, class V>
 class interval_map
@@ -32,18 +33,31 @@ public:
       return;
     auto const begin = m_map.lower_bound(keyBegin);
     auto end = m_map.upper_bound(keyEnd);
+
     auto const endValue = (--end)->second;
-    if (endValue == val)
-      return;
+
     auto const erased = m_map.erase(begin, ++end);
-    auto inserted = m_map.emplace_hint(erased, keyBegin, val);
-    m_map.emplace_hint(++inserted, keyEnd, endValue);
+
+    if (!(endValue == val)) {
+      auto inserted = m_map.emplace_hint(erased, keyBegin, val);
+      m_map.emplace_hint(++inserted, keyEnd, endValue);
+    }
+    if (m_map.size() == 0) {
+      m_map.emplace_hint(m_map.end(), std::numeric_limits<K>::lowest(), val);
+    }
   }
 
   // look-up of the value associated with key
   V const& operator[](K const& key) const
   {
     return (--m_map.upper_bound(key))->second;
+  }
+
+  bool isCanonical() const {
+    using namespace std;
+    using pair_t = decltype(m_map)::value_type;
+    return adjacent_find(m_map.cbegin(), m_map.cend(),
+      [](pair_t const& f, pair_t const& s) { return f.second == s.second; }) == m_map.end();
   }
 };
 
@@ -391,5 +405,97 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(size_t(1), map.m_map.size());
     Assert::AreEqual('a', map[rightEdge]);
     Assert::AreEqual('a', map[leftEdge]);
+  }
+
+  TEST_METHOD(assign_and_revert_to_initial) {
+    using key_t = size_t;
+    auto map = interval_map<key_t, char>('a');
+    auto constexpr min = numeric_limits<key_t>::min();
+    auto constexpr max = numeric_limits<key_t>::max();
+
+    map.assign(max/2, max, 'b');
+    map.assign(0, max, 'a');
+    Assert::AreEqual(1ui64, map.m_map.size());
+    Assert::IsTrue(map.isCanonical());
+  }
+
+  TEST_METHOD(complex) {
+    using key_t = size_t;
+    auto map = interval_map<key_t, char>('a');
+    auto constexpr min = numeric_limits<key_t>::min();
+    auto constexpr max = numeric_limits<key_t>::max();
+
+    Assert::AreEqual(1ui64, map.m_map.size());
+    Assert::IsTrue(map.isCanonical());
+
+    map.assign(100, max, 'b');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(3ui64, map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[99]);
+    Assert::AreEqual('b', map[100]);
+
+    map.assign(50, 150, 'c');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(4ui64, map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[49]);
+    Assert::AreEqual('c', map[50]);
+    Assert::AreEqual('c', map[149]);
+    Assert::AreEqual('b', map[150]);
+
+    map.assign(100, 150, 'd');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(5ui64, map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[49]);
+    Assert::AreEqual('c', map[50]);
+    Assert::AreEqual('c', map[99]);
+    Assert::AreEqual('d', map[100]);
+    Assert::AreEqual('d', map[149]);
+    Assert::AreEqual('b', map[150]);
+
+    map.assign(100, 150, 'e');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(5ui64, map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[49]);
+    Assert::AreEqual('c', map[50]);
+    Assert::AreEqual('c', map[99]);
+    Assert::AreEqual('e', map[100]);
+    Assert::AreEqual('e', map[149]);
+    Assert::AreEqual('b', map[150]);
+
+    map.assign(80, 170, 'f');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(5ui64, map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[49]);
+    Assert::AreEqual('c', map[50]);
+    Assert::AreEqual('c', map[79]);
+    Assert::AreEqual('f', map[80]);
+    Assert::AreEqual('f', map[169]);
+    Assert::AreEqual('b', map[170]);
+
+    map.assign(100, 150, 'd');
+    Assert::IsTrue(map.isCanonical());
+    Assert::AreEqual(7ui64, map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[49]);
+    Assert::AreEqual('c', map[50]);
+    Assert::AreEqual('c', map[79]);
+    Assert::AreEqual('f', map[80]);
+    Assert::AreEqual('f', map[99]);
+    Assert::AreEqual('d', map[100]);
+    Assert::AreEqual('d', map[149]);
+    Assert::AreEqual('f', map[150]);
+    Assert::AreEqual('f', map[169]);
+    Assert::AreEqual('b', map[170]);
+
+    map.assign(1, max, 'b');
+    Assert::AreEqual(3ui64, map.m_map.size());
+    map.assign(1, max, 'a');
+    Assert::AreEqual(1ui64, map.m_map.size());
+    Assert::IsTrue(map.isCanonical());
   }
 };
