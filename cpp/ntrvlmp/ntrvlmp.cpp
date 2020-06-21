@@ -69,31 +69,21 @@ TEST_CLASS(interval_map_test) {
   {
     auto map = interval_map<size_t, char>('a');
     map.assign(0, 1, 'b');
+    Assert::AreEqual(size_t(2), map.m_map.size());
     Assert::AreEqual('b', map[0]);
     Assert::AreEqual('a', map[1]);
-    Assert::AreEqual(size_t(2), map.m_map.size());
   }
 
-  TEST_METHOD(assign_right_part_of_one_value_iterval)
-  {
-    auto map = interval_map<size_t, char>('a');
-    map.assign(1, numeric_limits<size_t>::max(), 'b');
-    Assert::AreEqual(size_t(3), map.m_map.size());
-    Assert::AreEqual('a', map[0]);
-    Assert::AreEqual('b', map[1]);
-    Assert::AreEqual('b', map[numeric_limits<size_t>::max() - 1]);
-    Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
-  }
 
   TEST_METHOD(assign_middle_part_of_one_value_iterval)
   {
     auto map = interval_map<size_t, char>('a');
     map.assign(1000, 2000, 'b');
+    Assert::AreEqual(size_t(3), map.m_map.size());
     Assert::AreEqual('a', map[0]);
     Assert::AreEqual('a', map[999]);
     Assert::AreEqual('b', map[1000]);
     Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
-    Assert::AreEqual(size_t(3), map.m_map.size());
   }
 
   TEST_METHOD(assign_middle_part_of_two_values_interval)
@@ -126,10 +116,14 @@ TEST_CLASS(interval_map_test) {
     auto map = interval_map<size_t, char>('a');
     map.assign(100, 200, 'b');
     map.assign(100, 200, 'c');
-    Assert::AreNotEqual('b', map[100]);
-    Assert::AreNotEqual('b', map[150]);
-    Assert::AreNotEqual('b', map[199]);
     Assert::AreEqual(size_t(3), map.m_map.size());
+    Assert::AreEqual('a', map[0]);
+    Assert::AreEqual('a', map[99]);
+    Assert::AreEqual('c', map[100]);
+    Assert::AreEqual('c', map[150]);
+    Assert::AreEqual('c', map[199]);
+    Assert::AreEqual('a', map[200]);
+    Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
   }
 
   TEST_METHOD(assign_adjacent_intervals)
