@@ -30,17 +30,14 @@ public:
   {
     if (!(keyBegin < keyEnd))
       return;
-    auto const begin = m_map.lower_bound(keyBegin); // Complexity: logarithmic in the size of the container
-    auto end = m_map.upper_bound(keyEnd); // Complexity: logarithmic in the size of the container
-    auto const endValue = (--end)->second; // Memorize value at the end of the interval
+    auto const begin = m_map.lower_bound(keyBegin);
+    auto end = m_map.upper_bound(keyEnd);
+    auto const endValue = (--end)->second;
     if (endValue == val)
       return;
-    auto erased = m_map.erase(begin, ++end); // Complexity: Amortized O(distance(q1, q2))
-    if (erased != m_map.end())
-      --erased;
-    auto const result = m_map.insert(erased, std::make_pair(keyBegin, val)); // Complexity: logarithmic in general, but amortized constant if t is inserted right before p.
-    if (keyEnd < std::numeric_limits<K>::max())
-      m_map.insert(result, std::make_pair(keyEnd, endValue)); // Complexity: logarithmic in general, but amortized constant if t is inserted right before p.
+    auto const erased = m_map.erase(begin, ++end);
+    auto const inserted = m_map.insert(erased, std::make_pair(keyBegin, val));
+    m_map.insert(inserted, std::make_pair(keyEnd, endValue));
   }
 
   // look-up of the value associated with key
@@ -81,10 +78,11 @@ TEST_CLASS(interval_map_test) {
   {
     auto map = interval_map<size_t, char>('a');
     map.assign(1, numeric_limits<size_t>::max(), 'b');
+    Assert::AreEqual(size_t(3), map.m_map.size());
     Assert::AreEqual('a', map[0]);
     Assert::AreEqual('b', map[1]);
-    Assert::AreEqual('b', map[numeric_limits<size_t>::max()]);
-    Assert::AreEqual(size_t(2), map.m_map.size());
+    Assert::AreEqual('b', map[numeric_limits<size_t>::max() - 1]);
+    Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
   }
 
   TEST_METHOD(assign_middle_part_of_one_value_iterval)
@@ -105,19 +103,22 @@ TEST_CLASS(interval_map_test) {
     map.assign(500, 1500, 'c');
     Assert::AreEqual('a', map[0]);
     Assert::AreEqual('a', map[499]);
-    Assert::AreEqual('b', map[1500]);
-    Assert::AreEqual('b', map[numeric_limits<size_t>::max()]);
     Assert::AreEqual('c', map[500]);
     Assert::AreEqual('c', map[1499]);
+    Assert::AreEqual('b', map[1500]);
+    Assert::AreEqual('b', map[numeric_limits<size_t>::max() - 1]);
+    Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
   }
 
-  TEST_METHOD(assign_whole_interval)
+  TEST_METHOD(assign_maximum_possible_interval)
   {
     auto map = interval_map<size_t, char>('a');
     map.assign(numeric_limits<size_t>::min(), numeric_limits<size_t>::max(), 'b');
+    Assert::AreEqual(size_t(2), map.m_map.size());
     Assert::AreEqual('b', map[0]);
-    Assert::AreEqual('b', map[numeric_limits<size_t>::max()]);
-    Assert::AreEqual(size_t(1), map.m_map.size());
+    Assert::AreEqual('b', map[numeric_limits<size_t>::max() / 2]);
+    Assert::AreEqual('b', map[numeric_limits<size_t>::max() - 1]);
+    Assert::AreEqual('a', map[numeric_limits<size_t>::max()]);
   }
 
   TEST_METHOD(reassign_value_for_part_of_interval)
@@ -133,11 +134,13 @@ TEST_CLASS(interval_map_test) {
 
   TEST_METHOD(assign_adjacent_intervals)
   {
-    auto map = interval_map<size_t, char>('t');
+    auto map = interval_map<size_t, char>('c');
+    map.assign(  0, 100, 't');
     map.assign(100, 200, 'h');
     map.assign(200, 300, 'i');
     map.assign(300, 400, 'n');
     map.assign(400, numeric_limits<size_t>::max(), 'k');
+    Assert::AreEqual(sizeof("think"), map.m_map.size());
     Assert::AreEqual('t', map[0]);
     Assert::AreEqual('t', map[99]);
     Assert::AreEqual('h', map[100]);
@@ -147,141 +150,162 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('n', map[300]);
     Assert::AreEqual('n', map[399]);
     Assert::AreEqual('k', map[400]);
-    Assert::AreEqual('k', map[numeric_limits<size_t>::max()]);
-    Assert::AreEqual(size_t(5), map.m_map.size());
+    Assert::AreEqual('c', map[numeric_limits<size_t>::max()]);
   }
 
   TEST_METHOD(stress_by_adding_1000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 1'000;
+    size_t constexpr count = 1'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_2000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 2'000;
+    size_t constexpr count = 2'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_3000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 3'000;
+    size_t constexpr count = 3'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_4000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 4'000;
+    size_t constexpr count = 4'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_5000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 5'000;
+    size_t constexpr count = 5'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_6000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 6'000;
+    size_t constexpr count = 6'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_7000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 7'000;
+    size_t constexpr count = 7'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_8000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 8'000;
+    size_t constexpr count = 8'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_9000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 9'000;
+    size_t constexpr count = 9'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_10000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 10'000;
+    size_t constexpr count = 10'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
   TEST_METHOD(stress_by_adding_20000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 20'000;
+    size_t constexpr count = 20'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
+    Assert::AreEqual(count + 1, map.m_map.size());
   }
 
-  /*TEST_METHOD(stress_by_adding_100000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_30000_adjacent_intervals)
   {
     auto map = interval_map<size_t, size_t>(0);
-    size_t const count = 100'000;
+    size_t constexpr count = 30'000;
     for (size_t i = 0; i < count; ++i)
     {
       map.assign(i, numeric_limits<size_t>::max(), i);
     }
-    Assert::AreEqual(count, map.m_map.size());
-  }*/
+    Assert::AreEqual(count + 1, map.m_map.size());
+  }
+
+  TEST_METHOD(stress_by_adding_40000_adjacent_intervals)
+  {
+    auto map = interval_map<size_t, size_t>(0);
+    size_t constexpr count = 40'000;
+    for (size_t i = 0; i < count; ++i)
+    {
+      map.assign(i, numeric_limits<size_t>::max(), i);
+    }
+    Assert::AreEqual(count + 1, map.m_map.size());
+  }
+
+  TEST_METHOD(stress_by_adding_50000_adjacent_intervals)
+  {
+    auto map = interval_map<size_t, size_t>(0);
+    size_t constexpr count = 50'000;
+    for (size_t i = 0; i < count; ++i)
+    {
+      map.assign(i, numeric_limits<size_t>::max(), i);
+    }
+    Assert::AreEqual(count + 1, map.m_map.size());
+  }
 
   TEST_METHOD(do_not_change_the_map_when_interval_is_empty)
   {
@@ -372,5 +396,23 @@ TEST_CLASS(interval_map_test) {
     map.assign(leftEdge + gap, rightEdge - gap, 'a');
     Assert::AreEqual(size_t(1), map.m_map.size());
     Assert::AreEqual('a', map[rightEdge]);
+    Assert::AreEqual('a', map[leftEdge]);
   }
+
+  /*TEST_METHOD(complex) {
+    auto map = interval_map<size_t, char>('!');
+    auto leftEdge = numeric_limits<size_t>::min();
+    auto rightEdge = numeric_limits<size_t>::max();
+
+    map.assign(leftEdge, rightEdge, 'a');
+    Assert::AreEqual(size_t(1), map.m_map.size());
+    Assert::AreEqual('a', map[rightEdge]);
+    Assert::AreEqual('a', map[leftEdge]);
+
+    map.assign(++leftEdge, rightEdge--, 'b');
+    Assert::AreEqual(size_t(3), map.m_map.size());
+    
+    Assert::AreEqual('b', map[leftEdge]);
+    Assert::AreEqual('b', map[rightEdge]);
+  }*/
 };
