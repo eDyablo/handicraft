@@ -28,6 +28,7 @@ public:
   // and assign must do nothing.
   void assign(K const& keyBegin, K const& keyEnd, V const& val)
   {
+    using namespace std;
     if (!(keyBegin < keyEnd))
       return;
     auto const begin = m_map.lower_bound(keyBegin);
@@ -35,9 +36,9 @@ public:
     auto const endValue = (--end)->second;
     if (endValue == val)
       return;
-    auto const erased = m_map.erase(begin, ++end);
-    auto const inserted = m_map.insert(erased, std::make_pair(keyBegin, val));
-    m_map.insert(inserted, std::make_pair(keyEnd, endValue));
+    auto const afterErased = m_map.erase(begin, ++end);
+    auto inserted = m_map.insert(afterErased, move(make_pair(keyBegin, val)));
+    m_map.insert(++inserted, move(make_pair(keyEnd, endValue)));
   }
 
   // look-up of the value associated with key
