@@ -4,11 +4,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(spanchart VERSION 0.1.0)
 
-include(CTest)
-enable_testing()
-
-add_library(ntrvlmp SHARED span_chart_test.cpp)
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+add_library(spanchart SHARED span_chart_test.cpp)
