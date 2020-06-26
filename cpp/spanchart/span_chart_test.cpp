@@ -4,7 +4,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
-TEST_CLASS(interval_map_test) {
+TEST_CLASS(span_chart_test) {
   TEST_METHOD(newly_created_chart_is_valid)
   {
     auto chart = span_chart_t<size_t, char>('a');
@@ -36,7 +36,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(enroll_middle_part_of_two_values_interval)
+  TEST_METHOD(enroll_middle_part_of_two_values_span)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(1000, chart.highest_point, 'b');
@@ -50,7 +50,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(enroll_maximum_possible_interval)
+  TEST_METHOD(enroll_maximum_possible_span)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(chart.lowest_point, chart.highest_point, 'b');
@@ -61,7 +61,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(reenroll_value_for_part_of_interval)
+  TEST_METHOD(reenroll_value_for_part_of_span)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(100, 200, 'b');
@@ -76,7 +76,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(enroll_adjacent_intervals)
+  TEST_METHOD(enroll_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, char>('c');
     chart.enroll(  0, 100, 't');
@@ -97,7 +97,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('c', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(stress_by_adding_1000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_1000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 1'000;
@@ -108,7 +108,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_2000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_2000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 2'000;
@@ -119,7 +119,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_3000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_3000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 3'000;
@@ -130,7 +130,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  /*TEST_METHOD(stress_by_adding_4000_adjacent_intervals)
+  /*TEST_METHOD(stress_by_adding_4000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 4'000;
@@ -141,7 +141,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_5000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_5000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 5'000;
@@ -152,7 +152,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_6000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_6000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 6'000;
@@ -163,7 +163,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_7000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_7000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 7'000;
@@ -174,7 +174,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_8000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_8000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 8'000;
@@ -185,7 +185,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_9000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_9000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 9'000;
@@ -196,7 +196,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_10000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_10000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 10'000;
@@ -207,7 +207,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_20000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_20000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 20'000;
@@ -218,7 +218,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_30000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_30000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 30'000;
@@ -229,7 +229,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_40000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_40000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 40'000;
@@ -240,7 +240,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }
 
-  TEST_METHOD(stress_by_adding_50000_adjacent_intervals)
+  TEST_METHOD(stress_by_adding_50000_adjacent_spans)
   {
     auto chart = span_chart_t<size_t, size_t>(0);
     size_t constexpr count = 50'000;
@@ -251,7 +251,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(count + 1, chart.entries_count());
   }*/
 
-  TEST_METHOD(do_not_change_the_map_when_interval_is_empty)
+  TEST_METHOD(do_not_change_when_span_is_empty)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(10, 10, ' ');
@@ -260,7 +260,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(do_not_change_the_map_when_interval_is_reversed)
+  TEST_METHOD(do_not_change_when_span_is_reversed)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(10, 1, ' ');
@@ -270,7 +270,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual('a', chart[chart.highest_point]);
   }
 
-  TEST_METHOD(enroll_divergent_intervals_at_the_middle)
+  TEST_METHOD(enroll_divergent_spans_at_the_middle)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(30, 31, 'b');
@@ -282,7 +282,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(size_t(3), chart.entries_count());
   }
 
-  TEST_METHOD(enroll_convergent_intervals_at_the_middle)
+  TEST_METHOD(enroll_convergent_spans_at_the_middle)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(10, 51, 'b');
@@ -295,7 +295,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(size_t(7), chart.entries_count());
   }
 
-  TEST_METHOD(enroll_two_distant_interval_of_the_same_value)
+  TEST_METHOD(enroll_two_distant_span_of_the_same_value)
   {
     auto chart = span_chart_t<size_t, char>('a');
     chart.enroll(10, 21, 'b');
@@ -498,7 +498,7 @@ TEST_CLASS(interval_map_test) {
     Assert::AreEqual(7ui64, chart.entries_count());*/
   }
 
-  TEST_METHOD(shorten_middle_interval) {
+  TEST_METHOD(shorten_middle_span) {
     using key_t = size_t;
     auto chart = span_chart_t<key_t, char>('a');
     auto constexpr min = numeric_limits<key_t>::min();
@@ -519,7 +519,7 @@ TEST_CLASS(interval_map_test) {
     Assert::IsTrue(chart.is_dense());
   }
 
-  TEST_METHOD(remove_intervals) {
+  TEST_METHOD(remove_spans) {
     using key_t = size_t;
     auto chart = span_chart_t<key_t, char>('a');
 
