@@ -35,7 +35,7 @@ namespace coin {
         for (; subarray_sum >= min_sum; ++subarray_begin) {
           subarray_sum -= *subarray_begin;
           min_subarray_size = min(min_subarray_size,
-            size_t(distance(subarray_begin, subarray_end)) + 1);
+            size_t(distance(subarray_begin, subarray_end) + 1));
         }
       }
       return min_subarray_size;
