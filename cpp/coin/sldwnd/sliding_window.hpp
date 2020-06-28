@@ -9,7 +9,7 @@
 namespace coin {
   namespace sliding_window {
     template<typename Element>
-    auto find_max_sum_subarray(size_t subarray_size, std::vector<Element> const& array) {
+    auto find_max_sum_subarray(size_t const subarray_size, std::vector<Element> const& array) {
       size_t subarray_sum = 0;
       auto const array_begin = begin(array);
       auto const array_end = end(array);
@@ -27,7 +27,7 @@ namespace coin {
     }
 
     template<typename Element>
-    auto find_min_subarray(Element min_sum, std::vector<Element> const& array) {
+    auto find_min_subarray(Element const min_sum, std::vector<Element> const& array) {
       using namespace std;
       auto const array_begin = begin(array);
       auto const array_end = end(array);
@@ -46,7 +46,7 @@ namespace coin {
     }
 
     template<typename Char>
-    auto find_longest_distinct_substring_length(size_t max_distinct_chars,
+    auto find_longest_distinct_substring_length(size_t const max_distinct_chars,
     std::basic_string<Char> const& string) {
       using namespace std;
       valarray<size_t> char_count(numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1);
@@ -68,7 +68,7 @@ namespace coin {
     }
 
     template<typename Item>
-    auto find_max_count_of_types_subarray_size(size_t types_count, std::vector<Item> array) {
+    auto find_max_count_of_types_subarray_size(size_t const types_count, std::vector<Item> array) {
       using namespace std;
       valarray<size_t> item_count(numeric_limits<Item>::max() - numeric_limits<Item>::min() + 1);
       auto const above_zero = [](size_t item) { return item > 0u; };
@@ -110,7 +110,7 @@ namespace coin {
     }
 
     template<typename Char>
-    auto find_longest_same_letter_substring_size(size_t max_replacements,
+    auto find_longest_same_letter_substring_size(size_t const max_replacements,
     std::basic_string<Char> const& string) {
       using namespace std;
       valarray<size_t> char_count(numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1u);
