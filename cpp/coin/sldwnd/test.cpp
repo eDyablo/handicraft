@@ -31,5 +31,9 @@ int main() {
   test(3u, find_longest_same_letter_substring_size<char>(1u, "abccde"));
   test(6u, find_longest_same_item_subarray_size<uint8_t>(1u, 2u, {0,1,1,0,0,0,1,1,0,1,1}));
   test(9u, find_longest_same_item_subarray_size<uint8_t>(1u, 3u, {0,1,0,0,1,1,0,1,1,0,0,1,1}));
+  test(true, contains_permutation("abc", "oidbcaf"));
+  test(false, contains_permutation("dc", "odicf"));
+  test(true, contains_permutation("bcdyabcdx", "bcdxabcdy"));
+  test(true, contains_permutation("abc", "aaacb"));
   return 0;
 }
