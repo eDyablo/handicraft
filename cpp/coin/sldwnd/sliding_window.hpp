@@ -38,8 +38,8 @@ namespace coin {
         subarray_sum += *subarray_end;
         for (; subarray_sum >= min_sum; ++subarray_begin) {
           subarray_sum -= *subarray_begin;
-          min_subarray_size = min(min_subarray_size,
-            size_t(distance(subarray_begin, subarray_end) + 1));
+          min_subarray_size = min<size_t>(min_subarray_size,
+            distance(subarray_begin, subarray_end + 1));
         }
       }
       return min_subarray_size;
@@ -61,8 +61,8 @@ namespace coin {
         max_distinct_chars; ++substring_begin) {
           --char_count[*substring_begin];
         }
-        max_substring_length = max(max_substring_length,
-          size_t(distance(substring_begin, substring_end) + 1));
+        max_substring_length = max<size_t>(max_substring_length,
+          distance(substring_begin, substring_end + 1));
       }
       return max_substring_length;
     }
@@ -82,8 +82,8 @@ namespace coin {
         ++subarray_begin) {
           --item_count[*subarray_begin];
         }
-        max_subarray_size = max(max_subarray_size,
-          size_t(distance(subarray_begin, subarray_end) + 1));
+        max_subarray_size = max<size_t>(max_subarray_size,
+          distance(subarray_begin, subarray_end + 1));
       }
       return max_subarray_size;
     }
@@ -103,8 +103,8 @@ namespace coin {
           substring_begin = char_position[*substring_end] + 1;
         }
         char_position[*substring_end] = substring_end;
-        max_substring_size = max(max_substring_size,
-          size_t(distance(substring_begin, substring_end)) + 1);
+        max_substring_size = max<size_t>(max_substring_size,
+          distance(substring_begin, substring_end + 1));
       }
       return max_substring_size;
     }
@@ -120,15 +120,13 @@ namespace coin {
       auto const string_end = end(string);
       for (auto substring_begin = string_begin, substring_end = string_begin;
       substring_end != string_end; ++substring_end) {
-        ++char_count[*substring_end];
-        max_repeated_count = max(max_repeated_count, char_count[*substring_end]);
-        auto const substring_size = size_t(distance(substring_begin, substring_end)) + 1u;
+        max_repeated_count = max(max_repeated_count, ++char_count[*substring_end]);
+        auto const substring_size = size_t(distance(substring_begin, substring_end + 1));
         if (substring_size - max_repeated_count > max_replacements) {
-          --char_count[*substring_begin];
-          ++substring_begin;
+          --char_count[*(substring_begin++)];
         }
-        max_substring_size = max(max_substring_size,
-          size_t(distance(substring_begin, substring_end)) + 1u);
+        max_substring_size = max<size_t>(max_substring_size,
+          distance(substring_begin, substring_end + 1));
       }
       return max_substring_size;
     }
