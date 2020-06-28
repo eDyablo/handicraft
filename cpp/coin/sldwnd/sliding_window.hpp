@@ -91,17 +91,20 @@ namespace coin {
     template<typename Char>
     auto find_longest_no_repeating_substring(std::basic_string<Char> const& string) {
       using namespace std;
-      auto max_substring_size = numeric_limits<size_t>::lowest();
+      using iterator_t = basic_string<Char>::const_iterator;
       auto const string_begin = begin(string);
       auto const string_end = end(string);
+      valarray<iterator_t> char_position(string_end,
+        numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1);
+      auto max_substring_size = numeric_limits<size_t>::lowest();
       for (auto substring_begin = string_begin, substring_end = string_begin;
       substring_end != string_end; ++substring_end) {
-        auto const adjacent = adjacent_find(substring_begin, substring_end);
-        if (adjacent != substring_end) {
-          substring_begin = adjacent + 1;
+        if (char_position[*substring_end] != string_end) {
+          substring_begin = char_position[*substring_end] + 1;
         }
+        char_position[*substring_end] = substring_end;
         max_substring_size = max(max_substring_size,
-          size_t(distance(substring_begin, substring_end)));
+          size_t(distance(substring_begin, substring_end)) + 1);
       }
       return max_substring_size;
     }
