@@ -29,5 +29,7 @@ int main() {
   test(5u, find_longest_same_letter_substring_size<char>(2u, "aabccbb"));
   test(4u, find_longest_same_letter_substring_size<char>(1u, "abbcb"));
   test(3u, find_longest_same_letter_substring_size<char>(1u, "abccde"));
+  test(6u, find_longest_same_item_subarray_size<uint8_t>(1u, 2u, {0,1,1,0,0,0,1,1,0,1,1}));
+  test(9u, find_longest_same_item_subarray_size<uint8_t>(1u, 3u, {0,1,0,0,1,1,0,1,1,0,0,1,1}));
   return 0;
 }

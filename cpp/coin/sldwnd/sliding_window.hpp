@@ -130,5 +130,26 @@ namespace coin {
       }
       return max_substring_size;
     }
+
+    template<typename Item>
+    auto find_longest_same_item_subarray_size(Item const item, size_t max_replacements,
+    std::vector<Item> const& array) {
+      using namespace std;
+      auto max_subarray_size = numeric_limits<size_t>::min();
+      size_t item_count = 0;
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      for (auto subarray_begin = array_begin, subarray_end = array_begin;
+      subarray_end != array_end; ++subarray_end) {
+        item_count += (*subarray_end == item);
+        auto const subarray_size = distance(subarray_begin, subarray_end + 1);
+        if (subarray_size - item_count > max_replacements) {
+          item_count -= (*(subarray_begin++) == item);
+        }
+        max_subarray_size = max<size_t>(max_subarray_size,
+          distance(subarray_begin, subarray_end + 1));
+      }
+      return max_subarray_size;
+    }
   }
 }
