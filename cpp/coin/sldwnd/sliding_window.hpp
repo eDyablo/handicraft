@@ -27,7 +27,7 @@ namespace coin {
     }
 
     template<typename Element>
-    auto find_min_subarray(Element const min_sum, std::vector<Element> const& array) {
+    auto find_smallest_subarray_size(Element const sum, std::vector<Element> const& array) {
       using namespace std;
       auto const array_begin = begin(array);
       auto const array_end = end(array);
@@ -36,7 +36,7 @@ namespace coin {
       for (auto subarray_begin = array_begin, subarray_end = array_begin;
       subarray_end != array_end; ++subarray_end) {
         subarray_sum += *subarray_end;
-        for (; subarray_sum >= min_sum; ++subarray_begin) {
+        for (; subarray_sum >= sum; ++subarray_begin) {
           subarray_sum -= *subarray_begin;
           min_subarray_size = min<size_t>(min_subarray_size,
             distance(subarray_begin, subarray_end + 1));
@@ -46,7 +46,7 @@ namespace coin {
     }
 
     template<typename Char>
-    auto find_longest_distinct_substring_length(size_t const max_distinct_chars,
+    auto find_longest_distinct_substring_size(size_t const max_distinct_chars,
     std::basic_string<Char> const& string) {
       using namespace std;
       valarray<size_t> char_count(numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1);
