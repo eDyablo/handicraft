@@ -63,5 +63,26 @@ namespace coin {
       }
       return max_substring_length;
     }
+
+    template<typename Item>
+    size_t find_max_count_of_types_subarray_size(size_t types_count, std::vector<Item> array) {
+      using namespace std;
+      valarray<size_t> item_count(numeric_limits<Item>::max() - numeric_limits<Item>::min() + 1);
+      auto const above_zero = [](size_t item) { return item > 0u; };
+      auto max_subarray_size = numeric_limits<size_t>::lowest();
+      auto const array_begin = array.begin();
+      auto const array_end = array.end();
+      for (auto subarray_begin = array_begin, subarray_end = array_begin; subarray_end != array_end;
+      ++subarray_end) {
+        ++item_count[*subarray_end];
+        for (; size_t(count_if(begin(item_count), end(item_count), above_zero)) > types_count;
+        ++subarray_begin) {
+          --item_count[*subarray_begin];
+        }
+        max_subarray_size = max(max_subarray_size,
+          size_t(distance(subarray_begin, subarray_end) + 1));
+      }
+      return max_subarray_size;
+    }
   }
 }
