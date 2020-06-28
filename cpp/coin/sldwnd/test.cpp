@@ -23,5 +23,8 @@ int main() {
   test(5u, find_longest_distinct_substring_length<char>(3u, "cbbebi"));
   test(3u, find_max_count_of_types_subarray_size<char>(2u, {'A', 'B', 'C', 'A', 'C'}));
   test(5u, find_max_count_of_types_subarray_size<char>(2u, {'A', 'B', 'C', 'B', 'B', 'C'}));
+  test(3u, find_longest_no_repeating_substring<char>("aabccbb"));
+  test(2u, find_longest_no_repeating_substring<char>("abbbb"));
+  test(3u, find_longest_no_repeating_substring<char>("abccde"));
   return 0;
 }

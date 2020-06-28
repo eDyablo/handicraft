@@ -66,7 +66,7 @@ namespace coin {
     }
 
     template<typename Item>
-    size_t find_max_count_of_types_subarray_size(size_t types_count, std::vector<Item> array) {
+    auto find_max_count_of_types_subarray_size(size_t types_count, std::vector<Item> array) {
       using namespace std;
       valarray<size_t> item_count(numeric_limits<Item>::max() - numeric_limits<Item>::min() + 1);
       auto const above_zero = [](size_t item) { return item > 0u; };
@@ -84,6 +84,24 @@ namespace coin {
           size_t(distance(subarray_begin, subarray_end) + 1));
       }
       return max_subarray_size;
+    }
+
+    template<typename Char>
+    auto find_longest_no_repeating_substring(std::basic_string<Char> const& string) {
+      using namespace std;
+      auto max_substring_size = numeric_limits<size_t>::lowest();
+      auto const string_begin = begin(string);
+      auto const string_end = end(string);
+      for (auto substring_begin = string_begin, substring_end = string_begin;
+      substring_end != string_end; ++substring_end) {
+        auto const adjacent = adjacent_find(substring_begin, substring_end);
+        if (adjacent != substring_end) {
+          substring_begin = adjacent + 1;
+        }
+        max_substring_size = max(max_substring_size,
+          size_t(distance(substring_begin, substring_end)));
+      }
+      return max_substring_size;
     }
   }
 }
