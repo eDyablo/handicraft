@@ -48,13 +48,14 @@ namespace coin {
     std::basic_string<Char> const& text) {
       using namespace std;
       valarray<size_t> char_count(numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1);
+      auto const above_zero = [](size_t item) { return item > 0u; };
       auto max_substring_length = numeric_limits<size_t>::lowest();
       auto const text_begin = text.begin();
       auto const text_end = text.end();
       for (auto substring_begin = text_begin, substring_end = text_begin;
       substring_end != text_end; ++substring_end) {
         ++char_count[*substring_end];
-        for (; size_t(count_if(begin(char_count), end(char_count), [](size_t c) { return c > 0u ;})) >
+        for (; size_t(count_if(begin(char_count), end(char_count), above_zero)) >
         max_distinct_chars; ++substring_begin) {
           --char_count[*substring_begin];
         }
@@ -72,8 +73,8 @@ namespace coin {
       auto max_subarray_size = numeric_limits<size_t>::lowest();
       auto const array_begin = array.begin();
       auto const array_end = array.end();
-      for (auto subarray_begin = array_begin, subarray_end = array_begin; subarray_end != array_end;
-      ++subarray_end) {
+      for (auto subarray_begin = array_begin, subarray_end = array_begin;
+      subarray_end != array_end; ++subarray_end) {
         ++item_count[*subarray_end];
         for (; size_t(count_if(begin(item_count), end(item_count), above_zero)) > types_count;
         ++subarray_begin) {
