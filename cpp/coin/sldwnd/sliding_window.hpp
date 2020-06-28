@@ -108,5 +108,29 @@ namespace coin {
       }
       return max_substring_size;
     }
+
+    template<typename Char>
+    auto find_longest_same_letter_substring_size(size_t max_replacements,
+    std::basic_string<Char> const& string) {
+      using namespace std;
+      valarray<size_t> char_count(numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1u);
+      auto max_substring_size = numeric_limits<size_t>::min();
+      auto max_repeated_count = numeric_limits<size_t>::min();
+      auto const string_begin = begin(string);
+      auto const string_end = end(string);
+      for (auto substring_begin = string_begin, substring_end = string_begin;
+      substring_end != string_end; ++substring_end) {
+        ++char_count[*substring_end];
+        max_repeated_count = max(max_repeated_count, char_count[*substring_end]);
+        auto const substring_size = size_t(distance(substring_begin, substring_end)) + 1u;
+        if (substring_size - max_repeated_count > max_replacements) {
+          --char_count[*substring_begin];
+          ++substring_begin;
+        }
+        max_substring_size = max(max_substring_size,
+          size_t(distance(substring_begin, substring_end)) + 1u);
+      }
+      return max_substring_size;
+    }
   }
 }

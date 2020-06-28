@@ -26,5 +26,8 @@ int main() {
   test(3u, find_longest_no_repeating_substring<char>("aabccbb"));
   test(2u, find_longest_no_repeating_substring<char>("abbbb"));
   test(3u, find_longest_no_repeating_substring<char>("abccde"));
+  test(5u, find_longest_same_letter_substring_size<char>(2u, "aabccbb"));
+  test(4u, find_longest_same_letter_substring_size<char>(1u, "abbcb"));
+  test(3u, find_longest_same_letter_substring_size<char>(1u, "abccde"));
   return 0;
 }
