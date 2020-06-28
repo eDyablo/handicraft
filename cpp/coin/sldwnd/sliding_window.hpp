@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <limits>
+#include <string>
+#include <valarray>
 #include <vector>
 
 namespace coin {
@@ -39,6 +41,27 @@ namespace coin {
         }
       }
       return min_subarray_size;
+    }
+
+    template<typename Char>
+    auto find_longest_distinct_substring_length(size_t max_distinct_chars,
+    std::basic_string<Char> const& text) {
+      using namespace std;
+      valarray<size_t> char_count(numeric_limits<Char>::max() - numeric_limits<Char>::min() + 1);
+      auto max_substring_length = numeric_limits<size_t>::lowest();
+      auto const text_begin = text.begin();
+      auto const text_end = text.end();
+      for (auto substring_begin = text_begin, substring_end = text_begin;
+      substring_end != text_end; ++substring_end) {
+        ++char_count[*substring_end];
+        for (; size_t(count_if(begin(char_count), end(char_count), [](size_t c) { return c > 0u ;})) >
+        max_distinct_chars; ++substring_begin) {
+          --char_count[*substring_begin];
+        }
+        max_substring_length = max(max_substring_length,
+          size_t(distance(substring_begin, substring_end) + 1));
+      }
+      return max_substring_length;
     }
   }
 }

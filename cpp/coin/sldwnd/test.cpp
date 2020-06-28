@@ -18,5 +18,8 @@ int main() {
   test(2u, find_min_subarray<int>(7, {2, 1, 5, 2, 3, 2}));
   test(1u, find_min_subarray<int>(7, {2, 1, 5, 2, 8}));
   test(3u, find_min_subarray<int>(8, {3, 4, 1, 1, 6}));
+  test(4u, find_longest_distinct_substring_length<char>(2u, "araaci"));
+  test(2u, find_longest_distinct_substring_length<char>(1u, "araaci"));
+  test(5u, find_longest_distinct_substring_length<char>(3u, "cbbebi"));
   return 0;
 }
