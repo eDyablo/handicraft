@@ -152,7 +152,9 @@ namespace coin {
       return max_subarray_size;
     }
 
-    auto contains_permutation(std::string const& pattern, std::string const& string) {
+    template<typename Char>
+    auto contains_permutation(std::basic_string<Char> const& pattern,
+    std::basic_string<Char> const& string) {
       using namespace std;
       valarray<int> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
       for_each(begin(pattern), end(pattern), [&](char c) { ++char_count[c]; });
@@ -171,8 +173,7 @@ namespace coin {
           return true;
         }
         if (substring_end > string_begin + pattern.size() - 1) {
-          ++substring_begin;
-          if (char_count[*substring_begin] == 0) {
+          if (char_count[*(++substring_begin)] == 0) {
             --matched_char_count;
           }
           ++char_count[*substring_begin];
