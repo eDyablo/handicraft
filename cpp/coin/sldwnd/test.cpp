@@ -1,4 +1,7 @@
+#include <algorithm>
 #include <iostream>
+#include <iterator>
+#include <vector>
 
 #include "sliding_window.hpp"
 
@@ -7,6 +10,25 @@ void test(size_t expected, size_t actual) {
   if (actual != expected) {
     cout << "expected: " << expected << endl
       << "actual: " << actual << endl << endl;
+  }
+}
+
+template<typename Element>
+void test(std::vector<Element> expected, std::vector<Element> actual) {
+  using namespace std;
+  if (actual != expected) {
+    cout << "expected: [";
+    if (!expected.empty()) {
+      copy(begin(expected), end(expected) - 1, ostream_iterator<Element>(cout, ", "));
+      copy(end(expected) - 1, end(expected), ostream_iterator<Element>(cout));
+    }
+    cout << "]" << endl;
+    cout << "actual:   [";
+    if (!actual.empty()) {
+      copy(begin(actual), end(actual) - 1, ostream_iterator<Element>(cout, ", "));
+      copy(end(actual) - 1, end(actual), ostream_iterator<Element>(cout));
+    }
+    cout << "]" << endl;
   }
 }
 
@@ -35,5 +57,10 @@ int main() {
   test(false, contains_permutation<char>("dc", "odicf"));
   test(true, contains_permutation<char>("bcdyabcdx", "bcdxabcdy"));
   test(true, contains_permutation<char>("abc", "aaacb"));
+  test({0}, find_anagrams<char>("ab", "ab"));
+  //test({0, 2}, find_anagrams<char>("ab", "abab"));
+  test({0, 3}, find_anagrams<char>("ab", "abcabc"));
+  test({1, 2}, find_anagrams<char>("pq", "ppqp"));
+  test({2, 3, 4}, find_anagrams<char>("abc", "abbcabc"));
   return 0;
 }
