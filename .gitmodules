@@ -4,3 +4,7 @@
 [submodule "cpp/jamplus"]
 	path = cpp/jamplus
 	url = https://github.com/jamplus/jamplus.git
+[submodule "cpp/SFML"]
+	path = cpp/SFML
+	url = https://github.com/SFML/SFML.git
+	branch = master
