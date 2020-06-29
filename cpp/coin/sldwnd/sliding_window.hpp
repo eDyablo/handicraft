@@ -206,11 +206,11 @@ namespace coin {
           indices.push_back(distance(string_begin, substring_begin));
         }
         if (substring_end >= string_begin + pattern_size - 1) {
-          auto left_char = *(substring_begin++);
-          if (char_count[left_char] == 0) {
+          if (char_count[*substring_begin] == 0) {
             --matched_char_count;
           }
-          ++char_count[left_char];
+          ++char_count[*substring_begin];
+          ++substring_begin;
         }
       }
       return indices;
