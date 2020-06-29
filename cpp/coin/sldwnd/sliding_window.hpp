@@ -157,7 +157,7 @@ namespace coin {
     std::basic_string<Char> const& string) {
       using namespace std;
       valarray<size_t> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
-      for_each(begin(pattern), end(pattern), [&](char c) { ++char_count[c]; });
+      for (auto item : pattern) { ++char_count[item]; }
       size_t expected_matched_char_count = count_if(
         begin(char_count), end(char_count), [](size_t it) { return it > 0; });
       size_t matched_char_count = 0;
@@ -189,9 +189,9 @@ namespace coin {
     std::basic_string<Char> const& string) {
       using namespace std;
       valarray<size_t> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
-      for_each(begin(pattern), end(pattern), [&](char c) { ++char_count[c]; });
+      for (auto item : pattern) { ++char_count[item]; }
       size_t expected_matched_char_count = count_if(
-        begin(char_count), end(char_count), [](size_t it) { return it > 0; });
+        begin(char_count), end(char_count), [](size_t item) { return item > 0; });
       size_t matched_char_count = 0;
       vector<size_t> indices;
       auto const pattern_size = size(pattern);
