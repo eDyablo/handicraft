@@ -156,11 +156,12 @@ namespace coin {
     auto contains_permutation(std::basic_string<Char> const& pattern,
     std::basic_string<Char> const& string) {
       using namespace std;
-      valarray<int> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
+      valarray<size_t> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
       for_each(begin(pattern), end(pattern), [&](char c) { ++char_count[c]; });
       size_t expected_matched_char_count = count_if(
         begin(char_count), end(char_count), [](size_t it) { return it > 0; });
       size_t matched_char_count = 0;
+      auto const pattern_size = size(pattern);
       auto const string_begin = begin(string);
       auto const string_end = end(string);
       for (auto substring_begin = string_begin, substring_end = string_begin;
@@ -172,11 +173,12 @@ namespace coin {
         if (matched_char_count == expected_matched_char_count) {
           return true;
         }
-        if (substring_end > string_begin + pattern.size() - 1) {
-          if (char_count[*(++substring_begin)] == 0) {
+        if (substring_end >= string_begin + pattern_size - 1) {
+          if (char_count[*substring_begin] == 0) {
             --matched_char_count;
           }
           ++char_count[*substring_begin];
+          ++substring_begin;
         }
       }
       return false;
@@ -186,7 +188,7 @@ namespace coin {
     auto find_anagrams(std::basic_string<Char> const& pattern,
     std::basic_string<Char> const& string) {
       using namespace std;
-      valarray<int> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
+      valarray<size_t> char_count(numeric_limits<char>::max() - numeric_limits<char>::min() + 1);
       for_each(begin(pattern), end(pattern), [&](char c) { ++char_count[c]; });
       size_t expected_matched_char_count = count_if(
         begin(char_count), end(char_count), [](size_t it) { return it > 0; });
@@ -195,9 +197,8 @@ namespace coin {
       auto const pattern_size = size(pattern);
       auto const string_begin = begin(string);
       auto const string_end = end(string);
-      auto substring_begin = string_begin;
-      auto substring_end = string_begin;
-      for (; substring_end != string_end; ++substring_end) {
+      for (auto substring_begin = string_begin, substring_end = string_begin;
+      substring_end != string_end; ++substring_end) {
         --char_count[*substring_end];
         if (char_count[*substring_end] == 0) {
           ++matched_char_count;
