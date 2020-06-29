@@ -58,8 +58,9 @@ int main() {
   test(true, contains_permutation<char>("bcdyabcdx", "bcdxabcdy"));
   test(true, contains_permutation<char>("abc", "aaacb"));
   test({0}, find_anagrams<char>("ab", "ab"));
-  //test({0, 2}, find_anagrams<char>("ab", "abab"));
-  test({0, 3}, find_anagrams<char>("ab", "abcabc"));
+  test({0, 1, 2}, find_anagrams<char>("ab", "abab"));
+  test({0, 3, 6}, find_anagrams<char>("ab", "abcabcab"));
+  test({1, 4, 7}, find_anagrams<char>("ab", "cabcabcab"));
   test({1, 2}, find_anagrams<char>("pq", "ppqp"));
   test({2, 3, 4}, find_anagrams<char>("abc", "abbcabc"));
   return 0;
