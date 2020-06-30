@@ -1,34 +1,36 @@
+#include <gmock/gmock.h>
+
 #include <algorithm>
 #include <iostream>
 #include <iterator>
 #include <vector>
 
-#include <gmock/gmock.h>
-
 #include "sliding_window.hpp"
-
 
 void test(size_t expected, size_t actual) {
   using namespace std;
   if (actual != expected) {
     cout << "expected: " << expected << endl
-      << "actual: " << actual << endl << endl;
+         << "actual: " << actual << endl
+         << endl;
   }
 }
 
-template<typename Element>
+template <typename Element>
 void test(std::vector<Element> expected, std::vector<Element> actual) {
   using namespace std;
   if (actual != expected) {
     cout << "expected: [";
     if (!expected.empty()) {
-      copy(begin(expected), end(expected) - 1, ostream_iterator<Element>(cout, ", "));
+      copy(begin(expected), end(expected) - 1,
+           ostream_iterator<Element>(cout, ", "));
       copy(end(expected) - 1, end(expected), ostream_iterator<Element>(cout));
     }
     cout << "]" << endl;
     cout << "actual:   [";
     if (!actual.empty()) {
-      copy(begin(actual), end(actual) - 1, ostream_iterator<Element>(cout, ", "));
+      copy(begin(actual), end(actual) - 1,
+           ostream_iterator<Element>(cout, ", "));
       copy(end(actual) - 1, end(actual), ostream_iterator<Element>(cout));
     }
     cout << "]" << endl;
@@ -57,8 +59,10 @@ TEST(sliding_window, find_longest_distinct_substring_size) {
 
 TEST(sliding_window, find_max_count_of_types_subarray_size) {
   using namespace coin::sliding_window;
-  EXPECT_EQ(3u, find_max_count_of_types_subarray_size<char>(2u, {'A', 'B', 'C', 'A', 'C'}));
-  EXPECT_EQ(5u, find_max_count_of_types_subarray_size<char>(2u, {'A', 'B', 'C', 'B', 'B', 'C'}));
+  EXPECT_EQ(3u, find_max_count_of_types_subarray_size<char>(
+                    2u, {'A', 'B', 'C', 'A', 'C'}));
+  EXPECT_EQ(5u, find_max_count_of_types_subarray_size<char>(
+                    2u, {'A', 'B', 'C', 'B', 'B', 'C'}));
 }
 
 TEST(sliding_window, find_longest_no_repeating_substring) {
@@ -77,8 +81,10 @@ TEST(sliding_window, find_longest_same_letter_substring_size) {
 
 TEST(sliding_window, find_longest_same_item_subarray_size) {
   using namespace coin::sliding_window;
-  EXPECT_EQ(6u, find_longest_same_item_subarray_size<uint8_t>(1u, 2u, {0,1,1,0,0,0,1,1,0,1,1}));
-  EXPECT_EQ(9u, find_longest_same_item_subarray_size<uint8_t>(1u, 3u, {0,1,0,0,1,1,0,1,1,0,0,1,1}));
+  EXPECT_EQ(6u, find_longest_same_item_subarray_size<uint8_t>(
+                    1u, 2u, {0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1}));
+  EXPECT_EQ(9u, find_longest_same_item_subarray_size<uint8_t>(
+                    1u, 3u, {0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1}));
 }
 
 TEST(sliding_window, contains_permutation) {
