@@ -35,19 +35,6 @@ void test(std::vector<Element> expected, std::vector<Element> actual) {
   }
 }
 
-/*int main() {
-  using namespace std;
-  using namespace coin::sliding_window;
-  
-  
-  
-  
-  
-  
-  
-  return 0;
-}*/
-
 TEST(sliding_window, find_max_sum_subarray) {
   using namespace coin::sliding_window;
   EXPECT_EQ(9u, find_max_sum_subarray<int8_t>(3u, {2, 1, 5, 1, 3, 2}));
