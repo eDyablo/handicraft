@@ -1,6 +1,6 @@
-#include <gmock/gmock.h>
-
 #include "sliding_window.hpp"
+
+#include <gmock/gmock.h>
 
 TEST(sliding_window, find_max_sum_subarray) {
   using namespace coin::sliding_window;
