@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-project(spanchart)
+project(spanchart-test)
 
-add_executable(spanchart span_chart_test.cpp)
+add_executable(spanchart-test span_chart_test.cpp)
 
-target_link_libraries(spanchart googlemock googletest googletest-main)
+target_link_libraries(spanchart-test googlemock googletest googletest-main)
