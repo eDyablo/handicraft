@@ -238,5 +238,36 @@ namespace coin {
       }
       return indices;
     }
-  }  // namespace sliding_window
+
+    template <typename Char>
+    auto find_smallest_all_letters_substring(std::string const& pattern,
+                                             std::string const& string) {
+      using namespace std;
+      valarray<size_t> char_count(numeric_limits<Char>::max() -
+                                  numeric_limits<Char>::min() + 1);
+      for (auto c : pattern) {
+        ++char_count[c];
+      }
+      auto expected_matched_char_count =
+          count_if(begin(char_count), end(char_count),
+                   [](size_t item) { return item > 0; });
+      auto matched_char_count = numeric_limits<size_t>::min();
+      auto const string_begin = begin(string);
+      auto const string_end = end(string);
+      for (auto substring_begin = string_begin, substring_end = string_begin;
+           substring_end != string_end; ++substring_end) {
+        --char_count[*substring_end];
+        if (char_count[*substring_end] == 0) {
+          ++matched_char_count;
+        }
+        if (matched_char_count == expected_matched_char_count) {
+          for (; char_count[*substring_begin] != 0; ++substring_begin) {
+            ++char_count[*substring_begin];
+          }
+          return std::string(substring_begin, substring_end + 1);
+        }
+      }
+      return std::string();
+    }  // namespace sliding_window
+  }    // namespace sliding_window
 }  // namespace coin

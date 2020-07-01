@@ -70,3 +70,13 @@ TEST(sliding_window, find_anagrams) {
   EXPECT_THAT(find_anagrams<char>("pq", "ppqp"), ElementsAre(1, 2));
   EXPECT_THAT(find_anagrams<char>("abc", "abbcabc"), ElementsAre(2, 3, 4));
 }
+
+TEST(sliding_window, find_smallest_all_letters_substring) {
+  using namespace ::coin::sliding_window;
+  using namespace ::testing;
+  EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "aabdec"),
+              Eq("abdec"));
+  EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "abdabca"),
+              Eq("abc"));
+  EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "adcad"), Eq(""));
+}
