@@ -268,6 +268,6 @@ namespace coin {
         }
       }
       return std::string();
-    }  // namespace sliding_window
-  }    // namespace sliding_window
+    }
+  }  // namespace sliding_window
 }  // namespace coin
