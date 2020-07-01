@@ -19,3 +19,4 @@ target_include_directories(googletest-main PRIVATE googletest/googletest)
 target_include_directories(googletest-main PUBLIC googletest/googletest/include)
 
 add_subdirectory(coin)
+add_subdirectory(spanchart)
