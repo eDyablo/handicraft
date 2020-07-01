@@ -1,41 +1,6 @@
 #include <gmock/gmock.h>
 
-#include <algorithm>
-#include <iostream>
-#include <iterator>
-#include <vector>
-
 #include "sliding_window.hpp"
-
-void test(size_t expected, size_t actual) {
-  using namespace std;
-  if (actual != expected) {
-    cout << "expected: " << expected << endl
-         << "actual: " << actual << endl
-         << endl;
-  }
-}
-
-template <typename Element>
-void test(std::vector<Element> expected, std::vector<Element> actual) {
-  using namespace std;
-  if (actual != expected) {
-    cout << "expected: [";
-    if (!expected.empty()) {
-      copy(begin(expected), end(expected) - 1,
-           ostream_iterator<Element>(cout, ", "));
-      copy(end(expected) - 1, end(expected), ostream_iterator<Element>(cout));
-    }
-    cout << "]" << endl;
-    cout << "actual:   [";
-    if (!actual.empty()) {
-      copy(begin(actual), end(actual) - 1,
-           ostream_iterator<Element>(cout, ", "));
-      copy(end(actual) - 1, end(actual), ostream_iterator<Element>(cout));
-    }
-    cout << "]" << endl;
-  }
-}
 
 TEST(sliding_window, find_max_sum_subarray) {
   using namespace coin::sliding_window;
