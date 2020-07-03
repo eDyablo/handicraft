@@ -35,3 +35,8 @@ TEST(two_pointers, remove_all_inclusions) {
   EXPECT_THAT(remove_all_inclusions(2, numbers), Eq(2));
   EXPECT_THAT(numbers, ElementsAre(11, 1, 2, 2, 1));
 }
+
+TEST(two_pointers, make_squares) {
+  EXPECT_THAT(make_squares<int>({-2, -1, 0, 2, 3}), ElementsAre(0, 1, 4, 4, 9));
+  EXPECT_THAT(make_squares<int>({-3, -1, 0, 1, 2}), ElementsAre(0, 1, 1, 4, 9));
+}

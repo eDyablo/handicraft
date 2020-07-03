@@ -56,5 +56,26 @@ namespace coin {
       }
       return distance(array_begin, subarray_end);
     }
+
+    template <typename Item>
+    auto make_squares(std::vector<int> const& array) {
+      using namespace std;
+      vector<Item> squares(size(array));
+      auto left_iterator = begin(array);
+      auto right_iterator = rbegin(array);
+      for (auto squares_iterator = rbegin(squares);
+           squares_iterator != squares.rend(); ++squares_iterator) {
+        auto const left_square = (*left_iterator) * (*left_iterator);
+        auto const right_square = (*right_iterator) * (*right_iterator);
+        if (left_square > right_square) {
+          *squares_iterator = left_square;
+          ++left_iterator;
+        } else {
+          *squares_iterator = right_square;
+          ++right_iterator;
+        }
+      }
+      return squares;
+    }
   }  // namespace two_pointers
 }  // namespace coin
