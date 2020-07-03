@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <limits>
 #include <string>
+#include <unordered_map>
 #include <valarray>
 #include <vector>
 
@@ -247,7 +248,7 @@ namespace coin {
       using string_t = std::basic_string<letter_t>;
       using namespace std;
       valarray<size_t> letter_count(numeric_limits<letter_t>::max() -
-                                  numeric_limits<letter_t>::min() + 1);
+                                    numeric_limits<letter_t>::min() + 1);
       for (auto letter : pattern) {
         ++letter_count[letter];
       }
@@ -288,6 +289,44 @@ namespace coin {
       } else {
         return string_t();
       }
+    }
+
+    template <typename Char>
+    auto find_word_concatenation(
+        std::vector<std::basic_string<Char>> const& words,
+        std::basic_string<Char> const& string) {
+      using char_t = Char;
+      using string_t = std::basic_string<char_t>;
+      using word_map_t = std::unordered_map<string_t, size_t>;
+      using namespace std;
+      word_map_t expected_words;
+      for (auto const& word : words) {
+        ++expected_words[word];
+      }
+      vector<size_t> indices;
+      auto const word_count = size(words);
+      auto const word_size = word_count > 0 ? size(words.front()) : size_t(0);
+      auto const string_begin = begin(string);
+      auto const string_end = end(string);
+      for (auto string_iter = string_begin; string_iter != string_end;
+           ++string_iter) {
+        word_map_t seen_words;
+        for (auto lookup_iter = string_iter;
+             size_t(distance(lookup_iter, string_end)) >= word_size;
+             lookup_iter += word_size) {
+          string_t const lookup_word(lookup_iter, lookup_iter + word_size);
+          if (expected_words.find(lookup_word) != end(expected_words)) {
+            ++seen_words[lookup_word];
+            if (seen_words[lookup_word] > expected_words[lookup_word]) {
+              break;
+            }
+          }
+        }
+        if (size(seen_words) == size(expected_words)) {
+          indices.push_back(distance(string_begin, string_iter));
+        }
+      }
+      return indices;
     }
   }  // namespace sliding_window
 }  // namespace coin

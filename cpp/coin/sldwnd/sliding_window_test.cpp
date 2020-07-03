@@ -83,3 +83,12 @@ TEST(sliding_window, find_smallest_all_letters_substring) {
   EXPECT_THAT(find_smallest_all_letters_substring<char>("ab", "axxbxxaxb"),
               Eq("axb"));
 }
+
+TEST(sliding_window, find_word_concatenation) {
+  using namespace ::coin::sliding_window;
+  using namespace ::testing;
+  EXPECT_THAT(find_word_concatenation<char>({"cat", "fox"}, "catfoxcat"),
+              ElementsAre(0, 3));
+  EXPECT_THAT(find_word_concatenation<char>({"cat", "fox"}, "catcatfoxfox"),
+              ElementsAre(3));
+}
