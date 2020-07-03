@@ -292,7 +292,7 @@ namespace coin {
     }
 
     template <typename Char>
-    auto find_word_concatenation(
+    auto find_fixed_size_words_concatenation(
         std::vector<std::basic_string<Char>> const& words,
         std::basic_string<Char> const& string) {
       using char_t = Char;

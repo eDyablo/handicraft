@@ -87,8 +87,10 @@ TEST(sliding_window, find_smallest_all_letters_substring) {
 TEST(sliding_window, find_word_concatenation) {
   using namespace ::coin::sliding_window;
   using namespace ::testing;
-  EXPECT_THAT(find_word_concatenation<char>({"cat", "fox"}, "catfoxcat"),
-              ElementsAre(0, 3));
-  EXPECT_THAT(find_word_concatenation<char>({"cat", "fox"}, "catcatfoxfox"),
-              ElementsAre(3));
+  EXPECT_THAT(
+      find_fixed_size_words_concatenation<char>({"cat", "fox"}, "catfoxcat"),
+      ElementsAre(0, 3));
+  EXPECT_THAT(
+      find_fixed_size_words_concatenation<char>({"cat", "fox"}, "catcatfoxfox"),
+      ElementsAre(3));
 }
