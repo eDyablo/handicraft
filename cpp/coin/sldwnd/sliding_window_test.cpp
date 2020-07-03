@@ -76,7 +76,7 @@ TEST(sliding_window, find_smallest_all_letters_substring) {
   using namespace ::testing;
   EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "aabdec"),
               Eq("abdec"));
-  EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "abdabcaxy"),
+  EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "abdabca"),
               Eq("abc"));
   EXPECT_THAT(find_smallest_all_letters_substring<char>("abc", "adcad"),
               Eq(""));
