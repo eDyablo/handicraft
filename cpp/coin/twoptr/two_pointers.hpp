@@ -42,5 +42,19 @@ namespace coin {
       }
       return distance(array_begin, subarray_end);
     }
+
+    template <typename Item>
+    auto remove_all_inclusions(const Item& element, std::vector<Item>& array) {
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      auto subarray_end = array_begin;
+      for (auto iterator = array_begin; iterator != array_end; ++iterator) {
+        if (*iterator != element) {
+          *subarray_end = move(*iterator);
+          ++subarray_end;
+        }
+      }
+      return distance(array_begin, subarray_end);
+    }
   }  // namespace two_pointers
 }  // namespace coin

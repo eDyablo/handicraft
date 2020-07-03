@@ -17,3 +17,9 @@ TEST(two_pointers, remove_duplicates) {
   EXPECT_THAT(remove_duplicates(numbers), Eq(4));
   EXPECT_THAT(numbers, ElementsAre(2, 3, 6, 9, 6, 9, 9));
 }
+
+TEST(two_pointers, remove_all_inclusions) {
+  vector<int> numbers{3, 2, 3, 6, 3, 10, 9, 3};
+  EXPECT_THAT(remove_all_inclusions(3, numbers), Eq(4));
+  EXPECT_THAT(numbers, ElementsAre(2, 6, 10, 9, 3, 10, 9, 3));
+}
