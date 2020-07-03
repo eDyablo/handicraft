@@ -315,9 +315,12 @@ namespace coin {
              size_t(distance(lookup_iter, string_end)) >= word_size;
              lookup_iter += word_size) {
           string_t const lookup_word(lookup_iter, lookup_iter + word_size);
-          if (expected_words.find(lookup_word) != end(expected_words)) {
-            ++seen_words[lookup_word];
-            if (seen_words[lookup_word] > expected_words[lookup_word]) {
+          auto expected_word_record = expected_words.find(lookup_word);
+          if (expected_word_record != end(expected_words)) {
+            auto seen_word_record =
+                seen_words.try_emplace(begin(seen_words), lookup_word);
+            ++(seen_word_record->second);
+            if (seen_word_record->second > expected_word_record->second) {
               break;
             }
           }
