@@ -3,6 +3,7 @@
 #include <limits>
 #include <utility>
 #include <valarray>
+#include <vector>
 
 namespace coin {
   namespace two_pointers {
@@ -26,6 +27,20 @@ namespace coin {
       }
       return make_pair(numeric_limits<size_t>::max(),
                        numeric_limits<size_t>::max());
+    }
+
+    template <typename Item>
+    auto remove_duplicates(std::vector<Item>& array) {
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      auto subarray_end = array_begin + 1;
+      for (auto iterator = array_begin; iterator != array_end; ++iterator) {
+        if (*(subarray_end - 1) != *iterator) {
+          *subarray_end = move(*iterator);
+          ++subarray_end;
+        }
+      }
+      return distance(array_begin, subarray_end);
     }
   }  // namespace two_pointers
 }  // namespace coin
