@@ -252,22 +252,39 @@ namespace coin {
           count_if(begin(char_count), end(char_count),
                    [](size_t item) { return item > 0; });
       auto matched_char_count = numeric_limits<size_t>::min();
+      auto const pattern_size = size(pattern);
       auto const string_begin = begin(string);
       auto const string_end = end(string);
+      auto smallest_substring_begin = string_begin;
+      auto smallest_substring_end = string_end;
+      auto smallest_substring_size = numeric_limits<size_t>::max();
       for (auto substring_begin = string_begin, substring_end = string_begin;
            substring_end != string_end; ++substring_end) {
         --char_count[*substring_end];
         if (char_count[*substring_end] == 0) {
           ++matched_char_count;
         }
-        if (matched_char_count == expected_matched_char_count) {
-          for (; char_count[*substring_begin] != 0; ++substring_begin) {
-            ++char_count[*substring_begin];
+        while (matched_char_count == expected_matched_char_count) {
+          auto const substring_size =
+              size_t(distance(substring_begin, substring_end + 1));
+          smallest_substring_size =
+              distance(smallest_substring_begin, smallest_substring_end);
+          if (substring_size < smallest_substring_size) {
+            smallest_substring_begin = substring_begin;
+            smallest_substring_end = substring_end + 1;
           }
-          return std::string(substring_begin, substring_end + 1);
+          if (char_count[*substring_begin] == 0) {
+            --matched_char_count;
+          }
+          ++char_count[*substring_begin];
+          ++substring_begin;
         }
       }
-      return std::string();
+      if (smallest_substring_size < numeric_limits<size_t>::max()) {
+        return std::string(smallest_substring_begin, smallest_substring_end);
+      } else {
+        return std::string();
+      }
     }
   }  // namespace sliding_window
 }  // namespace coin
