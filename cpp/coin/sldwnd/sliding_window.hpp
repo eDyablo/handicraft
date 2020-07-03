@@ -239,19 +239,22 @@ namespace coin {
       return indices;
     }
 
-    template <typename Char>
-    auto find_smallest_all_letters_substring(std::string const& pattern,
-                                             std::string const& string) {
+    template <typename Letter>
+    auto find_smallest_all_letters_substring(
+        std::basic_string<Letter> const& pattern,
+        std::basic_string<Letter> const& string) {
+      using letter_t = Letter;
+      using string_t = std::basic_string<letter_t>;
       using namespace std;
-      valarray<size_t> char_count(numeric_limits<Char>::max() -
-                                  numeric_limits<Char>::min() + 1);
-      for (auto c : pattern) {
-        ++char_count[c];
+      valarray<size_t> letter_count(numeric_limits<letter_t>::max() -
+                                  numeric_limits<letter_t>::min() + 1);
+      for (auto letter : pattern) {
+        ++letter_count[letter];
       }
-      auto expected_matched_char_count =
-          count_if(begin(char_count), end(char_count),
+      auto expected_matched_letter_count =
+          count_if(begin(letter_count), end(letter_count),
                    [](size_t item) { return item > 0; });
-      auto matched_char_count = numeric_limits<size_t>::min();
+      auto matched_letter_count = numeric_limits<size_t>::min();
       auto const pattern_size = size(pattern);
       auto const string_begin = begin(string);
       auto const string_end = end(string);
@@ -260,11 +263,11 @@ namespace coin {
       auto smallest_substring_size = numeric_limits<size_t>::max();
       for (auto substring_begin = string_begin, substring_end = string_begin;
            substring_end != string_end; ++substring_end) {
-        --char_count[*substring_end];
-        if (char_count[*substring_end] == 0) {
-          ++matched_char_count;
+        --letter_count[*substring_end];
+        if (letter_count[*substring_end] == 0) {
+          ++matched_letter_count;
         }
-        while (matched_char_count == expected_matched_char_count) {
+        while (matched_letter_count == expected_matched_letter_count) {
           auto const substring_size =
               size_t(distance(substring_begin, substring_end + 1));
           smallest_substring_size =
@@ -273,17 +276,17 @@ namespace coin {
             smallest_substring_begin = substring_begin;
             smallest_substring_end = substring_end + 1;
           }
-          if (char_count[*substring_begin] == 0) {
-            --matched_char_count;
+          if (letter_count[*substring_begin] == 0) {
+            --matched_letter_count;
           }
-          ++char_count[*substring_begin];
+          ++letter_count[*substring_begin];
           ++substring_begin;
         }
       }
       if (smallest_substring_size < numeric_limits<size_t>::max()) {
-        return std::string(smallest_substring_begin, smallest_substring_end);
+        return string_t(smallest_substring_begin, smallest_substring_end);
       } else {
-        return std::string();
+        return string_t();
       }
     }
   }  // namespace sliding_window
