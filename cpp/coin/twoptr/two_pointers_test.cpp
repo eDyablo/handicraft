@@ -59,3 +59,8 @@ TEST(two_pointers, find_triplet_sum_close_to_target) {
   EXPECT_THAT(find_triplet_sum_close_to_target(1, {-3, -1, 1, 2}), Eq(0));
   EXPECT_THAT(find_triplet_sum_close_to_target(100, {1, 0, 1, 1}), Eq(3));
 }
+
+TEST(two_pointers, count_triplets_with_smaller_sum) {
+  EXPECT_THAT(count_triplets_with_smaller_sum(3, {-1, 0, 2, 3}), Eq(2));
+  EXPECT_THAT(count_triplets_with_smaller_sum(5, {-1, 4, 2, 1, 3}), Eq(4));
+}

@@ -139,5 +139,31 @@ namespace coin {
       }
       return target_sum - min_diff;
     }
+
+    template <typename Item>
+    auto count_triplets_with_smaller_sum(Item target_sum,
+                                         std::vector<Item> array) {
+      using item_t = Item;
+      using namespace std;
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      sort(array_begin, array_end);
+      auto count = numeric_limits<size_t>::denorm_min();
+      for (auto array_iterator = array_begin; array_iterator != array_end;
+           ++array_iterator) {
+        for (auto left_iterator = array_iterator + 1,
+                  right_iterator = array_end - 1;
+             left_iterator < right_iterator;) {
+          auto const sum = *array_iterator + *left_iterator + *right_iterator;
+          if (sum < target_sum) {
+            count += distance(left_iterator, right_iterator);
+            ++left_iterator;
+          } else {
+            --right_iterator;
+          }
+        }
+      }
+      return count;
+    }
   }  // namespace two_pointers
 }  // namespace coin
