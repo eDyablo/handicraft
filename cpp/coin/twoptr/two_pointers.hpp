@@ -107,5 +107,37 @@ namespace coin {
       }
       return triplets;
     }
+
+    template <typename Item>
+    Item find_triplet_sum_close_to_target(Item target_sum,
+                                          std::vector<Item> array) {
+      using item_t = Item;
+      using namespace std;
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      sort(array_begin, array_end);
+      auto min_diff = numeric_limits<item_t>::max();
+      for (auto array_iterator = array_begin; array_iterator != array_end;
+           ++array_iterator) {
+        auto left_iterator = array_iterator + 1;
+        auto right_iterator = array_end - 1;
+        while (left_iterator < right_iterator) {
+          auto const diff =
+              target_sum - *array_iterator - *left_iterator - *right_iterator;
+          if (diff == 0) {
+            return target_sum;
+          }
+          if (abs(diff) < abs(min_diff)) {
+            min_diff = diff;
+          }
+          if (0 < diff) {
+            ++left_iterator;
+          } else {
+            --right_iterator;
+          }
+        }
+      }
+      return target_sum - min_diff;
+    }
   }  // namespace two_pointers
 }  // namespace coin

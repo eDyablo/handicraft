@@ -53,3 +53,9 @@ TEST(two_pointers, find_triplets) {
   EXPECT_THAT(find_triplets(numbers),
               ElementsAre(array{-5, 2, 3}, array{-2, -1, 3}));
 }
+
+TEST(two_pointers, find_triplet_sum_close_to_target) {
+  EXPECT_THAT(find_triplet_sum_close_to_target(2, {-2, 0, 1, 2}), Eq(1));
+  EXPECT_THAT(find_triplet_sum_close_to_target(1, {-3, -1, 1, 2}), Eq(0));
+  EXPECT_THAT(find_triplet_sum_close_to_target(100, {1, 0, 1, 1}), Eq(3));
+}
