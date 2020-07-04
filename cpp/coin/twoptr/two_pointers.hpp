@@ -165,5 +165,36 @@ namespace coin {
       }
       return count;
     }
+
+    template <typename Item>
+    auto find_triplets_with_smaller_sum(Item target_sum,
+                                        std::vector<Item> array) {
+      using item_t = Item;
+      using triplet_t = std::array<item_t, 3>;
+      using namespace std;
+      vector<triplet_t> triplets;
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      sort(array_begin, array_end);
+      for (auto array_iterator = array_begin; array_iterator != array_end;
+           ++array_iterator) {
+        for (auto left_iterator = array_iterator + 1,
+                  right_iterator = array_end - 1;
+             left_iterator < right_iterator;) {
+          auto const sum = *array_iterator + *left_iterator + *right_iterator;
+          if (sum < target_sum) {
+            for (auto iter = left_iterator + 1; iter != right_iterator + 1;
+                 ++iter) {
+              triplets.push_back(
+                  triplet_t{*array_iterator, *left_iterator, *iter});
+            }
+            ++left_iterator;
+          } else {
+            --right_iterator;
+          }
+        }
+      }
+      return triplets;
+    }
   }  // namespace two_pointers
 }  // namespace coin

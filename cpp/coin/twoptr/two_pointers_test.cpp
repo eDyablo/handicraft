@@ -64,3 +64,11 @@ TEST(two_pointers, count_triplets_with_smaller_sum) {
   EXPECT_THAT(count_triplets_with_smaller_sum(3, {-1, 0, 2, 3}), Eq(2));
   EXPECT_THAT(count_triplets_with_smaller_sum(5, {-1, 4, 2, 1, 3}), Eq(4));
 }
+
+TEST(two_pointers, find_triplets_with_smaller_sum) {
+  EXPECT_THAT(find_triplets_with_smaller_sum(3, {-1, 0, 2, 3}),
+              ElementsAre(array{-1, 0, 2}, array{-1, 0, 3}));
+  EXPECT_THAT(find_triplets_with_smaller_sum(5, {-1, 4, 2, 1, 3}),
+              ElementsAre(array{-1, 1, 2}, array{-1, 1, 3}, array{-1, 1, 4},
+                          array{-1, 2, 3}));
+}
