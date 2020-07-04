@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <limits>
 #include <utility>
 #include <valarray>
@@ -76,6 +77,35 @@ namespace coin {
         }
       }
       return squares;
+    }
+
+    template <typename Item>
+    auto find_triplets(std::vector<Item>& array) {
+      using item_t = Item;
+      using triplet_t = std::array<item_t, 3>;
+      using namespace std;
+      vector<triplet_t> triplets;
+      auto const array_begin = begin(array);
+      auto const array_end = end(array);
+      sort(begin(array), end(array));
+      for (auto array_iterator = array_begin; array_iterator != array_end;
+           ++array_iterator) {
+        auto left_iterator = array_iterator + 1;
+        auto right_iterator = array_end - 1;
+        auto const required_sum = -(*array_iterator);
+        while (left_iterator < right_iterator) {
+          auto const sum = (*left_iterator) + (*right_iterator);
+          if (required_sum < sum) {
+            --right_iterator;
+          } else if (sum < required_sum) {
+            ++left_iterator;
+          } else {
+            triplets.push_back(move(triplet_t{
+                *array_iterator, *(left_iterator++), *(right_iterator--)}));
+          }
+        }
+      }
+      return triplets;
     }
   }  // namespace two_pointers
 }  // namespace coin

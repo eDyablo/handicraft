@@ -14,7 +14,7 @@ TEST(two_pointers, find_target_sum_pair) {
 
 TEST(two_pointers, remove_duplicates) {
   vector<int> numbers;
-  
+
   numbers = {2, 3, 3, 3, 6, 9, 9};
   EXPECT_THAT(remove_duplicates(numbers), Eq(4));
   EXPECT_THAT(numbers, ElementsAre(2, 3, 6, 9, 6, 9, 9));
@@ -26,7 +26,7 @@ TEST(two_pointers, remove_duplicates) {
 
 TEST(two_pointers, remove_all_inclusions) {
   vector<int> numbers;
-  
+
   numbers = {3, 2, 3, 6, 3, 10, 9, 3};
   EXPECT_THAT(remove_all_inclusions(3, numbers), Eq(4));
   EXPECT_THAT(numbers, ElementsAre(2, 6, 10, 9, 3, 10, 9, 3));
@@ -39,4 +39,17 @@ TEST(two_pointers, remove_all_inclusions) {
 TEST(two_pointers, make_squares) {
   EXPECT_THAT(make_squares<int>({-2, -1, 0, 2, 3}), ElementsAre(0, 1, 4, 4, 9));
   EXPECT_THAT(make_squares<int>({-3, -1, 0, 1, 2}), ElementsAre(0, 1, 1, 4, 9));
+}
+
+TEST(two_pointers, find_triplets) {
+  vector<int> numbers;
+
+  numbers = {-3, 0, 1, 2, -1, 1, -2};
+  EXPECT_THAT(find_triplets(numbers),
+              ElementsAre(array{-3, 1, 2}, array{-2, 0, 2}, array{-2, 1, 1},
+                          array{-1, 0, 1}));
+
+  numbers = {-5, 2, -1, -2, 3};
+  EXPECT_THAT(find_triplets(numbers),
+              ElementsAre(array{-5, 2, 3}, array{-2, -1, 3}));
 }
