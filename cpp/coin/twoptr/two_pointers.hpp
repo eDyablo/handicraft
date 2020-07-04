@@ -92,9 +92,9 @@ namespace coin {
            ++array_iterator) {
         auto left_iterator = array_iterator + 1;
         auto right_iterator = array_end - 1;
-        auto const required_sum = -(*array_iterator);
+        auto const required_sum = -*array_iterator;
         while (left_iterator < right_iterator) {
-          auto const sum = (*left_iterator) + (*right_iterator);
+          auto const sum = *left_iterator + *right_iterator;
           if (required_sum < sum) {
             --right_iterator;
           } else if (sum < required_sum) {
