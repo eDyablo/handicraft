@@ -100,3 +100,15 @@ TEST(two_pointers, find_quardruplets_with_taget_sum) {
   EXPECT_THAT(find_quardruplets_with_taget_sum(2, {2, 0, -1, 1, -2, 2}),
               ElementsAre(array{-2, 0, 2, 2}, array{-1, 0, 1, 2}));
 }
+
+TEST(two_pointers, compare_strings_with_backspaces) {
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("xy#z", "xzz#"));
+  EXPECT_FALSE(compare_strings_with_backspaces<char>("xy#z", "xyz#"));
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("xp#", "xyz##"));
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("xywrrmp", "xywrrmu#p"));
+  EXPECT_FALSE(compare_strings_with_backspaces<char>("ab", "b"));
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("#", "#"));
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("a#", "a#"));
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("a##", "a##"));
+  EXPECT_TRUE(compare_strings_with_backspaces<char>("a#", "a##"));
+}

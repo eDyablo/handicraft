@@ -1,7 +1,9 @@
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <limits>
+#include <string>
 #include <utility>
 #include <valarray>
 #include <vector>
@@ -271,6 +273,43 @@ namespace coin {
         }
       }
       return quardruplets;
+    }
+
+    template <typename Char>
+    auto compare_strings_with_backspaces(
+        std::basic_string<Char> const& first,
+        std::basic_string<Char> const& second) {
+      auto first_iterator = rbegin(first);
+      auto second_iterator = rbegin(second);
+      auto const first_end = rend(first);
+      auto const second_end = rend(second);
+      for (; first_iterator < first_end && second_iterator < second_end;
+           ++first_iterator, ++second_iterator) {
+        auto backspace_count = 0;
+        for (; first_iterator < first_end && *first_iterator == '#';
+             ++first_iterator) {
+          ++backspace_count;
+        }
+        advance(
+            first_iterator,
+            min<size_t>(backspace_count, distance(first_iterator, first_end)));
+        backspace_count = 0;
+        for (; second_iterator < second_end && *second_iterator == '#';
+             ++second_iterator) {
+          ++backspace_count;
+        }
+        advance(second_iterator,
+                min<size_t>(backspace_count,
+                            distance(second_iterator, second_end)));
+        if (!(first_iterator < first_end) || !(second_iterator < second_end)) {
+          break;
+        }
+        if (*first_iterator != *second_iterator) {
+          return false;
+        }
+      }
+      return distance(first_iterator, first_end) ==
+             distance(second_iterator, second_end);
     }
   }  // namespace two_pointers
 }  // namespace coin
