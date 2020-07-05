@@ -12,10 +12,9 @@ namespace coin {
     auto find_target_sum_pair(Item target_sum,
                               std::valarray<Item> const& array) {
       using namespace std;
-      auto const array_begin = begin(array);
-      auto front_iterator = begin(array);
-      auto back_iterator = end(array) - 1;
-      while (front_iterator != back_iterator) {
+      for (auto array_begin = begin(array), front_iterator = array_begin,
+                back_iterator = end(array) - 1;
+           front_iterator != back_iterator;) {
         auto sum = *front_iterator + *back_iterator;
         if (sum > target_sum) {
           --back_iterator;
