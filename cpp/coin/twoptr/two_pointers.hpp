@@ -223,13 +223,14 @@ namespace coin {
     }
 
     template <typename Item>
-    void dutch_flag_sort(std::vector<Item>& array) {
+    void dutch_flag_sort(Item const red, Item const blue,
+                         std::vector<Item>& array) {
       for (auto left_iterator = begin(array), right_iterator = end(array) - 1,
                 iterator = left_iterator;
            iterator <= right_iterator;) {
-        if (*iterator == 0) {
+        if (*iterator == red) {
           swap(*(iterator++), *(left_iterator++));
-        } else if (*iterator == 2) {
+        } else if (*iterator == blue) {
           swap(*iterator, *(right_iterator--));
         } else {
           ++iterator;
