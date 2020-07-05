@@ -237,5 +237,40 @@ namespace coin {
         }
       }
     }
+
+    template <typename Item>
+    auto find_quardruplets_with_taget_sum(Item target_sum,
+                                          std::vector<Item> items) {
+      using item_t = Item;
+      using quardruplet_t = std::array<item_t, 4>;
+      using namespace std;
+      sort(begin(items), end(items));
+      vector<quardruplet_t> quardruplets;
+      for (auto items_begin = begin(items), items_end = end(items),
+                first_iterator = items_begin;
+           first_iterator < items_end; ++first_iterator) {
+        for (auto second_iterator = first_iterator + 1;
+             second_iterator < items_end; ++second_iterator) {
+          auto third_iterator = second_iterator + 1;
+          auto fourth_iterator = items_end - 1;
+          while (third_iterator < fourth_iterator) {
+            auto const sum = *first_iterator + *second_iterator +
+                             *third_iterator + *fourth_iterator;
+            if (sum < target_sum) {
+              ++third_iterator;
+            } else if (target_sum < sum) {
+              --fourth_iterator;
+            } else {
+              quardruplets.push_back(
+                  quardruplet_t{*first_iterator, *second_iterator,
+                                *third_iterator, *fourth_iterator});
+              ++third_iterator;
+              --fourth_iterator;
+            }
+          }
+        }
+      }
+      return quardruplets;
+    }
   }  // namespace two_pointers
 }  // namespace coin

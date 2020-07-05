@@ -93,3 +93,10 @@ TEST(two_pointers, dutch_flag_sort) {
   dutch_flag_sort(0ui16, 2ui16, objects);
   EXPECT_THAT(objects, ElementsAre(0, 0, 1, 2, 2, 2));
 }
+
+TEST(two_pointers, find_quardruplets_with_taget_sum) {
+  EXPECT_THAT(find_quardruplets_with_taget_sum(1, {4, 1, 2, -1, 1, -3}),
+              ElementsAre(array{-3, -1, 1, 4}, array{-3, 1, 1, 2}));
+  EXPECT_THAT(find_quardruplets_with_taget_sum(2, {2, 0, -1, 1, -2, 2}),
+              ElementsAre(array{-2, 0, 2, 2}, array{-1, 0, 1, 2}));
+}
