@@ -196,5 +196,31 @@ namespace coin {
       }
       return triplets;
     }
+
+    template <typename Item>
+    auto find_subarrays_with_smaller_product(Item target_product,
+                                             std::vector<Item> const& array) {
+      using item_t = Item;
+      using namespace std;
+      vector<vector<item_t>> subarrays;
+      item_t product = 1;
+      for (auto array_begin = begin(array), array_end = end(array),
+                right_iterator = array_begin, left_iterator = array_begin;
+           right_iterator != array_end; ++right_iterator) {
+        product *= *right_iterator;
+        for (; target_product <= product && left_iterator != array_end;
+             ++left_iterator) {
+          product /= *left_iterator;
+        }
+        vector<item_t> buffer;
+        for (auto iterator = make_reverse_iterator(right_iterator + 1),
+                  end = make_reverse_iterator(left_iterator);
+             iterator != end; ++iterator) {
+          buffer.push_back(*iterator);
+          subarrays.push_back(vector<item_t>(rbegin(buffer), rend(buffer)));
+        }
+      }
+      return subarrays;
+    }
   }  // namespace two_pointers
 }  // namespace coin

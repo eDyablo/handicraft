@@ -72,3 +72,12 @@ TEST(two_pointers, find_triplets_with_smaller_sum) {
               ElementsAre(array{-1, 1, 2}, array{-1, 1, 3}, array{-1, 1, 4},
                           array{-1, 2, 3}));
 }
+
+TEST(two_pointers, find_subarrays_with_smaller_product) {
+  EXPECT_THAT(find_subarrays_with_smaller_product(30, {2, 5, 3, 10}),
+              ElementsAre(vector{2}, vector{5}, vector{2, 5}, vector{3},
+                          vector{5, 3}, vector{10}));
+  EXPECT_THAT(find_subarrays_with_smaller_product(50, {8, 2, 6, 5}),
+              ElementsAre(vector{8}, vector{2}, vector{8, 2}, vector{6},
+                          vector{2, 6}, vector{5}, vector{6, 5}));
+}
