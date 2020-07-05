@@ -81,3 +81,15 @@ TEST(two_pointers, find_subarrays_with_smaller_product) {
               ElementsAre(vector{8}, vector{2}, vector{8, 2}, vector{6},
                           vector{2, 6}, vector{5}, vector{6, 5}));
 }
+
+TEST(two_pointers, dutch_flag_sort) {
+  vector<uint16_t> objects;
+
+  objects = {1, 0, 2, 1, 0};
+  dutch_flag_sort(objects);
+  EXPECT_THAT(objects, ElementsAre(0, 0, 1, 1, 2));
+
+  objects = {2, 2, 0, 1, 2, 0};
+  dutch_flag_sort(objects);
+  EXPECT_THAT(objects, ElementsAre(0, 0, 1, 2, 2, 2));
+}
