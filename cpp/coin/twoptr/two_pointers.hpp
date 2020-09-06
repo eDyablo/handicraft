@@ -33,6 +33,7 @@ namespace coin {
 
     template <typename Item>
     auto remove_duplicates(std::vector<Item>& array) {
+      using namespace std;
       auto const array_begin = begin(array);
       auto const array_end = end(array);
       auto subarray_end = array_begin + 1;
@@ -279,6 +280,7 @@ namespace coin {
     auto compare_strings_with_backspaces(
         std::basic_string<Char> const& first,
         std::basic_string<Char> const& second) {
+      using namespace std;
       auto first_iterator = rbegin(first);
       auto second_iterator = rbegin(second);
       auto const first_end = rend(first);

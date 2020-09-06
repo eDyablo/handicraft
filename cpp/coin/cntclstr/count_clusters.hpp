@@ -1,7 +1,8 @@
 #pragma once
 
-#include <array>
 #include <algorithm>
+#include <array>
+#include <iostream>
 
 namespace coin {
   template<size_t rows, size_t columns>

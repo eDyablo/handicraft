@@ -58,7 +58,7 @@ public:
 
   bool is_dense() const {
     using namespace std;
-    using pair_t = decltype(chart)::value_type;
+    using pair_t = typename decltype(chart)::value_type;
     return adjacent_find(chart.cbegin(), chart.cend(),
       [](pair_t const& f, pair_t const& s) { return f.second == s.second; }) == chart.end();
   }

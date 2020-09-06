@@ -102,7 +102,7 @@ namespace coin {
     auto find_longest_no_repeating_substring(
         std::basic_string<Char> const& string) {
       using namespace std;
-      using iterator_t = basic_string<Char>::const_iterator;
+      using iterator_t = typename basic_string<Char>::const_iterator;
       auto const string_begin = begin(string);
       auto const string_end = end(string);
       valarray<iterator_t> char_position(
