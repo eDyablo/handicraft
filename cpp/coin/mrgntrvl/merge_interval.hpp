@@ -1,4 +1,5 @@
-#include <ostream>
+#include <iostream>
+#include <numeric>
 #include <vector>
 
 namespace coin {
@@ -61,6 +62,58 @@ namespace coin {
         result.push_back(current);
       }
     }
+    return result;
+  }
+
+  interval_vector_t merge2(interval_vector_t intervals) {
+    using namespace std;
+
+    // Find leftmost value in the intervals to support negative values
+    int leftmost = 0;
+    for (auto const& interval: intervals) {
+      if (interval.begin < leftmost) {
+        leftmost = interval.begin;
+      }
+    }
+
+    // Get index of zero point
+    int origin = abs(leftmost);
+
+    vector<int> points;
+    for (auto const& interval: intervals) {
+      // Allocate enough points to place the interval
+      auto const required_size = origin + interval.end + 1;
+      if (size(points) < required_size) {
+        points.resize(required_size, 0);
+      }
+      // Mark points belong to the interval
+      // A point belongs to an interval if sum of its value and
+      // the previous point value greater than zero
+      ++points[origin + interval.begin]; // all points starting from the position have greater sum
+      --points[origin + interval.end]; // all points starting from the position will have less sum
+    }
+
+    // replace point markers with sums
+    partial_sum(begin(points), end(points), begin(points));
+
+    // construct disjoint intervals
+    interval_vector_t result;
+    auto const point_count = size(points);
+    for (int point_index = 0; point_index < point_count;) {
+      interval_t interval;
+      while (points[point_index] == 0 and point_index < point_count) {
+        ++point_index;
+      }
+      interval.begin = point_index - origin;
+      while (points[point_index] != 0 and point_index < point_count) {
+        ++point_index;
+      }
+      interval.end = point_index - origin;
+      if (point_index < point_count) {
+        result.push_back(interval);
+      }
+    }
+    
     return result;
   }
 }
