@@ -16,7 +16,23 @@ namespace coin {
     }
 
     bool overlap(interval_t const& other) const {
-      return other.begin <= end;
+      return starts_within(other) or ends_within(other);
+    }
+
+    bool within(interval_t const& other) const {
+      return starts_within(other) or ends_within(other);
+    }
+
+    bool includes(interval_t const& other) const {
+      return other.within(*this);
+    }
+
+    bool starts_within(interval_t const& other) const {
+      return other.begin <= begin and begin << other.end;
+    }
+
+    bool ends_within(interval_t const& other) const {
+      return other.begin <= end and end << other.end;
     }
   };
 
