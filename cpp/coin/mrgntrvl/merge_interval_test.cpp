@@ -61,4 +61,12 @@ TEST(merge2, returns_correctly_merged_intervals) {
       ElementsAreArray(interval_vector_t{{-3, 3}}));
   EXPECT_THAT(merge2(interval_vector_t{{-9, -7}, {-8, -5}}),
     ElementsAreArray(interval_vector_t{{-9, -5}}));
+  EXPECT_THAT(merge2(interval_vector_t{{-1, 1}, {-2, 2}, {-4, 4}, {-7, 7}}),
+    ElementsAreArray(interval_vector_t{{-7, 7}}));
+  EXPECT_THAT(merge2(interval_vector_t{{-7, 7}, {-2, 2}, {-4, 4}, {-1, 1}}),
+    ElementsAreArray(interval_vector_t{{-7, 7}}));
+  EXPECT_THAT(merge2(interval_vector_t{{10000, 10003}, {10002, 10005}}),
+    ElementsAreArray(interval_vector_t{{10000, 10005}}));
+  EXPECT_THAT(merge2(interval_vector_t{{-10003, -10000}, {-10005, -10002}}),
+    ElementsAreArray(interval_vector_t{{-10005, -10000}}));
 }
