@@ -44,3 +44,21 @@ TEST(matrix2d, get_zero_when_retrive_element_not_set_before) {
   EXPECT_THAT(matrix.at(1, 0), Eq(0));
   EXPECT_THAT(matrix.at(1, 1), Eq(0));
 }
+
+TEST(matrix2d, multiply_one_row_matrix_by_vector) {
+  matrix2d_t matrix(1, 2);
+  matrix.set(0, 0, 1);
+  matrix.set(0, 1, 2);
+  auto const result = matrix * std::vector<matrix2d_t::element_t>{3, 4};
+  EXPECT_THAT(result, ElementsAreArray({11}));
+}
+
+TEST(matrix2d, multiply_two_rows_matrix_by_vector) {
+  matrix2d_t matrix(2, 2);
+  matrix.set(0, 0, 1);
+  matrix.set(0, 1, 2);
+  matrix.set(1, 0, 3);
+  matrix.set(1, 1, 4);
+  auto const result = matrix * std::vector<matrix2d_t::element_t>{3, 4};
+  EXPECT_THAT(result, ElementsAreArray({11, 25}));
+}

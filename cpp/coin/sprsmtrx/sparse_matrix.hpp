@@ -28,6 +28,16 @@ namespace coin {
         return entry_locator != end(data) ? entry_locator->second : element_t();
       }
 
+      auto operator*(std::vector<element_t> const& vector) const {
+        std::vector<element_t> result(row_count, element_t());
+        for (size_t row = 0; row < row_count; ++row) {
+          for (size_t column = 0; column < column_count; ++column) {
+            result[row] += at(row, column) * vector[column];
+          }
+        }
+        return result;
+      }
+
     private:
       constexpr size_t get_key(size_t row, size_t column) const {
         return column_count * row + column;
