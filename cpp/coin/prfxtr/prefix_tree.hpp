@@ -12,10 +12,6 @@ namespace coin {
       using partner_set_t = std::unordered_map<element_t, location_t>;
 
       struct node_t {
-        bool has(element_t element) const {
-          return partners.find(element) != partners.end();
-        }
-
         void link(element_t element, location_t location) {
           partners.emplace(element, location);
         }
@@ -31,19 +27,21 @@ namespace coin {
 
       using node_set_t = std::vector<node_t>;
 
+      constexpr static location_t no_location = location_t();
+
       tree_t(): nodes(1) {
       }
 
       void insert(word_t const& word) {
         auto node_iter = nodes.begin();
         for (auto const letter: word) {
-          if (node_iter->has(letter) == false) {
+          auto const location = node_iter->locate(letter);
+          if (location == no_location) {
             node_iter->link(letter, nodes.size());
             nodes.push_back(node_t());
-            node_iter = nodes.begin() + nodes.size() - 1;
+            node_iter = prev(nodes.end());
           } else {
-            auto const location = node_iter->locate(letter);
-            node_iter = nodes.begin() + location;
+            node_iter = next(nodes.begin(), location);
           }
         }
       }
