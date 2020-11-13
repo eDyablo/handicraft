@@ -38,3 +38,8 @@ TEST_F(char_tree, has_three_nodes_when_two_identical_two_letters_words_inserted)
   tree.insert("ab");
   EXPECT_THAT(tree.node_count(), Eq(3));
 }
+
+TEST_F(char_tree, starts_with_added_one_letter_word) {
+  tree.insert("a");
+  EXPECT_THAT(tree.starts_with("a"), Eq(true));
+}

@@ -46,6 +46,19 @@ namespace coin {
         }
       }
 
+      bool starts_with(word_t const& word) {
+        auto node_iter = begin(nodes);
+        for (auto const letter: word) {
+          auto const location = node_iter->locate(letter);
+          if (location == no_location) {
+            return false;
+          } else {
+            node_iter = next(nodes.begin(), location);
+          }
+        }
+        return true;
+      }
+
       size_t node_count() const {
         return nodes.size();
       }
