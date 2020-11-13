@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <string>
+#include <unordered_set>
 
 namespace coin {
   namespace prfxtr {
@@ -7,18 +8,19 @@ namespace coin {
     struct tree_t {
       using element_t = E;
       using word_t = std::basic_string<element_t>;
+      using partner_set_t = std::unordered_set<element_t>;
 
       struct node_t {
         bool has(element_t element) const {
-          return element == this->element;
+          return partners.find(element) != partners.end();
         }
 
         void link(element_t element) {
-          this->element = element;
+          partners.insert(element);
         }
 
       private:
-        element_t element;
+        partner_set_t partners;
       };
 
       using node_set_t = std::vector<node_t>;
