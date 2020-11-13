@@ -30,9 +30,12 @@ namespace coin {
 
       void insert(word_t const& word) {
         auto node_iter = nodes.begin();
-        if (node_iter->has(word[0]) == false) {
-          node_iter->link(word[0]);
-          nodes.push_back(node_t());
+        for (auto const letter: word) {
+          if (node_iter->has(letter) == false) {
+            node_iter->link(letter);
+            nodes.push_back(node_t());
+            node_iter = nodes.begin() + nodes.size() - 1;
+          }
         }
       }
 

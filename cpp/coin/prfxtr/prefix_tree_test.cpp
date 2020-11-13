@@ -26,3 +26,9 @@ TEST(tree, has_three_nodes_when_two_different_one_letter_words_inserted_two_time
   tree.insert("b");
   EXPECT_THAT(tree.node_count(), Eq(3));
 }
+
+TEST(tree, has_five_nodes_when_one_word_with_four_unique_letters_inserted) {
+  tree_t<char> tree;
+  tree.insert("abcd");
+  EXPECT_THAT(tree.node_count(), Eq(5));
+}
