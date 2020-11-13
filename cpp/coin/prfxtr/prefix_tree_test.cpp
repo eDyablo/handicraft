@@ -32,3 +32,10 @@ TEST(tree, has_five_nodes_when_one_word_with_four_unique_letters_inserted) {
   tree.insert("abcd");
   EXPECT_THAT(tree.node_count(), Eq(5));
 }
+
+TEST(tree, has_three_nodes_when_two_identical_two_letters_words_inserted) {
+  tree_t<char> tree;
+  tree.insert("ab");
+  tree.insert("ab");
+  EXPECT_THAT(tree.node_count(), Eq(3));
+}
