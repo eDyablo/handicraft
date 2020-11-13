@@ -27,8 +27,9 @@ namespace coin {
       }
 
       void insert(word_t const& word) {
-        if (nodes[0].has(word[0]) == false) {
-          nodes[0].link(word[0]);
+        auto node_iter = nodes.begin();
+        if (node_iter->has(word[0]) == false) {
+          node_iter->link(word[0]);
           nodes.push_back(node_t());
         }
       }
