@@ -1,4 +1,5 @@
 #include "palindrome.hpp"
+#include "test_timeout.hpp"
 
 #include <gmock/gmock.h>
 
@@ -27,4 +28,11 @@ TEST(is_palindrome, returns_false_for_three_letters_string_when_two_first_letter
 
 TEST(is_palindrome, returns_false_for_four_letter_string_with_two_unique_different_letters_at_the_middle) {
   EXPECT_THAT(is_palindrome("abca"), Eq(false));
+}
+
+TEST(is_palindrome, return_true_for_one_million_equal_letters_string) {
+  static std::string const worst_case(1'000'000, 'a');
+  TEST_TIMEOUT_BEGIN
+    EXPECT_THAT(is_palindrome(worst_case), Eq(true));
+  TEST_TIMEOUT_FAIL_END(10)
 }
