@@ -16,3 +16,7 @@ TEST(is_palindrome, returns_flase_for_string_of_two_different_letters) {
 TEST(is_palindrome, returns_true_for_one_letter_string) {
   EXPECT_THAT(is_palindrome("a"), Eq(true));
 }
+
+TEST(is_palindrome, returns_true_for_string_of_two_equal_letters) {
+  EXPECT_THAT(is_palindrome("aa"), Eq(true));
+}

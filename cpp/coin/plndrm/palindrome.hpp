@@ -5,7 +5,7 @@ namespace coin {
     bool is_palindrome(std::string const& string) {
       if (string.size() < 2)
         return true;
-      return false;
+      return string[0] == string[1];
     }
   }
 }
