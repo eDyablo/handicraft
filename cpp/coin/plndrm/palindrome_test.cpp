@@ -20,3 +20,7 @@ TEST(is_palindrome, returns_true_for_one_letter_string) {
 TEST(is_palindrome, returns_true_for_string_of_two_equal_letters) {
   EXPECT_THAT(is_palindrome("aa"), Eq(true));
 }
+
+TEST(is_palindrome, returns_false_for_three_letters_string_when_two_first_letters_are_equal) {
+  EXPECT_THAT(is_palindrome("aab"), Eq(false));
+}
