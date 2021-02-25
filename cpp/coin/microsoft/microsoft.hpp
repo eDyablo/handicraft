@@ -32,14 +32,21 @@ namespace coin {
     Number max_sum_of_equal_digits_sum_pair(
         std::vector<Number> const& numbers) {
       using namespace std;
+      using digit_sum_lookup_t = unordered_map<Number, Number>;
       using pair_t = pair<Number, Number>;
-      using lookup_t = unordered_map<Number, pair_t>;
-      lookup_t lookup;
+      using pair_lookup_t = unordered_map<Number, pair_t>;
+      digit_sum_lookup_t digit_sum_lookup;
+      pair_lookup_t pair_lookup;
+      auto max_sum = Number(0);
       for (auto number : numbers) {
-        auto digit_sum = sumup_digits(number);
-        auto location = lookup.find(digit_sum);
-        if (location == lookup.end()) {
-          lookup.emplace(digit_sum, make_pair(Number(0), number));
+        auto digit_sum = digit_sum_lookup[number];
+        if (digit_sum == 0) {
+          digit_sum = sumup_digits(number);
+          digit_sum_lookup[number] = digit_sum;
+        }
+        auto const location = pair_lookup.find(digit_sum);
+        if (location == pair_lookup.end()) {
+          pair_lookup.emplace(digit_sum, make_pair(Number(0), number));
         } else {
           auto& pair = location->second;
           if (pair.first < number) {
@@ -47,12 +54,6 @@ namespace coin {
           } else if (pair.second < number) {
             pair.second = number;
           }
-        }
-      }
-      auto max_sum = Number(0);
-      for (auto record : lookup) {
-        auto const& pair = record.second;
-        if (pair.first != 0) {
           auto const sum = pair.first + pair.second;
           if (max_sum < sum) {
             max_sum = sum;
