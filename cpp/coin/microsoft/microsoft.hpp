@@ -31,15 +31,12 @@ namespace coin {
           pair_lookup.emplace(digit_sum, make_pair(Number(0), number));
         } else {
           auto& pair = location->second;
-          if (pair.first < number) {
-            pair.first = number;
-          } else if (pair.second < number) {
-            pair.second = number;
+          if (pair.first < number or pair.second < number) {
+            auto const bigger = max(pair.first, pair.second);
+            pair.first = min(bigger, number);
+            pair.second = max(bigger, number);
           }
-          auto const sum = pair.first + pair.second;
-          if (max_sum < sum) {
-            max_sum = sum;
-          }
+          max_sum = max(max_sum, pair.first + pair.second);
         }
       }
       return max_sum != 0 ? max_sum : -1;
