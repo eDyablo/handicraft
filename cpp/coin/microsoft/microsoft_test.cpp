@@ -22,11 +22,43 @@ TEST(microsoft, max_sum_of_equal_digits_sum_pair) {
               Eq(151));
 }
 
-TEST(microsoft, max_sum_of_equal_digits_sum_pair_performance) {
+TEST(microsoft, DISABLED_max_sum_of_equal_digits_sum_pair_performance) {
   vector<int> numbers(200'000);
   generate(begin(numbers), end(numbers), []() -> int {
     static int counter = 1'000'000'000;
     return counter--;
   });
   EXPECT_THAT(max_sum_of_equal_digits_sum_pair(numbers), Not(Eq(-1)));
+}
+
+TEST(microsoft, replace_question_marks) {
+  auto riddles = {
+      string(""),
+      string("?"),
+      string("??"),
+      string("???"),
+      string("abc"),
+      string("a?"),
+      string("ab?"),
+      string("?a"),
+      string("??a"),
+      string("??b"),
+      string("??c"),
+      string("a?a"),
+      string("a?b"),
+      string("a?c"),
+      string("a?a?a"),
+      string("a?a?b"),
+      string("a?b?b"),
+      string("a?b?c"),
+      string("?a?b??c???d????"),
+      string(13, '?'),
+      string(14, '?'),
+      string(26, '?'),
+  };
+  for (auto riddle : riddles) {
+    auto const answer = replace_question_marks(riddle);
+    EXPECT_THAT(answer, AllOf(Each(Not('?')), Each(Ge('a')), Each(Le('z'))));
+    EXPECT_THAT(adjacent_find(begin(answer), end(answer)), Eq(end(answer)));
+  }
 }

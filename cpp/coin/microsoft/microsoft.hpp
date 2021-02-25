@@ -41,5 +41,30 @@ namespace coin {
       }
       return max_sum != 0 ? max_sum : -1;
     }
+
+    std::string replace_question_marks(std::string const& riddle) {
+      using namespace std;
+      string answer = riddle;
+      if (size(answer) > 0) {
+        string alphabet = "abcdefghijklmnopqrstuvwxyz";
+        auto alpha_index = 0;
+        auto iter = begin(answer);
+        if (*iter == '?') {
+          *iter = alphabet[alpha_index];
+          alpha_index += 2;
+        } else {
+          alpha_index += *iter - alphabet[0] + 2;
+        }
+        for (++iter; iter != end(answer); ++iter) {
+          if (*(iter - 1) == *iter) {
+            *(iter - 1) = alphabet[alpha_index - 1];
+          } else if (*iter == '?') {
+            *iter = alphabet[alpha_index];
+            alpha_index = (alpha_index + 2) % size(alphabet);
+          };
+        }
+      }
+      return answer;
+    }
   }  // namespace microsoft
 }  // namespace coin
