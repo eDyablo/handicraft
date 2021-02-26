@@ -62,3 +62,7 @@ TEST(microsoft, replace_question_marks) {
     EXPECT_THAT(adjacent_find(begin(answer), end(answer)), Eq(end(answer)));
   }
 }
+
+TEST(microsoft, replace_question_marks_performance) {
+  replace_question_marks(string(100'000, '?'));
+}
