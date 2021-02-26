@@ -22,7 +22,7 @@ TEST(microsoft, max_sum_of_equal_digits_sum_pair) {
               Eq(151));
 }
 
-TEST(microsoft, DISABLED_max_sum_of_equal_digits_sum_pair_performance) {
+TEST(microsoft, max_sum_of_equal_digits_sum_pair_performance) {
   vector<int> numbers(200'000);
   generate(begin(numbers), end(numbers), []() -> int {
     static int counter = 1'000'000'000;
