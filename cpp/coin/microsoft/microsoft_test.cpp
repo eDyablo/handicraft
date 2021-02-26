@@ -64,5 +64,5 @@ TEST(microsoft, replace_question_marks) {
 }
 
 TEST(microsoft, replace_question_marks_performance) {
-  replace_question_marks(string(100'000, '?'));
+  replace_question_marks(string(1'000'000, '?'));
 }

@@ -46,21 +46,15 @@ namespace coin {
       using namespace std;
       string answer = riddle;
       if (size(answer) > 0) {
-        string alphabet = "abcdefghijklmnopqrstuvwxyz";
-        auto alpha_index = 0;
-        auto iter = begin(answer);
-        if (*iter == '?') {
-          *iter = alphabet[alpha_index];
-          alpha_index += 2;
-        } else {
-          alpha_index += *iter - alphabet[0] + 2;
+        if (answer[0] == '?') {
+          answer[0] = 'b';
         }
-        for (++iter; iter != end(answer); ++iter) {
-          if (*(iter - 1) == *iter) {
-            *(iter - 1) = alphabet[alpha_index - 1];
-          } else if (*iter == '?') {
-            *iter = alphabet[alpha_index];
-            alpha_index = (alpha_index + 2) % size(alphabet);
+        for (size_t index = 1; index < size(answer); ++index) {
+          if (answer[index - 1] == answer[index]) {
+            answer[index - 1] -= 1;
+          } else if (answer[index] == '?') {
+            auto const next = answer[index - 1] + 2;
+            answer[index] = next > 'z' ? 'a' : next;
           };
         }
       }
