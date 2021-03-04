@@ -24,22 +24,29 @@ namespace coin {
                          std::vector<size_t> const& starts,
                          std::vector<size_t> const& ends) {
       using namespace std;
-      auto const plan = build_plan(compartments);
       auto answer = vector<size_t>();
-      for (auto i = 0; i < size(starts); ++i) {
-        auto const start = starts[i] - 1;
-        auto const end = ends[i] - 1;
-        auto left = start;
-        if (plan[left] < 0) {
-          left += plan[left];
+      if (not empty(compartments)) {
+        auto const plan = build_plan(compartments);
+        auto const interval_count = min(size(starts), size(ends));
+        for (auto i = 0; i < interval_count; ++i) {
+          auto start = starts[i] - 1;
+          auto end = min(size(plan), ends[i]) - 1;
+          if (plan[start] < 0) {
+            start += plan[start];
+          }
+          if (plan[end] < 0) {
+            end += plan[end];
+          }
+          size_t sum = 0;
+          for (; start < end;) {
+            auto const count = plan[start];
+            sum += count;
+            start += count + 1;
+          }
+          if (sum > 0) {
+            answer.push_back(sum);
+          }
         }
-        size_t sum = 0;
-        do {
-          auto const count = plan[left];
-          sum += count;
-          left += count + 1;
-        } while (left < end - 1);
-        answer.push_back(sum);
       }
       return answer;
     }
