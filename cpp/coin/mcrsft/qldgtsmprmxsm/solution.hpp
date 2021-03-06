@@ -1,12 +1,10 @@
 #include <algorithm>
-#include <sstream>
-#include <string>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 
 namespace coin {
-  namespace microsoft {
+  namespace mcrsft {
     template <typename Number>
     Number sumup_digits(Number number) {
       auto sum = Number(0);
@@ -42,6 +40,5 @@ namespace coin {
       return max_sum != 0 ? max_sum : -1;
     }
 
-    
-  }  // namespace microsoft
+  }  // namespace mcrsft
 }  // namespace coin

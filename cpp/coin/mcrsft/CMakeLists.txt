@@ -1,5 +1,5 @@
 add_executable(mcrsft
-  test.cpp
+  qldgtsmprmxsm/test.cpp
   qstnmrkrdl/solution_test.cpp
 )
 
