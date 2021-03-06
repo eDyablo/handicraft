@@ -1,4 +1,4 @@
-#include "scene_partitioning.hpp"
+#include "solution.hpp"
 
 #include <gmock/gmock.h>
 
