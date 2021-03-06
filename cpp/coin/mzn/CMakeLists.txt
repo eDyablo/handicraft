@@ -1,4 +1,5 @@
 add_executable(mzn
+  cntclstrs/solution_test.cpp
   fvstrslrs/solution_test.cpp
   scene_partitioning_test.cpp
   tmsncntrs/solution_test.cpp
