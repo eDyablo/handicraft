@@ -18,8 +18,6 @@ namespace coin {
 
       review_t raised() const { return review_t(high + 1, all + 1); }
 
-      void dump(std::ostream& stream) const { stream << high << "/" << all; }
-
      private:
       size_t high;
       size_t all;
@@ -27,21 +25,12 @@ namespace coin {
       float delta;
     };
 
-    std::ostream& operator<<(std::ostream& stream, review_t const& review) {
-      review.dump(stream);
-      return stream;
-    }
-
     auto sumup_ratio(std::vector<review_t> const& reviews) {
       float sum = 0.0;
       for (auto review : reviews) {
         sum += review.get_ratio();
       }
       return sum;
-    }
-
-    auto rate(std::vector<review_t> const& reviews) {
-      return 100 * sumup_ratio(reviews) / size(reviews);
     }
 
     auto reviews_needed(std::vector<review_t> reviews, int threshold) {
@@ -64,8 +53,6 @@ namespace coin {
         reviews.back() = reviews.back().raised();
         sum += reviews.back().get_ratio();
         push_heap(begin(reviews), end(reviews), compare);
-        /*copy(begin(reviews), end(reviews), ostream_iterator<review_t>(cout, " ")),
-            cout << " " << sum << " " << threshold_sum << endl;*/
       }
 
       return count;
