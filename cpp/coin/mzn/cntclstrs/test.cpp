@@ -1,8 +1,8 @@
-#include "solution.hpp"
-
 #include <gmock/gmock.h>
 
 #include <vector>
+
+#include "solution.hpp"
 
 using namespace ::testing;
 using namespace ::coin::mzn;
@@ -13,7 +13,7 @@ struct cluster_test_t {
   size_t cluster_count;
 };
 
-TEST(mzn, count_clusters) {
+TEST(cntclstrs, correctness) {
   vector<cluster_test_t> cases = {
       {
           {
