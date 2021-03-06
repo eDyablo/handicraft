@@ -48,6 +48,7 @@ namespace coin {
 
     template <typename Item>
     auto remove_all_inclusions(const Item& element, std::vector<Item>& array) {
+      using namespace std;
       auto const array_begin = begin(array);
       auto const array_end = end(array);
       auto subarray_end = array_begin;
@@ -228,6 +229,7 @@ namespace coin {
     template <typename Item>
     void dutch_flag_sort(Item const red, Item const blue,
                          std::vector<Item>& array) {
+      using namespace std;
       for (auto left_iterator = begin(array), right_iterator = end(array) - 1,
                 iterator = left_iterator;
            iterator <= right_iterator;) {

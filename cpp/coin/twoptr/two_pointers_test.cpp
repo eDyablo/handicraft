@@ -86,11 +86,11 @@ TEST(two_pointers, dutch_flag_sort) {
   vector<uint16_t> objects;
 
   objects = {1, 0, 2, 1, 0};
-  dutch_flag_sort(0ui16, 2ui16, objects);
+  dutch_flag_sort(uint16_t(0), uint16_t(2), objects);
   EXPECT_THAT(objects, ElementsAre(0, 0, 1, 1, 2));
 
   objects = {2, 2, 0, 1, 2, 0};
-  dutch_flag_sort(0ui16, 2ui16, objects);
+  dutch_flag_sort(uint16_t(0), uint16_t(2), objects);
   EXPECT_THAT(objects, ElementsAre(0, 0, 1, 2, 2, 2));
 }
 

@@ -331,7 +331,7 @@ TEST(span_chart, enroll_and_revert_to_initial) {
 
   chart.enroll(max / 2, max, 'b');
   chart.enroll(0, max, 'a');
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 }
 
@@ -341,11 +341,11 @@ TEST(span_chart, complex) {
   auto constexpr min = numeric_limits<key_t>::min();
   auto constexpr max = numeric_limits<key_t>::max();
 
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(100, max, 'b');
-  EXPECT_EQ(3ui64, chart.entries_count());
+  EXPECT_EQ(size_t(3), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[99]);
@@ -353,7 +353,7 @@ TEST(span_chart, complex) {
 
   chart.enroll(50, 150, 'c');
 
-  EXPECT_EQ(4ui64, chart.entries_count());
+  EXPECT_EQ(size_t(4), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[49]);
@@ -362,7 +362,7 @@ TEST(span_chart, complex) {
   EXPECT_EQ('b', chart[150]);
 
   chart.enroll(100, 150, 'd');
-  EXPECT_EQ(5ui64, chart.entries_count());
+  EXPECT_EQ(size_t(5), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[49]);
@@ -373,7 +373,7 @@ TEST(span_chart, complex) {
   EXPECT_EQ('b', chart[150]);
 
   chart.enroll(100, 150, 'e');
-  EXPECT_EQ(5ui64, chart.entries_count());
+  EXPECT_EQ(size_t(5), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[49]);
@@ -384,7 +384,7 @@ TEST(span_chart, complex) {
   EXPECT_EQ('b', chart[150]);
 
   chart.enroll(80, 170, 'f');
-  EXPECT_EQ(5ui64, chart.entries_count());
+  EXPECT_EQ(size_t(5), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[49]);
@@ -395,7 +395,7 @@ TEST(span_chart, complex) {
   EXPECT_EQ('b', chart[170]);
 
   chart.enroll(100, 150, 'd');
-  EXPECT_EQ(7ui64, chart.entries_count());
+  EXPECT_EQ(size_t(7), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[49]);
@@ -410,43 +410,43 @@ TEST(span_chart, complex) {
   EXPECT_EQ('b', chart[170]);
 
   chart.enroll(1, max, 'b');
-  EXPECT_EQ(3ui64, chart.entries_count());
+  EXPECT_EQ(size_t(3), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(1, max, 'c');
-  EXPECT_EQ(3ui64, chart.entries_count());
+  EXPECT_EQ(size_t(3), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(1, max, 'a');
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(100, 200, 'b');
   chart.enroll(300, 400, 'c');
   chart.enroll(500, 600, 'd');
-  EXPECT_EQ(7ui64, chart.entries_count());
+  EXPECT_EQ(size_t(7), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(100 - 1, 200 + 1, 'b');
   chart.enroll(300 - 1, 400 + 1, 'c');
   chart.enroll(500 - 1, 600 + 1, 'd');
-  EXPECT_EQ(7ui64, chart.entries_count());
+  EXPECT_EQ(size_t(7), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(100 + 1, 200 - 1, 'b');
   chart.enroll(300 + 1, 400 - 1, 'c');
   chart.enroll(500 + 1, 600 - 1, 'd');
-  EXPECT_EQ(7ui64, chart.entries_count());
+  EXPECT_EQ(size_t(7), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(150, 151, 'c');
   chart.enroll(350, 351, 'd');
   chart.enroll(550, 551, 'b');
-  EXPECT_EQ(13ui64, chart.entries_count());
+  EXPECT_EQ(size_t(13), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(1, max, 'a');
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(100, 200, 'b');
@@ -455,7 +455,7 @@ TEST(span_chart, complex) {
   chart.enroll(100, 200, 'a');
   chart.enroll(300, 400, 'a');
   chart.enroll(500, 600, 'a');
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(100, 200, 'b');
@@ -464,7 +464,7 @@ TEST(span_chart, complex) {
   chart.enroll(100 - 1, 200 + 1, 'a');
   chart.enroll(300 - 1, 400 + 1, 'a');
   chart.enroll(500 - 1, 600 + 1, 'a');
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   /*chart.enroll(100, 200, 'b');
@@ -472,7 +472,7 @@ TEST(span_chart, complex) {
   chart.enroll(500, 600, 'd');
   chart.enroll(0, 150, 'a');
   //EXPECT_TRUE(chart.is_dense());
-  EXPECT_EQ(7ui64, chart.entries_count());*/
+  EXPECT_EQ(size_t(7), chart.entries_count());*/
 }
 
 TEST(span_chart, shorten_middle_span) {
@@ -484,7 +484,7 @@ TEST(span_chart, shorten_middle_span) {
   chart.enroll(0, max, 'a');
   chart.enroll(100, 200, 'b');
   chart.enroll(100, 100 + 1, 'a');
-  EXPECT_EQ(3ui64, chart.entries_count());
+  EXPECT_EQ(size_t(3), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 
   chart.enroll(0, max, 'a');
@@ -492,7 +492,7 @@ TEST(span_chart, shorten_middle_span) {
   chart.enroll(199, 200, 'a');
   EXPECT_EQ('a', chart[0]);
   EXPECT_EQ('a', chart[200]);
-  EXPECT_EQ(3ui64, chart.entries_count());
+  EXPECT_EQ(size_t(3), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 }
 
@@ -504,6 +504,6 @@ TEST(span_chart, remove_spans) {
   chart.enroll(300, 400, 'c');
   chart.enroll(300, 400, 'a');
   chart.enroll(100, 200, 'a');
-  EXPECT_EQ(1ui64, chart.entries_count());
+  EXPECT_EQ(size_t(1), chart.entries_count());
   EXPECT_TRUE(chart.is_dense());
 }
