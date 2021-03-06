@@ -7,8 +7,11 @@ namespace coin {
     auto build_plan(std::string const& compartments) {
       using namespace std;
       auto plan = vector<int>(size(compartments), 0);
-      auto left = distance(find(begin(compartments), end(compartments), '|'),
-                           begin(compartments));
+      auto left = distance(begin(compartments),
+                           find(begin(compartments), end(compartments), '|'));
+      for (auto right = 0; right < left; ++right) {
+        plan[right] = -right;
+      }
       for (auto right = left + 1; right < size(compartments); ++right) {
         if (compartments[right] == '*') {
           plan[right] = left - right;
@@ -20,6 +23,18 @@ namespace coin {
       return plan;
     }
 
+    auto partial_counts(std::string const& compartments) {
+      using namespace std;
+      auto counts = vector<size_t>(size(compartments), 0);
+      for (size_t idx = 0, count = 0; idx < size(compartments); ++idx) {
+        if (compartments[idx] == '*') {
+          ++count;
+        }
+        counts[idx] = count;
+      }
+      return counts;
+    }
+
     auto count_inventory(std::string const& compartments,
                          std::vector<size_t> const& starts,
                          std::vector<size_t> const& ends) {
@@ -27,6 +42,7 @@ namespace coin {
       auto answer = vector<size_t>();
       if (not empty(compartments)) {
         auto const plan = build_plan(compartments);
+        auto const counts = partial_counts(compartments);
         auto const interval_count = min(size(starts), size(ends));
         for (auto i = 0; i < interval_count; ++i) {
           auto start = starts[i] - 1;
@@ -37,13 +53,8 @@ namespace coin {
           if (plan[end] < 0) {
             end += plan[end];
           }
-          size_t sum = 0;
-          for (; start < end;) {
-            auto const count = plan[start];
-            sum += count;
-            start += count + 1;
-          }
-          if (sum > 0) {
+          auto const sum = counts[end] - counts[start];
+          if (start < end and sum > 0) {
             answer.push_back(sum);
           }
         }
