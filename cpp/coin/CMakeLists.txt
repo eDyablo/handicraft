@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(cntclstr)
 add_subdirectory(exabeam)
-add_subdirectory(microsoft)
+add_subdirectory(mcrsft)
 add_subdirectory(mrgntrvl)
 add_subdirectory(mzn)
 add_subdirectory(plndrm)
