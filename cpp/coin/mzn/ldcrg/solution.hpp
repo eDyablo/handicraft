@@ -15,6 +15,7 @@ namespace coin {
         }
       }
       size_t amount = 0;
+      cargo_size = min(cargo_size, size(pile));
       for (size_t i = 0; i < cargo_size; ++i) {
         pop_heap(begin(pile), end(pile));
         amount += pile.back();
