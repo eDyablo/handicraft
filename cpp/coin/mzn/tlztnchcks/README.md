@@ -88,3 +88,5 @@ Sample Output
 * At second 2, averageUtil[1] = 5<25, so an action is instantiated to halve the number of instances to ceil(5/2) = 3.
 * The system will stop checking for 10 seconds, so from averageUtil[2] through averageUtil[5] no actions will be taken.
 * There are no more readings to consider and 3 is the final answer.
+
+[Copyright © A++ Code Bootcamp 2021](https://aonecode.com/amazon-online-assessment-utilization-checks)
