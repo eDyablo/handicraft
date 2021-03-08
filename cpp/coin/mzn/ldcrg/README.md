@@ -45,3 +45,5 @@ Multiply containers by itemsPerContainer. We have: 3 containers with 1 item each
 Put them together: [1, 1, 1, 2, 3, 3]
 
 The cargoSize is 4, so we can load the top 4 from the above array, which is [3, 3, 2, 1], and return the sum 9.
+
+[Copyright © A++ Code Bootcamp 2021](https://aonecode.com/interview-question/load_cargo)
