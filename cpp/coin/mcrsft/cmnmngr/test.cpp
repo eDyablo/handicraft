@@ -43,4 +43,5 @@ TEST(cmnmngr, correctness) {
   EXPECT_THAT(vp.find_common("ic0", "ic2"), Eq("vp"));
   EXPECT_THAT(vp.find_common("ic0", "gm0"), Eq("vp"));
   EXPECT_THAT(vp.find_common("gm0", "ic1"), Eq("vp"));
+  EXPECT_THAT(vp.find_common("ic3", "ic3"), Eq("gm2"));
 }
