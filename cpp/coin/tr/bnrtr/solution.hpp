@@ -1,4 +1,5 @@
 #include <ostream>
+#include <queue>
 #include <stack>
 
 namespace coin {
@@ -34,8 +35,23 @@ namespace coin {
         }
       }
 
-      void dump(std::ostream& stream) const {
-        in_depth([&stream](node_t const& node) { stream << node.value << " "; });
+      template <typename Action>
+      void in_breadth(Action action) const {
+        auto queue = std::queue<node_t const*>();
+        if (root) {
+          queue.push(root);
+        }
+        while (not(empty(queue))) {
+          auto node = queue.front();
+          queue.pop();
+          action(*node);
+          if (node->left) {
+            queue.push(node->left);
+          }
+          if (node->right) {
+            queue.push(node->right);
+          }
+        }
       }
     };
   }  // namespace tr
