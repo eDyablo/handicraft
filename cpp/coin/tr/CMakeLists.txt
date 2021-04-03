@@ -4,4 +4,4 @@ file(GLOB test_sources
 
 add_executable(tr ${test_sources})
 
-target_link_libraries(tr googlemock googletest googletest-main)
+target_link_libraries(tr gmock gtest gtest_main)

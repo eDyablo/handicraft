@@ -1,3 +1,3 @@
 add_executable(exabeam exabeam_test.cpp)
 
-target_link_libraries(exabeam googlemock googletest googletest-main)
+target_link_libraries(exabeam gmock gtest gtest_main)

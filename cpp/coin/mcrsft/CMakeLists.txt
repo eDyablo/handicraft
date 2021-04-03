@@ -4,4 +4,4 @@ add_executable(mcrsft
   cmnmngr/test.cpp
 )
 
-target_link_libraries(mcrsft googlemock googletest googletest-main)
+target_link_libraries(mcrsft gmock gtest gtest_main)

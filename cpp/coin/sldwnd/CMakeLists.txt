@@ -4,4 +4,4 @@ project(sldwnd-test)
 
 add_executable(sldwnd-test sliding_window_test.cpp)
 
-target_link_libraries(sldwnd-test googlemock googletest googletest-main)
+target_link_libraries(sldwnd-test gmock gtest gtest_main)

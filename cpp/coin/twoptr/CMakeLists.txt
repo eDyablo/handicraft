@@ -4,4 +4,4 @@ project(twoptr-test)
 
 add_executable(twoptr-test two_pointers_test.cpp)
 
-target_link_libraries(twoptr-test googlemock googletest googletest-main)
+target_link_libraries(twoptr-test gmock gtest gtest_main)

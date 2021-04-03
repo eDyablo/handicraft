@@ -4,4 +4,4 @@ project(spanchart-test)
 
 add_executable(spanchart-test span_chart_test.cpp)
 
-target_link_libraries(spanchart-test googlemock googletest googletest-main)
+target_link_libraries(spanchart-test gmock gtest gtest_main)

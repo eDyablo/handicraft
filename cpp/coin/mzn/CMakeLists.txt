@@ -4,4 +4,4 @@ file(GLOB test_sources
 
 add_executable(mzn ${test_sources})
 
-target_link_libraries(mzn googlemock googletest googletest-main)
+target_link_libraries(mzn gmock gtest gtest_main)
