@@ -20,3 +20,6 @@ target_include_directories(googletest-main PUBLIC googletest/googletest/include)
 
 add_subdirectory(coin)
 add_subdirectory(spanchart)
+
+add_subdirectory(sfml)
+add_subdirectory(game)
