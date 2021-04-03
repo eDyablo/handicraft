@@ -23,3 +23,4 @@ add_subdirectory(spanchart)
 
 add_subdirectory(sfml)
 add_subdirectory(game)
+add_subdirectory(lark)
