@@ -1,3 +1,3 @@
 add_executable(plndrm palindrome_test.cpp)
 
-target_link_libraries(plndrm googlemock googletest googletest-main)
+target_link_libraries(plndrm gmock gtest gtest_main)
