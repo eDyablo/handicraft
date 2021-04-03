@@ -1,0 +1,27 @@
+plugins {
+  id 'groovy'
+  id 'application'
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy:3.+'
+}
+
+task fatJar(type: Jar) {
+  manifest {
+    attributes 'Main-Class': 'org.e4d.workfolk.Main'
+  }
+  baseName = project.name + '-fat'
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
+}
+
+version '1.0.0'
+
+targetCompatibility = 14
+
+mainClassName = 'org.e4d.workfolk.Main'
