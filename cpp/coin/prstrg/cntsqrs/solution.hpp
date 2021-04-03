@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 #include <set>
 #include <vector>
 
@@ -14,6 +15,20 @@ namespace coin {
       float threshold = 0.001;
       bool operator()(float const& first, float const& second) const {
         return second - first > threshold;
+      }
+    };
+
+    struct segment_t {
+      point_t first;
+      point_t second;
+
+      auto diagonal() const {
+        auto const mid_x = (first.x + second.x) / 2.f;
+        auto const mid_y = (first.y + second.y) / 2.f;
+        return segment_t{point_t{int(mid_x + (second.y - mid_y)),
+                                 int(mid_y - (second.x - mid_x))},
+                         point_t{int(mid_x - (mid_y - first.y)),
+                                 int(mid_y + (mid_x - first.x))}};
       }
     };
 
