@@ -13,3 +13,6 @@ include_directories(
 
 add_subdirectory(coin)
 add_subdirectory(spanchart)
+
+add_subdirectory(sfml)
+add_subdirectory(game)
