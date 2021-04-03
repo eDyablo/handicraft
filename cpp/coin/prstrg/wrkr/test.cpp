@@ -17,7 +17,7 @@ TEST(wrkr, correcteness) {
   EXPECT_THAT(0, Eq(0));
 }
 
-TEST(wrks, multiworker) {
+TEST(wrks, DISABLED_multiworker) {
   auto worker = multiworker_t();
   bool completed = false;
   worker.add([]() { cout << "first\n"; });
@@ -30,8 +30,8 @@ TEST(wrks, multiworker) {
     completed = true;
   });
   size_t count = 10000;
-  while (not completed and count > 0) {
-    this_thread::sleep_for(chrono::microseconds(1));
+  while (not completed and --count > 0) {
+    this_thread::sleep_for(chrono::milliseconds(1));
   }
   cout << endl;
 }
