@@ -31,10 +31,6 @@ ostream& operator<<(ostream& stream, segment_t const& segment) {
   return stream;
 }
 
-bool operator==(point_t const& first, point_t const& second) {
-  return first.x == second.x and first.y == second.y;
-}
-
 bool operator==(segment_t const& first, segment_t const& second) {
   return first.first == second.first and first.second == second.second;
 }
@@ -55,4 +51,12 @@ TEST(cntsqrs, diagonal_correctness) {
               SegmentEq(segment_t{{2, 1}, {0, 1}}));
   EXPECT_THAT(segment_t({{0, 2}, {3, 1}}).diagonal(),
               SegmentEq(segment_t{{1, 0}, {2, 3}}));
+}
+
+TEST(cntsqrs, count_squares_correctness) {
+  EXPECT_THAT(count_squares({{0, 0}, {0, 2}, {2, 0}, {2, 2}}), Eq(1));
+  EXPECT_THAT(
+      count_squares({{0, 0}, {0, 2}, {2, 0}, {2, 2}, {0, 4}, {4, 0}, {4, 4}}),
+      Eq(2));
+  EXPECT_THAT(count_squares({{0, 0}, {0, 1}, {1, 0}, {1, 1}}), Eq(1));
 }

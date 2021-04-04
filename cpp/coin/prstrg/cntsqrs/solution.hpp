@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <set>
+#include <unordered_set>
 #include <vector>
 
 namespace coin {
@@ -9,6 +10,17 @@ namespace coin {
     struct point_t {
       int x;
       int y;
+    };
+
+    bool operator==(point_t const& first, point_t const& second) noexcept {
+      return first.x == second.x and first.y == second.y;
+    }
+
+    struct point_hash_t {
+      std::hash<int> hash;
+      size_t operator()(point_t const& point) const noexcept {
+        return hash(point.x) ^ (hash(point.y) << 1);
+      }
     };
 
     struct distance_less {
@@ -30,6 +42,12 @@ namespace coin {
                          point_t{int(mid_x - (mid_y - first.y)),
                                  int(mid_y + (mid_x - first.x))}};
       }
+
+      float length() const {
+        auto const x_delta = first.x - second.x;
+        auto const y_delta = first.y - second.y;
+        return sqrt(x_delta * x_delta + y_delta * y_delta);
+      }
     };
 
     using point_vec_t = std::vector<point_t>;
@@ -48,6 +66,29 @@ namespace coin {
         }
       }
       return size(distances) == 2;
+    }
+
+    size_t count_squares(point_vec_t const& points) {
+      using namespace std;
+      auto lookup = unordered_set<point_t, point_hash_t>();
+      for (auto& point : points) {
+        lookup.insert(point);
+      }
+      size_t count = 0;
+      for (size_t i = 0; i < size(points); ++i) {
+        for (size_t j = i; j < size(points); ++j) {
+          if (i != j) {
+            auto const segment = segment_t{points[i], points[j]};
+            auto const diagonal = segment.diagonal();
+            if (segment.length() > 1.0f and
+                lookup.find(diagonal.first) != lookup.end() and
+                lookup.find(diagonal.second) != lookup.end()) {
+              ++count;
+            }
+          }
+        }
+      }
+      return count / 2;
     }
   }  // namespace prstrg
 }  // namespace coin
