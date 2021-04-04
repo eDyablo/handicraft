@@ -27,7 +27,7 @@ namespace coin {
       point_t first;
       point_t second;
 
-      auto diagonal() const {
+      auto orthogonal() const {
         auto mid =
             point_t{(first.x + second.x) / 2.f, (first.y + second.y) / 2.f};
         auto delta = point_t{second.x - mid.x, second.y - mid.y};
@@ -51,7 +51,7 @@ namespace coin {
     }
 
     bool is_square(point_vec_t const& points) {
-      auto distances = std::set<float>();
+      auto distances = std::unordered_set<float>();
       for (size_t i = 0; i < size(points); ++i) {
         for (size_t j = i + 1; j < size(points); ++j) {
           distances.insert(distance(points[i], points[j]));
@@ -71,7 +71,7 @@ namespace coin {
         for (size_t j = i; j < size(points); ++j) {
           if (i != j) {
             auto const segment = segment_t{points[i], points[j]};
-            auto const diagonal = segment.diagonal();
+            auto const diagonal = segment.orthogonal();
             if (lookup.find(diagonal.first) != lookup.end() and
                 lookup.find(diagonal.second) != lookup.end()) {
               ++count;
