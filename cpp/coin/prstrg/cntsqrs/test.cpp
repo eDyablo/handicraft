@@ -44,12 +44,12 @@ MATCHER_P(SegmentEq, other, "segment_t") {
          (arg.first == other.second and arg.second == other.first);
 }
 
-TEST(cntsqrs, diagonal_correctness) {
-  EXPECT_THAT(segment_t({{0, 0}, {2, 2}}).diagonal(),
+TEST(cntsqrs, orthogonal_correctness) {
+  EXPECT_THAT(segment_t({{0, 0}, {2, 2}}).orthogonal(),
               SegmentEq(segment_t{{0, 2}, {2, 0}}));
-  EXPECT_THAT(segment_t({{1, 0}, {1, 2}}).diagonal(),
+  EXPECT_THAT(segment_t({{1, 0}, {1, 2}}).orthogonal(),
               SegmentEq(segment_t{{2, 1}, {0, 1}}));
-  EXPECT_THAT(segment_t({{0, 2}, {3, 1}}).diagonal(),
+  EXPECT_THAT(segment_t({{0, 2}, {3, 1}}).orthogonal(),
               SegmentEq(segment_t{{1, 0}, {2, 3}}));
 }
 
