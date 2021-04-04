@@ -35,12 +35,12 @@ namespace coin {
       point_t second;
 
       auto diagonal() const {
-        auto const mid_x = (first.x + second.x) / 2.f;
-        auto const mid_y = (first.y + second.y) / 2.f;
-        return segment_t{point_t{int(mid_x + (second.y - mid_y)),
-                                 int(mid_y - (second.x - mid_x))},
-                         point_t{int(mid_x - (mid_y - first.y)),
-                                 int(mid_y + (mid_x - first.x))}};
+        float const mid_x = (first.x + second.x) / 2.f;
+        float const mid_y = (first.y + second.y) / 2.f;
+        float const delta_x = second.x - mid_x;
+        float const delta_y = second.y - mid_y;
+        return segment_t{{int(mid_x - delta_y), int(mid_y + delta_x)},
+                         {int(mid_x + delta_y), int(mid_y - delta_x)}};
       }
 
       float length() const {
