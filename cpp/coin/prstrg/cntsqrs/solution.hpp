@@ -71,9 +71,9 @@ namespace coin {
         for (size_t j = i; j < size(points); ++j) {
           if (i != j) {
             auto const segment = segment_t{points[i], points[j]};
-            auto const diagonal = segment.orthogonal();
-            if (lookup.find(diagonal.first) != lookup.end() and
-                lookup.find(diagonal.second) != lookup.end()) {
+            auto const orthogonal = segment.orthogonal();
+            if (lookup.find(orthogonal.first) != lookup.end() and
+                lookup.find(orthogonal.second) != lookup.end()) {
               ++count;
             }
           }
