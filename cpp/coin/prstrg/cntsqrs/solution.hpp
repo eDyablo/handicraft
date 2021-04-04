@@ -8,8 +8,8 @@
 namespace coin {
   namespace prstrg {
     struct point_t {
-      int x;
-      int y;
+      float x;
+      float y;
     };
 
     bool operator==(point_t const& first, point_t const& second) noexcept {
@@ -17,16 +17,9 @@ namespace coin {
     }
 
     struct point_hash_t {
-      std::hash<int> hash;
+      std::hash<float> coord_hash;
       size_t operator()(point_t const& point) const noexcept {
-        return hash(point.x) ^ (hash(point.y) << 1);
-      }
-    };
-
-    struct distance_less {
-      float threshold = 0.001;
-      bool operator()(float const& first, float const& second) const {
-        return second - first > threshold;
+        return coord_hash(point.x) ^ (coord_hash(point.y) << 1);
       }
     };
 
@@ -35,12 +28,11 @@ namespace coin {
       point_t second;
 
       auto diagonal() const {
-        float const mid_x = (first.x + second.x) / 2.f;
-        float const mid_y = (first.y + second.y) / 2.f;
-        float const delta_x = second.x - mid_x;
-        float const delta_y = second.y - mid_y;
-        return segment_t{{int(mid_x - delta_y), int(mid_y + delta_x)},
-                         {int(mid_x + delta_y), int(mid_y - delta_x)}};
+        auto mid =
+            point_t{(first.x + second.x) / 2.f, (first.y + second.y) / 2.f};
+        auto delta = point_t{second.x - mid.x, second.y - mid.y};
+        return segment_t{{(mid.x - delta.y), (mid.y + delta.x)},
+                         {(mid.x + delta.y), (mid.y - delta.x)}};
       }
 
       float length() const {
@@ -59,7 +51,7 @@ namespace coin {
     }
 
     bool is_square(point_vec_t const& points) {
-      auto distances = std::set<float, distance_less>();
+      auto distances = std::set<float>();
       for (size_t i = 0; i < size(points); ++i) {
         for (size_t j = i + 1; j < size(points); ++j) {
           distances.insert(distance(points[i], points[j]));
@@ -80,8 +72,7 @@ namespace coin {
           if (i != j) {
             auto const segment = segment_t{points[i], points[j]};
             auto const diagonal = segment.diagonal();
-            if (segment.length() > 1.0f and
-                lookup.find(diagonal.first) != lookup.end() and
+            if (lookup.find(diagonal.first) != lookup.end() and
                 lookup.find(diagonal.second) != lookup.end()) {
               ++count;
             }

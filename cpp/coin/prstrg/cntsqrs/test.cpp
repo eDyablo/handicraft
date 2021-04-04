@@ -59,4 +59,7 @@ TEST(cntsqrs, count_squares_correctness) {
       count_squares({{0, 0}, {0, 2}, {2, 0}, {2, 2}, {0, 4}, {4, 0}, {4, 4}}),
       Eq(2));
   EXPECT_THAT(count_squares({{0, 0}, {0, 1}, {1, 0}, {1, 1}}), Eq(1));
+  EXPECT_THAT(
+      count_squares({{0, 0}, {0, 2}, {2, 0}, {2, 2}, {0, 3}, {3, 0}, {3, 3}}),
+      Eq(2));
 }
