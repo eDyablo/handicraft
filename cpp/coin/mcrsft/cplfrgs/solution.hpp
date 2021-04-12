@@ -12,20 +12,13 @@ namespace coin {
       auto left = begin(blocks), right = begin(blocks);
       for (; right != end(blocks); ++right) {
         if (*right < *(right - 1)) {
-          auto const dist = distance(left, right);
-          if (length < dist) {
-            length = dist;
-          }
+          length = max(length, size_t(distance(left, right)));
           while (left != right and (*left < *(left + 1))) {
             ++left;
           }
         }
       }
-      auto const dist = distance(left, right);
-      if (length < dist) {
-        length = dist;
-      }
-      return length;
+      return max(length, size_t(distance(left, right)));;
     }
   }  // namespace mcrsft
 }  // namespace coin
