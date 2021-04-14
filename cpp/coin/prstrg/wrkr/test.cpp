@@ -17,7 +17,7 @@ TEST(wrkr, correcteness) {
   EXPECT_THAT(0, Eq(0));
 }
 
-TEST(wrks, DISABLED_multiworker) {
+TEST(wrks, multiworker) {
   auto worker = multiworker_t();
   bool completed = false;
   worker.add([]() { cout << "first\n"; });

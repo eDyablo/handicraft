@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <atomic>
 #include <functional>
 #include <thread>
 #include <vector>
@@ -36,7 +37,8 @@ namespace coin {
       void start(completion_t when_done) {
         using namespace std;
         completion = when_done;
-        in_progress_count = size(workers);
+        //in_progress_count = size(workers);
+        in_progress_count.store(size(workers));
         for (auto& worker : workers) {
           worker.start([this](size_t id) { all_completed(id); });
         }
@@ -44,7 +46,8 @@ namespace coin {
 
      private:
       void all_completed(size_t id) {
-        if (--in_progress_count == 0) {
+        if (in_progress_count.fetch_sub(1) == 1) {
+        //if (--in_progress_count == 0) {
           completion(id);
         }
       }
@@ -52,7 +55,7 @@ namespace coin {
      private:
       std::vector<worker_t> workers;
       completion_t completion;
-      size_t in_progress_count;
+      std::atomic_size_t in_progress_count;
     };
   }  // namespace prstrg
 }  // namespace coin
