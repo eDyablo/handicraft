@@ -30,3 +30,11 @@ class LinkedList:
         else:
             self.last_node.next_node = Node(data)
             self.last_node = self.last_node.next_node
+
+    def to_list(self):
+        lst = []
+        node = self.head
+        while node:
+            lst.append(node.data)
+            node = node.next_node
+        return lst
