@@ -9,6 +9,12 @@ namespace coin {
     using memo_record_t = std::pair<bool, number_set_t>;
     using how_sum_memo_t = std::unordered_map<number_t, memo_record_t>;
 
+    /**
+     * m = target
+     * n = length of numbers array
+     * time:  O(n * m^2)
+     * space: O(m^2)
+     **/
     bool how_sum(number_t target, number_set_t const& numbers,
                  number_set_t& set, how_sum_memo_t& memo) {
       using namespace std;
