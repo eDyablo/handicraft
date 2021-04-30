@@ -14,5 +14,6 @@ TEST(hwsm, correctness) {
   EXPECT_THAT(how_sum(7, {5, 3, 4, 7}), ElementsAre(4, 3));
   EXPECT_THAT(how_sum(7, {2, 4}), IsEmpty());
   EXPECT_THAT(how_sum(8, {2, 3, 5}), ElementsAre(2, 2, 2, 2));
-  EXPECT_THAT(how_sum(300, {7, 14}), IsEmpty());
 }
+
+TEST(hwsm, performance) { EXPECT_THAT(how_sum(300, {7, 14}), IsEmpty()); }
