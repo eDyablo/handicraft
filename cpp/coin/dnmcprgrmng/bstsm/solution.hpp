@@ -17,23 +17,19 @@ namespace coin {
       if (memo.find(target) != end(memo)) return memo[target];
       if (target == 0) return number_set_t{};
       if (target < 0) return std::nullopt;
-      number_set_t set;
+      best_sum_result_t shortest_combination;
       for (auto number : numbers) {
         auto const reminder = target - number;
-        auto sub_result = best_sum(reminder, numbers, memo);
-        if (sub_result.has_value()) {
-          auto sub_set = sub_result.value();
-          sub_set.push_back(number);
-          if (empty(set) or size(sub_set) < size(set)) {
-            set = sub_set;
+        auto combination = best_sum(reminder, numbers, memo);
+        if (combination.has_value()) {
+          combination.value().push_back(number);
+          if (not shortest_combination.has_value() or
+              size(combination.value()) < size(shortest_combination.value())) {
+            shortest_combination = combination;
           }
         }
       }
-      if (empty(set)) {
-        memo[target] = std::nullopt;
-      } else {
-        memo[target] = set;
-      }
+      memo[target] = shortest_combination;
       return memo[target];
     }
 
