@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm>
 #include <optional>
 #include <unordered_map>
 #include <vector>
@@ -14,7 +13,7 @@ namespace coin {
 
     best_sum_result_t best_sum(number_t target, number_set_t const& numbers,
                                best_sum_memo_t& memo) {
-      if (memo.find(target) != end(memo)) return memo[target];
+      if (memo.find(target) != memo.end()) return memo[target];
       if (target == 0) return number_set_t{};
       if (target < 0) return std::nullopt;
       best_sum_result_t shortest_combination;
@@ -30,7 +29,7 @@ namespace coin {
         }
       }
       memo[target] = shortest_combination;
-      return memo[target];
+      return shortest_combination;
     }
 
     number_set_t best_sum(number_t target, number_set_t const& numbers) {
