@@ -15,4 +15,7 @@ TEST(lcntstrct, correctness) {
       all_construct("abcdef", {"ab", "abc", "cd", "def", "abcd", "ef", "c"}),
       ElementsAre(word_bank_t{"ab", "cd", "ef"}, word_bank_t{"ab", "c", "def"},
                   word_bank_t{"abc", "def"}, word_bank_t{"abcd", "ef"}));
+  EXPECT_THAT(all_construct("skateboard",
+                            {"bo", "rd", "ate", "t", "ska", "sk", "boar"}),
+              IsEmpty());
 }
