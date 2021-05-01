@@ -11,14 +11,14 @@ namespace coin {
     using word_set_t = std::vector<word_t>;
     using can_construct_memo_t = std::unordered_map<text_t, bool>;
 
-    bool can_construct(text_t const& text, word_set_t const& words,
+    bool can_construct(text_t const& text, word_set_t const& word_bank,
                        can_construct_memo_t& memo) {
       if (memo.find(text) != memo.end()) return memo[text];
       if (empty(text)) return true;
-      for (auto word : words) {
+      for (auto word : word_bank) {
         if (text.find(word) == 0) {
-          auto const sub_text = text.substr(size(word));
-          if (can_construct(sub_text, words, memo)) {
+          auto const reminder = text.substr(size(word));
+          if (can_construct(reminder, word_bank, memo)) {
             memo[text] = true;
             return true;
           }
