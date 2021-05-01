@@ -19,7 +19,7 @@ namespace coin {
      * time:   O(n^m * m) == O(n^m)
      * memory: O(m^2)
      *
-     * Memoized force:
+     * Memoized version:
      * time:   O(n * m^2)
      * memory: O(m^2)
      **/
