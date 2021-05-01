@@ -8,6 +8,11 @@ namespace coin {
     namespace mztn {
       using fibo_memo = std::unordered_map<size_t, unsigned long>;
 
+      /**
+       * Memoized solution:
+       * time:   O(n)
+       * memory: O(n)
+       */
       unsigned long fibo(size_t n, fibo_memo& memo) {
         if (n == 1 or n == 2) return 1;
         if (memo.find(n) != memo.end()) return memo[n];
@@ -22,6 +27,11 @@ namespace coin {
     }  // namespace mztn
 
     namespace tbltn {
+      /**
+       * Tabulation solution:
+       * time:   O(n)
+       * memory: O(n)
+       */
       unsigned long fibo(size_t n) {
         using namespace std;
         std::vector<unsigned long> table(n + 3, 0);
