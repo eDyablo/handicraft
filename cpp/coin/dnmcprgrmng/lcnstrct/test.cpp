@@ -9,10 +9,10 @@ TEST(lcntstrct, correctness) {
   EXPECT_THAT(all_construct("hello", {"cat", "dog"}), IsEmpty());
   EXPECT_THAT(all_construct("", {"cat", "dog"}), ElementsAre(word_bank_t{}));
   EXPECT_THAT(all_construct("purple", {"purp", "p", "ur", "le", "purpl"}),
-              ElementsAre(word_bank_t{"le", "purp"},
-                          word_bank_t{"le", "p", "ur", "p"}));
+              ElementsAre(word_bank_t{"purp", "le"},
+                          word_bank_t{"p", "ur", "p", "le"}));
   EXPECT_THAT(
       all_construct("abcdef", {"ab", "abc", "cd", "def", "abcd", "ef", "c"}),
-      ElementsAre(word_bank_t{"ef", "cd", "ab"}, word_bank_t{"def", "c", "ab"},
-                  word_bank_t{"def", "abc"}, word_bank_t{"ef", "abcd"}));
+      ElementsAre(word_bank_t{"ab", "cd", "ef"}, word_bank_t{"ab", "c", "def"},
+                  word_bank_t{"abc", "def"}, word_bank_t{"abcd", "ef"}));
 }
