@@ -11,6 +11,18 @@ namespace coin {
     using word_set_t = std::vector<word_t>;
     using can_construct_memo_t = std::unordered_map<text_t, bool>;
 
+    /**
+     * m = text length
+     * n = words count
+     *
+     * Brute force:
+     * time:   O(n^m * m) == O(n^m)
+     * memory: O(m^2)
+     *
+     * Memoized force:
+     * time:   O(n * m^2)
+     * memory: O(m^2)
+     **/
     bool can_construct(text_t const& text, word_set_t const& word_bank,
                        can_construct_memo_t& memo) {
       if (memo.find(text) != memo.end()) return memo[text];
