@@ -5,7 +5,7 @@
 using namespace ::testing;
 using namespace ::coin::dnmcprgrmng;
 
-TEST(fibo, correctness) {
+TEST(fbnc, correctness) {
   EXPECT_THAT(fibo(1), Eq(1));
   EXPECT_THAT(fibo(2), Eq(1));
   EXPECT_THAT(fibo(3), Eq(2));
@@ -17,6 +17,6 @@ TEST(fibo, correctness) {
   EXPECT_THAT(fibo(9), Eq(34));
 }
 
-TEST(fibo, performance) {
+TEST(fbnc, performance) {
   EXPECT_THAT(fibo(50), Eq(12'586'269'025));
 }
