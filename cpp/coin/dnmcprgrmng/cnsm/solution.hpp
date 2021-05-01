@@ -3,10 +3,11 @@
 
 namespace coin {
   namespace dnmcprgrmng {
-    using numbers_t = std::vector<int>;
+    using number_t = int;
+    using number_set_t = std::vector<int>;
     using can_sum_memo = std::unordered_map<int, bool>;
 
-    bool can_sum(int target, numbers_t const& numbers, can_sum_memo& memo) {
+    bool can_sum(int target, number_set_t const& numbers, can_sum_memo& memo) {
       if (memo.find(target) != memo.end()) return memo[target];
       if (target == 0) return true;
       if (target < 0) return false;
@@ -20,7 +21,7 @@ namespace coin {
       return false;
     }
 
-    bool can_sum(int target, numbers_t const& numbers) {
+    bool can_sum(int target, number_set_t const& numbers) {
       can_sum_memo memo;
       return can_sum(target, numbers, memo);
     }
