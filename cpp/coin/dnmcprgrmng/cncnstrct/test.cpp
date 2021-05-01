@@ -1,7 +1,9 @@
 #include <gmock/gmock.h>
 
-#include "solution.hpp"
+#include <algorithm>
+#include <iterator>
 
+#include "solution.hpp"
 using namespace ::coin::dnmcprgrmng;
 using namespace ::testing;
 
@@ -15,6 +17,12 @@ TEST(cncnstrct, correctness) {
   EXPECT_THAT(can_construct("enterapotentpot",
                             {"a", "p", "ent", "enter", "ot", "o", "t"}),
               Eq(true));
+  text_t alphabet = "abcdefghijklmnopqrstuvwxyz";
+  word_set_t letters;
+  using namespace std;
+  transform(begin(alphabet), end(alphabet), back_inserter(letters),
+            [](char l) -> word_t { return word_t{l}; });
+  EXPECT_THAT(can_construct(alphabet, letters), Eq(true));
 }
 
 TEST(cncnstrct, performance) {
