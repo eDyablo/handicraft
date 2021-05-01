@@ -13,6 +13,14 @@ namespace coin {
     using combination_set_t = std::vector<word_bank_t>;
     using all_construct_memo_t = std::unordered_map<text_t, combination_set_t>;
 
+    /**
+     * m = text length
+     * n = word count
+     * 
+     * Memoized solution:
+     * O(n^m)
+     * O(m)
+     */
     combination_set_t all_construct(text_t const& text,
                                     word_bank_t const& word_bank,
                                     all_construct_memo_t& memo) {

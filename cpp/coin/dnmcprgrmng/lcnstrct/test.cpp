@@ -25,3 +25,9 @@ TEST(lcntstrct, perfomance) {
                             {"a", "aa", "aaa", "aaaa", "aaaaa"}),
               IsEmpty());
 }
+
+TEST(lcntstrct, DISABLED_worst_case_performance) {
+  EXPECT_THAT(all_construct("aaaaaaaaaaaaaaaaaaaaaaaaa",
+                            {"a", "aa", "aaa", "aaaa", "aaaaa"}),
+              Not(IsEmpty()));
+}
