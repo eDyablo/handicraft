@@ -21,6 +21,7 @@ TEST(lcntstrct, correctness) {
 }
 
 TEST(lcntstrct, perfomance) {
-  EXPECT_THAT(all_construct("aaaaaaaaaaaaaaaaaaaaaaaaaz", {"a", "aa", "aaa", "aaaa", "aaaaa"}),
+  EXPECT_THAT(all_construct("aaaaaaaaaaaaaaaaaaaaaaaaaz",
+                            {"a", "aa", "aaa", "aaaa", "aaaaa"}),
               IsEmpty());
 }
