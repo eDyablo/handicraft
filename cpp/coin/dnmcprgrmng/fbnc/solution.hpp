@@ -10,8 +10,8 @@ namespace coin {
 
       /**
        * Memoized solution:
-       * time:   O(n)
-       * memory: O(n)
+       * time:  O(n)
+       * space: O(n)
        */
       unsigned long fibo(size_t n, fibo_memo& memo) {
         if (n == 1 or n == 2) return 1;
@@ -29,8 +29,8 @@ namespace coin {
     namespace tbltn {
       /**
        * Tabulation solution:
-       * time:   O(n)
-       * memory: O(n)
+       * time:  O(n)
+       * space: O(n)
        */
       unsigned long fibo(size_t n) {
         using namespace std;

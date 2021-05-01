@@ -16,12 +16,12 @@ namespace coin {
      * n = words bank size
      *
      * Brute force:
-     * time:   O(n^m * m) == O(n^m)
-     * memory: O(m^2)
+     * time:  O(n^m * m) == O(n^m)
+     * space: O(m^2)
      *
      * Memoized version:
-     * time:   O(n * m^2)
-     * memory: O(m^2)
+     * time:  O(n * m^2)
+     * space: O(m^2)
      **/
     size_t count_construct(text_t const& text, word_bank_t const& word_bank,
                            count_construct_memo_t& memo) {
