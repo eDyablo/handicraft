@@ -21,8 +21,11 @@ TEST(cntcnstrct, correctness) {
               Eq(4));
 }
 
-TEST(DISABLED_cntcnstrct, performance) {
+TEST(cntcnstrct, performance) {
   EXPECT_THAT(count_construct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",
                               {"e", "ee", "eee", "eeee", "eeeee", "eeeeee"}),
               Eq(0));
+  EXPECT_THAT(count_construct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                              {"e", "ee", "eee", "eeee", "eeeee", "eeeeee"}),
+              Eq(437513522));
 }
