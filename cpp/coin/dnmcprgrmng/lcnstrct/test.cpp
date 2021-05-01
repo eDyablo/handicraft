@@ -19,3 +19,8 @@ TEST(lcntstrct, correctness) {
                             {"bo", "rd", "ate", "t", "ska", "sk", "boar"}),
               IsEmpty());
 }
+
+TEST(lcntstrct, perfomance) {
+  EXPECT_THAT(all_construct("aaaaaaaaaaaaaaaaaaaaaaaaaz", {"a", "aa", "aaa", "aaaa", "aaaaa"}),
+              IsEmpty());
+}
