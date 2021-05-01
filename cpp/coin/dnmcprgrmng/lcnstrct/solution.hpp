@@ -20,13 +20,11 @@ namespace coin {
         if (text.find(word) == 0) {
           auto const reminder = text.substr(word.size());
           auto reminder_combinations = _all_construct(reminder, word_bank);
-          if (not reminder_combinations.empty()) {
-            for (auto& words : reminder_combinations) {
-              words.push_back(word);
-            }
-            move(begin(reminder_combinations), end(reminder_combinations),
-                 back_inserter(combinations));
+          for (auto& words : reminder_combinations) {
+            words.push_back(word);
           }
+          move(begin(reminder_combinations), end(reminder_combinations),
+               back_inserter(combinations));
         }
       }
       return combinations;
