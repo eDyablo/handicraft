@@ -28,7 +28,7 @@ namespace coin {
 
     namespace tbltn {
       /**
-       * Tabulation solution:
+       * Tabulated solution:
        * time:  O(n)
        * space: O(n)
        */
