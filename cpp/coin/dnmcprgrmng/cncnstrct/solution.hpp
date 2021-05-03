@@ -62,12 +62,12 @@ namespace coin {
       bool can_construct(text_t const& text, word_set_t const& word_bank) {
         can_construct_t table(text.size() + 1, false);
         table[0] = true;
-        for (size_t start = 0; start < text.size(); ++start) {
-          if (table[start]) {
-            auto const reminder = text.substr(start);
+        for (size_t position = 0; position < text.size(); ++position) {
+          if (table[position]) {
+            auto const reminder = text.substr(position);
             for (auto word : word_bank) {
               if (reminder.find(word) == 0) {
-                table[start + word.size()] = true;
+                table[position + word.size()] = true;
               }
             }
           }
