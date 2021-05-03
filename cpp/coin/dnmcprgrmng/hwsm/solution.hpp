@@ -55,7 +55,7 @@ namespace coin {
        * m = target sum
        * n = amount of numners
        *
-       * Tabulazed solution:
+       * Tabulated solution:
        * time:  O(n * m^2)
        * space: O(m^2)
        **/
