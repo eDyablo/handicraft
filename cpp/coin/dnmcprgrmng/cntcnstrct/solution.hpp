@@ -52,7 +52,7 @@ namespace coin {
       /**
        * m = text length
        * n = words bank size
-       * 
+       *
        * Tabulated solution:
        * time:  O(n * m^2)
        * space: O(m)
