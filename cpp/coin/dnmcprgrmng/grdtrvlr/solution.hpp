@@ -7,6 +7,20 @@
 
 namespace coin {
   namespace dnmcprgrmng {
+    namespace brtfrc {
+      /**
+       * Brute force solution:
+       * time:  O(2^(w*h))
+       * space: O(w+h)
+       **/
+      size_t grid_travel_ways(size_t width, size_t height) {
+        if (width == 0 or height == 0) return 0;
+        if (width == 1 or height == 1) return 1;
+        return grid_travel_ways(width - 1, height) +
+               grid_travel_ways(width, height - 1);
+      }
+    }  // namespace brtfrc
+
     namespace mztn {
       using grid_travel_memo = std::unordered_map<size_t, unsigned long>;
 
@@ -30,8 +44,8 @@ namespace coin {
     namespace tbltn {
       /**
        * Tabulated solution:
-       * time:  O(w*s)
-       * space: O(w*s)
+       * time:  O(w*h)
+       * space: O(w*h)
        **/
       size_t grid_travel_ways(size_t width, size_t height) {
         size_t table[width + 1][height + 1];
