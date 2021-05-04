@@ -6,6 +6,27 @@ namespace coin {
     using number_t = int;
     using number_set_t = std::vector<int>;
 
+    namespace brtfrc {
+      /**
+       * m = target sum
+       * n = amount of numbers
+       *
+       * Brute force solution:
+       * time:  O(n^m)
+       * space: O(m)
+       */
+      bool can_sum(int target, number_set_t const& numbers) {
+        if (target == 0) return true;
+        if (target < 0) return false;
+        for (auto number : numbers) {
+          if (can_sum(target - number, numbers)) {
+            return true;
+          }
+        }
+        return false;
+      }
+    }  // namespace brtfrc
+
     namespace mztn {
       using can_sum_memo = std::unordered_map<int, bool>;
 
@@ -36,7 +57,7 @@ namespace coin {
       /**
        * m = target sum
        * n = numbers count
-       * 
+       *
        * Tabulated solution:
        * time:  O(m * n)
        * space: O(m)
