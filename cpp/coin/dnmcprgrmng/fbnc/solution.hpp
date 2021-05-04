@@ -5,6 +5,18 @@
 
 namespace coin {
   namespace dnmcprgrmng {
+    namespace brtfrc {
+      /**
+       * Brute force solution:
+       * time:  O(2^n)
+       * space: O(n)
+       */
+      unsigned long fibo(size_t n) {
+        if (n == 1 or n == 2) return 1;
+        return fibo(n - 1) + fibo(n - 2);
+      }
+    }  // namespace brtfrc
+
     namespace mztn {
       using fibo_memo = std::unordered_map<size_t, unsigned long>;
 
