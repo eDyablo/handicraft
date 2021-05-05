@@ -57,5 +57,15 @@ namespace coin {
         return count_sum(target, numbers, 0, memo);
       }
     }  // namespace mztn
+
+    namespace tbltn {
+      using count_sum_table_t = std::vector<size_t>;
+
+      size_t count_sum(number_t target, number_bank_t const& numbers) {
+        count_sum_table_t table(target + 1);
+        table[0] = 1;
+        return table[target];
+      }
+    }  // namespace tbltn
   }    // namespace dnmcprgrmng
 }  // namespace coin
