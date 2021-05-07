@@ -53,17 +53,26 @@ class FileInGitRepository:
         else:
             working_copy = self.git.clone(
                 self.repository, working_copy=directory)
-        working_copy.checkout(self.git, self.path)
-        return PulledFileFromGitRepository(self, location)
+        working_copy.checkout(self.path)
+        return FileInGitWorkingCopy(self, working_copy, self.path)
 
 
-class PulledFileFromGitRepository:
-    def __init__(self, source: FileInGitRepository, location: str):
+class FileInGitWorkingCopy:
+    from git import GitWorkingCopy
+
+    def __init__(self, source: FileInGitRepository, working_copy: GitWorkingCopy, path: str):
         self.source = source
-        self.location = LocalFile(location)
+        self.working_copy = working_copy
+        self.path = path
+        self.location = LocalFile(f'{self.working_copy.directory}/{self.path}')
 
     def __repr__(self):
-        return f'{self.location} pulled from {self.source}'
+        return f'local file {self.path} at {self.working_copy}'
 
     def push(self):
+        from subprocess import run
+        run(['git', 'commit', f'--message=update {self.path}', '--', self.path],
+            cwd=self.working_copy.directory, check=True)
+        run(['git', 'push', 'origin', self.working_copy.branch()],
+            cwd=self.working_copy.directory, check=True)
         return self.source

@@ -1,12 +1,13 @@
 from files import LocalFile, FileInGitRepository
 from functools import partial
-from git import GitClient
+from git import GitClient, GitProfile
 from manifest import load
 
 
 manifest = load()
 
-git = GitClient()
+git = GitClient(GitProfile(
+    user={'name': 'edyablo', 'email': 'eyablonsky@gmail.com'}))
 
 files = []
 
@@ -19,9 +20,10 @@ for file_manifest in manifest.get('files', []):
 print('INPUT')
 print('\n'.join(map(repr, files)))
 
+print('PULL')
 files = [file.pull('__tmp__') for file in files]
 
-print('PULL')
+print('PULLED')
 print('\n'.join(map(repr, files)))
 
 for file in files:
@@ -31,7 +33,9 @@ for file in files:
         for line in lines:
             stream.write(f'{line}\n')
 
+print('PUSH')
+
 files = [file.push() for file in files]
 
-print('PUSH')
+print('PUSHED')
 print('\n'.join(map(repr, files)))
