@@ -49,7 +49,7 @@ class FileInGitRepository:
             '[:~@]', '/', self.repository.url), self.repository.branch]))
         location = '/'.join(filter(None, [directory, self.path]))
         if path.exists(directory):
-            working_copy = GitWorkingCopy(directory, self.repository.branch)
+            working_copy = GitWorkingCopy(directory)
         else:
             working_copy = self.git.clone(
                 self.repository, working_copy=directory)

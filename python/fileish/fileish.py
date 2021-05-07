@@ -25,8 +25,11 @@ print('PULL')
 print('\n'.join(map(repr, files)))
 
 for file in files:
-    with open(file.location.path) as stream:
-        pass
+    with open(file.location.path, 'r') as stream:
+        lines = [str(int(line) + 1) for line in map(str.strip, stream)]
+    with open(file.location.path, 'w') as stream:
+        for line in lines:
+            stream.write(f'{line}\n')
 
 files = [file.push() for file in files]
 

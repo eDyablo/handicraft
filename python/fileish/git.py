@@ -12,12 +12,19 @@ class GitRepository:
 
 
 class GitWorkingCopy:
-    def __init__(self, directory, branch='master'):
+    def __init__(self, directory):
         self.directory = directory
-        self.branch = branch
+        self.__branch = None
+
+    def branch(self):
+        if not self.__branch:
+            self.__branch = run(['git', 'branch', '--show-current'],
+                                cwd=self.directory, check=True, stdout=PIPE).stdout.decode().strip()
+        return self.__branch
 
     def checkout(self, git, path):
-        run(['git', 'checkout', self.branch, '--', path], cwd=self.directory, check=True)
+        run(['git', 'checkout', self.branch(), '--', path],
+            cwd=self.directory, check=True)
 
 
 class GitClient:
