@@ -17,3 +17,14 @@ func Test_correctness(t *testing.T) {
 		}
 	}
 }
+
+func Test_performance(t *testing.T) {
+	tests := []testCase{
+		{50, 12586269025},
+	}
+	for _, test := range tests {
+		if actual := fibo(test.number); actual != test.expected {
+			t.Error("expected fibo(", test.number, ") to be", test.expected, "but go", actual)
+		}
+	}
+}
