@@ -12,18 +12,18 @@ namespace dnmcprgrmng.fbnc.brtfrc
             solution = new Solution();
         }
 
-        [Test]
-        public void Correctness()
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 2)]
+        [TestCase(4, 3)]
+        [TestCase(5, 5)]
+        [TestCase(6, 8)]
+        [TestCase(7, 13)]
+        [TestCase(8, 21)]
+        [TestCase(9, 34)]
+        public void Correctness(int n, int expected)
         {
-            Assert.That(solution.fibo(1), Is.EqualTo(1));
-            Assert.That(solution.fibo(2), Is.EqualTo(1));
-            Assert.That(solution.fibo(3), Is.EqualTo(2));
-            Assert.That(solution.fibo(4), Is.EqualTo(3));
-            Assert.That(solution.fibo(5), Is.EqualTo(5));
-            Assert.That(solution.fibo(6), Is.EqualTo(8));
-            Assert.That(solution.fibo(7), Is.EqualTo(13));
-            Assert.That(solution.fibo(8), Is.EqualTo(21));
-            Assert.That(solution.fibo(9), Is.EqualTo(34));
+            Assert.That(solution.fibo(n), Is.EqualTo(expected));
         }
     }
 }
