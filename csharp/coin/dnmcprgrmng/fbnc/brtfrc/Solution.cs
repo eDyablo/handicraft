@@ -1,5 +1,3 @@
-using System;
-
 namespace dnmcprgrmng.fbnc.brtfrc
 {
     public class Solution
