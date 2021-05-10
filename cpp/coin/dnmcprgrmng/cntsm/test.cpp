@@ -38,7 +38,7 @@ TEST(cntsm_mztn, performance) {
   EXPECT_THAT(count_sum(1000, number_bank_t(10, 3)), Eq(0));
 }
 
-TEST(DISABLED_cntsm_tbltn, correctness) {
+TEST(cntsm_tbltn, correctness) {
   using namespace tbltn;
   EXPECT_THAT(count_sum(0, {1, 2, 3}), Eq(1));
   EXPECT_THAT(count_sum(1, {1}), Eq(1));
@@ -50,4 +50,9 @@ TEST(DISABLED_cntsm_tbltn, correctness) {
   EXPECT_THAT(count_sum(10, {1, 5, 10, 25}), Eq(4));
   EXPECT_THAT(count_sum(25, {1, 5, 10, 25}), Eq(13));
   EXPECT_THAT(count_sum(7, {7, 4, 3, 2}), Eq(3));
+}
+
+TEST(cntsm_tbltn, performance) {
+  using namespace tbltn;
+  EXPECT_THAT(count_sum(1000, number_bank_t(10, 3)), Eq(0));
 }
