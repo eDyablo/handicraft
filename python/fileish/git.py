@@ -35,9 +35,30 @@ class GitWorkingCopy:
                                 cwd=self.directory, check=True, stdout=PIPE).stdout.decode().strip()
         return self.__branch
 
-    def checkout(self, path):
-        run(['git', 'checkout', self.branch(), '--', path],
-            cwd=self.directory, check=True)
+    def checkout(self, path: str):
+        if self.is_in_tree(path):
+            run(['git', 'checkout', self.branch(), '--', path],
+                cwd=self.directory, check=True)
+
+    def is_modified(self, path: str):
+        return run(['git', 'diff', '--exit-code', path], cwd=self.directory, check=False).returncode == 1
+
+    def is_in_tree(self, path: str):
+        tree_path = run(['git', 'ls-tree', '--name-only', self.branch(), path],
+                        cwd=self.directory, check=True, stdout=PIPE).stdout.decode().strip()
+        return len(tree_path) > 0
+
+    def is_new(self, path: str):
+        return not self.is_in_tree(path)
+
+    def push_changes(self, path: str):
+        if self.is_new(path) or self.is_modified(path):
+            run(['git', 'add', path],
+                cwd=self.directory, check=True)
+            run(['git', 'commit', f'--message=update {path}', '--', path],
+                cwd=self.directory, check=True)
+            run(['git', 'push', 'origin', self.branch()],
+                cwd=self.directory, check=True)
 
 
 class GitClient:

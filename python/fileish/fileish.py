@@ -27,11 +27,19 @@ print('PULLED')
 print('\n'.join(map(repr, files)))
 
 for file in files:
-    with open(file.location.path, 'r') as stream:
-        lines = [str(int(line) + 1) for line in map(str.strip, stream)]
-    with open(file.location.path, 'w') as stream:
-        for line in lines:
-            stream.write(f'{line}\n')
+    from os.path import dirname, exists
+    from os import makedirs
+    if not exists(file.location.path):
+        if not exists(dirname(file.location.path)):
+            makedirs(dirname(file.location.path))
+        with open(file.location.path, 'w') as stream:
+            stream.write('0\n')
+    else:
+        with open(file.location.path, 'r') as stream:
+            lines = [str(int(line) + 1) for line in map(str.strip, stream)]
+        with open(file.location.path, 'w') as stream:
+            for line in lines:
+                stream.write(f'{line}\n')
 
 print('PUSH')
 

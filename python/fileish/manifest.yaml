@@ -1,11 +1,20 @@
 files:
-  - path: seeds/first
-  - path: seeds/second
+  #- path: seeds/first
+  #- path: seeds/second
+  #- path: seeds/third
   - git:
       url: https://github.com/eDyablo/handicraft.git
-      branch: develop
+      branch: test
       path: python/fileish/seeds/first
   - git:
       url: https://github.com/eDyablo/handicraft.git
-      branch: develop
+      branch: test
       path: python/fileish/seeds/second
+  - git:
+      url: https://github.com/eDyablo/handicraft.git
+      branch: test
+      path: python/fileish/seeds/third
+  - git:
+      url: https://github.com/eDyablo/handicraft.git
+      branch: test
+      path: python/fileish/seeds/fourth

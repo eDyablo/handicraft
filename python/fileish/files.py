@@ -7,10 +7,11 @@ class LocalFile:
 
     def pull(self, destination: str):
         from shutil import copyfile
-        from os import makedirs, path
+        from os import makedirs
+        from os.path import dirname, exists
         location = f'{destination}/{self.path}'
-        location_dir = path.dirname(location)
-        if not path.exists(location_dir):
+        location_dir = dirname(location)
+        if not exists(location_dir):
             makedirs(location_dir)
         return PulledLocalFile(self, copyfile(self.path, location))
 
@@ -70,9 +71,5 @@ class FileInGitWorkingCopy:
         return f'local file {self.path} at {self.working_copy}'
 
     def push(self):
-        from subprocess import run
-        run(['git', 'commit', f'--message=update {self.path}', '--', self.path],
-            cwd=self.working_copy.directory, check=True)
-        run(['git', 'push', 'origin', self.working_copy.branch()],
-            cwd=self.working_copy.directory, check=True)
+        self.working_copy.push_changes(self.path)
         return self.source
