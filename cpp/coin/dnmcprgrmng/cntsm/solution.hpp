@@ -64,11 +64,9 @@ namespace coin {
       size_t count_sum(number_t target, number_bank_t const& numbers) {
         count_sum_table_t table(target + 1, 0);
         table[0] = 1;
-        for (number_t number : numbers) {
-          for (number_t amount = 1; amount <= target; ++amount) {
-            if (number <= amount) {
-              table[amount] += table[amount - number];
-            }
+        for (auto number : numbers) {
+          for (auto amount = number; amount <= target; ++amount) {
+            table[amount] += table[amount - number];
           }
         }
         return table[target];
