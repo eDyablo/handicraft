@@ -1,0 +1,25 @@
+/* groovylint-disable CompileStatic */
+apply plugin: 'java'
+
+repositories {
+  jcenter()
+  mavenCentral()
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src']
+    }
+  }
+  test {
+    java {
+      srcDirs = ['test']
+    }
+  }
+}
+
+dependencies {
+  testImplementation 'junit:junit:4.+'
+  testImplementation 'org.hamcrest:hamcrest-junit:2.+'
+}
