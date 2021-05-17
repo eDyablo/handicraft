@@ -15,16 +15,16 @@ public class SolutionTest {
 
   @Test
   public void correctness() {
-    assertThat(solution.fibo(0), is(equalTo(0)));
-    assertThat(solution.fibo(1), is(equalTo(1)));
-    assertThat(solution.fibo(2), is(equalTo(1)));
-    assertThat(solution.fibo(3), is(equalTo(2)));
-    assertThat(solution.fibo(4), is(equalTo(3)));
-    assertThat(solution.fibo(5), is(equalTo(5)));
-    assertThat(solution.fibo(6), is(equalTo(8)));
-    assertThat(solution.fibo(7), is(equalTo(13)));
-    assertThat(solution.fibo(8), is(equalTo(21)));
-    assertThat(solution.fibo(9), is(equalTo(34)));
+    assertThat(solution.fibo(0), is(equalTo(0l)));
+    assertThat(solution.fibo(1), is(equalTo(1l)));
+    assertThat(solution.fibo(2), is(equalTo(1l)));
+    assertThat(solution.fibo(3), is(equalTo(2l)));
+    assertThat(solution.fibo(4), is(equalTo(3l)));
+    assertThat(solution.fibo(5), is(equalTo(5l)));
+    assertThat(solution.fibo(6), is(equalTo(8l)));
+    assertThat(solution.fibo(7), is(equalTo(13l)));
+    assertThat(solution.fibo(8), is(equalTo(21l)));
+    assertThat(solution.fibo(9), is(equalTo(34l)));
   }
 
   @Test
