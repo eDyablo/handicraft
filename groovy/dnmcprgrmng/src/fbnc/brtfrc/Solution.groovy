@@ -1,11 +1,5 @@
 package fbnc.brtfrc
 
-import groovy.transform.CompileStatic
-
-/**
- * Solution
- */
-@CompileStatic
 class Solution {
 
   int fibo(int n) {

@@ -1,12 +1,5 @@
-/* groovylint-disable NoDef, VariableTypeRequired */
 package fbnc.tbltn
 
-import groovy.transform.CompileDynamic
-
-/**
- * Solution
- */
-@CompileDynamic
 class Solution {
 
   long fibo(int n) {

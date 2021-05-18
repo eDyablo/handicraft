@@ -1,12 +1,5 @@
-/* groovylint-disable FieldTypeRequired, NoDef */
 package fbnc.mztn
 
-import groovy.transform.CompileDynamic
-
-/**
- * Solution
- */
-@CompileDynamic
 class Solution {
 
   final memo = [:]

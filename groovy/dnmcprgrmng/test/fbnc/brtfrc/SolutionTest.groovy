@@ -5,15 +5,10 @@ import static org.hamcrest.Matchers.is
 import static org.hamcrest.Matchers.equalTo
 
 import org.junit.Test
-import groovy.transform.CompileStatic
 
-/**
- * Tests
- */
-@CompileStatic
 class SolutionTest {
 
-  private final Solution solution = new Solution()
+  private final solution = new Solution()
 
   @Test void correctness() {
     assertThat(solution.fibo(0), is(equalTo(0)))
