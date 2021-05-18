@@ -1,0 +1,27 @@
+/* groovylint-disable CompileStatic */
+plugins {
+  id 'groovy'
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceSets {
+  main {
+    groovy {
+      srcDirs = ['src']
+    }
+  }
+  test {
+    groovy {
+      srcDirs = ['test']
+    }
+  }
+}
+
+dependencies {
+  implementation 'org.codehaus.groovy:groovy:+'
+  testImplementation 'junit:junit:+'
+  testImplementation 'org.hamcrest:hamcrest-junit:+'
+}
