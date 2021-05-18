@@ -1,4 +1,3 @@
-/* groovylint-disable CompileStatic */
 plugins {
   id 'groovy'
 }
