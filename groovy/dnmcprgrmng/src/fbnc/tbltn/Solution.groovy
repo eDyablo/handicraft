@@ -1,3 +1,4 @@
+/* groovylint-disable NoDef, VariableTypeRequired */
 package fbnc.tbltn
 
 import groovy.transform.CompileDynamic

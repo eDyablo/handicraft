@@ -1,3 +1,4 @@
+/* groovylint-disable FieldTypeRequired, NoDef */
 package fbnc.mztn
 
 import groovy.transform.CompileDynamic
