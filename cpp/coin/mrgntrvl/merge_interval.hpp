@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <numeric>
 #include <vector>
@@ -52,7 +53,7 @@ namespace coin {
     if (intervals.empty()) {
       return intervals;
     }
-    sort(begin(intervals), end(intervals), starts_before);
+    std::sort(begin(intervals), end(intervals), starts_before);
     interval_vector_t result{intervals.front()};
     for (auto const& current: intervals) {
       auto& last = result.back();

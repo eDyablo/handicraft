@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <iterator>
 
 namespace coin {
   template<size_t rows, size_t columns>
