@@ -1,11 +1,8 @@
 #include <gmock/gmock.h>
 
-#include <iostream>
-
 #include "solution.hpp"
 
 using namespace ::coin::prstrg;
-using namespace ::std;
 using namespace ::testing;
 
 TEST(cntsqrs, distance_correctness) {
@@ -21,15 +18,17 @@ TEST(cntsqrs, is_square_correctness) {
   EXPECT_THAT(is_square(point_vec_t{{1, 0}, {3, 4}, {0, 3}, {4, 1}}), Eq(true));
 }
 
-ostream& operator<<(ostream& stream, point_t const& point) {
-  stream << point.x << "," << point.y;
-  return stream;
-}
+namespace std {
+  ostream& operator<<(ostream& stream, point_t const& point) {
+    stream << point.x << "," << point.y;
+    return stream;
+  }
 
-ostream& operator<<(ostream& stream, segment_t const& segment) {
-  stream << segment.first << "-" << segment.second;
-  return stream;
-}
+  ostream& operator<<(ostream& stream, segment_t const& segment) {
+    stream << segment.first << "-" << segment.second;
+    return stream;
+  }
+}  // namespace std
 
 bool operator==(segment_t const& first, segment_t const& second) {
   return first.first == second.first and first.second == second.second;
