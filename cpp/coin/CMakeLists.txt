@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(cntclstr)
 add_subdirectory(dnmcprgrmng)
+add_subdirectory(dtrt)
 add_subdirectory(exabeam)
 add_subdirectory(mcrsft)
 add_subdirectory(mrgntrvl)
