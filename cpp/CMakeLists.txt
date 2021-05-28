@@ -12,5 +12,5 @@ include_directories(
     "googletest/googletest/include")
 
 add_subdirectory(coin)
-add_subdirectory(sfml)
+add_subdirectory(SFML)
 add_subdirectory(spanchart)

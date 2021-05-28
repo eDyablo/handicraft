@@ -1,0 +1,13 @@
+const assert = require('assert')
+const solution = require('./solution.js')
+
+assert.strictEqual(solution.fibonnaci(0), 0)
+assert.strictEqual(solution.fibonnaci(1), 1)
+assert.strictEqual(solution.fibonnaci(2), 1)
+assert.strictEqual(solution.fibonnaci(3), 2)
+assert.strictEqual(solution.fibonnaci(4), 3)
+assert.strictEqual(solution.fibonnaci(5), 5)
+assert.strictEqual(solution.fibonnaci(6), 8)
+assert.strictEqual(solution.fibonnaci(7), 13)
+assert.strictEqual(solution.fibonnaci(8), 21)
+assert.strictEqual(solution.fibonnaci(9), 34)
