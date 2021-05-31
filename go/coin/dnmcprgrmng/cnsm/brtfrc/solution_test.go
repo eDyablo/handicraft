@@ -21,7 +21,7 @@ func Test_correctness(t *testing.T) {
 	}
 	for _, test := range tests {
 		if actual := canSum(test.target, test.numbers); actual != test.expected {
-			t.Error("expected that the", test.target, "sum can be built from", test.numbers)
+			t.Error("for", test.target, "and", test.numbers, "expected", test.expected, "but got", actual)
 			t.Fail()
 		}
 	}
