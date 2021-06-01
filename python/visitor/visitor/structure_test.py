@@ -2,7 +2,7 @@ import unittest
 from structure import Infrastructure
 
 
-class TestComponent:
+class Compomnent:
   def __init__(self, id):
     self.id = id
 
@@ -10,7 +10,7 @@ class TestComponent:
     visitor.visit_component(self)
 
 
-class TestVisitor:
+class Visitor:
   def __init__(self):
     self.log = []
 
@@ -32,9 +32,9 @@ class InfrastructureTest(unittest.TestCase):
     self.assertEqual(self.infra.components, [1, 2])
 
   def test_visits_all_its_components_in_order(self):
-    self.infra.add_component(TestComponent(1))
-    self.infra.add_component(TestComponent(2))
-    self.infra.add_component(TestComponent(3))
-    visitor = TestVisitor()
+    self.infra.add_component(Compomnent(1))
+    self.infra.add_component(Compomnent(2))
+    self.infra.add_component(Compomnent(3))
+    visitor = Visitor()
     self.infra.accept_visitor(visitor)
     self.assertEqual(visitor.log, [1, 2, 3])
