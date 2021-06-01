@@ -1,4 +1,6 @@
-def count_travel_ways(width, height, memo={}):
+def count_travel_ways(width, height, memo=None):
+    if memo is None:
+        memo = {}
     key = f'{width},{height}'
     if key in memo:
         return memo[key]

@@ -1,4 +1,6 @@
-def can_sum(target, numbers, memo={}):
+def can_sum(target, numbers, memo=None):
+    if memo is None:
+        memo = {}
     if target in memo:
         return memo[target]
     if target == 0:
