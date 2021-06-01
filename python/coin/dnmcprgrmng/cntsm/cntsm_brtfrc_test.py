@@ -1,4 +1,4 @@
-def count_sum(target: int, numbers: list[int], selected=0) -> int:
+def count_sum(target, numbers, selected=0):
     if target == 0:
         return 1
     if target < 0:

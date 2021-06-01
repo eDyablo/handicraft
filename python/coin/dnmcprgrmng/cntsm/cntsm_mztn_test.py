@@ -1,7 +1,7 @@
 from pytest import mark
 
 
-def count_sum(target: int, numbers: list[int], selected=0, memo=None) -> int:
+def count_sum(target, numbers, selected=0, memo=None):
     if memo is None:
         memo = {}
     key = target * len(numbers) + selected
