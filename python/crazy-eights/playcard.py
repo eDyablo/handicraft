@@ -1,13 +1,21 @@
 from random import shuffle
 
 
-class Suite:
+class Suite(object):
     def __init__(self, name, pip):
         self.__name = name
         self.__pip = pip
 
     def __str__(self):
         return str(self.__pip)
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def pip(self):
+        return self.__pip
 
 
 class Card:
@@ -22,13 +30,29 @@ class Card:
             self.__face,
         ]))
 
+    @property
+    def face(self):
+        return self.__face
 
-class Deck:
+    @property
+    def rank(self):
+        return self.__rank
+
+    @property
+    def suite(self):
+        return self.__suite
+
+
+class Deck(object):
     def __init__(self):
         self.__cards = []
 
     def __str__(self):
         return ' '.join(map(str, self.__cards))
+
+    @property
+    def cards(self):
+        return self.__cards[:]
 
     def put(self, card):
         self.__cards.append(card)
@@ -37,18 +61,12 @@ class Deck:
         shuffle(self.__cards)
 
     def draw(self):
-        return self.__cards.pop()
+        if len(self.__cards):
+            return self.__cards.pop()
 
     def top(self):
-        return self.__cards[-1]
-
-    def copy(self):
-        deck = Deck()
-        deck.__cards = self.__cards[:]
-        return deck
-
-    def enumerate(self):
-        return enumerate(self.__cards)
+        if len(self.__cards):
+            return self.__cards[-1]
 
 
 class EnglishPattern:
