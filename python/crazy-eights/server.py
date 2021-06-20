@@ -39,10 +39,19 @@ class Game:
         self.__hands = {}
 
     def add_player(self, player):
-        self.__hands[player.id] = Deck()
+        if self.hands_count() < 2:
+            self.__hands[player.id] = Deck()
+            if self.hands_count() == 2:
+                self.__deal_cards()
 
     def hands_count(self):
         return len(self.__hands)
+
+    def __deal_cards(self):
+        for i in range(0, 5):
+            for (player, hand) in self.__hands.items():
+                hand.put(self.__deck.draw())
+        self.__discardpile.put(self.__deck.draw())
 
     def serialized(self):
         return {
