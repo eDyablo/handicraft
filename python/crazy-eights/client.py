@@ -44,6 +44,19 @@ class Server:
             {'player': player_id}), {'content-type': 'application/json'})
         self.__connection.getresponse().read()
 
+    def get_playing_hand(self, game_id, player_id):
+        self.__connection.request('GET', f'/game/{game_id}/hand/{player_id}')
+        return json.loads(self.__connection.getresponse().read())['hand']
+
+    def get_discard_pile_top(self, game_id):
+        self.__connection.request('GET', f'/game/{game_id}/discard_pile_top')
+        return json.loads(self.__connection.getresponse().read())['card']
+
+    def make_buy(self, game_id, player_id):
+        self.__connection.request('POST', f'/game/{game_id}/buy', json.dumps(
+            {'game': game_id, 'player': player_id}), {'content-type': 'application/json'})
+        self.__connection.getresponse().read()
+
 
 class Player:
     def __init__(self, server, **data):
@@ -55,15 +68,29 @@ class Game(Cmd):
     def __init__(self, server, **data):
         super().__init__()
         self.__server = server
-        self.__name = data.get('id')
-        self.prompt = f'({self.__name}) '
+        self.name = data.get('id')
+        self.prompt = f'({self.name}) '
 
-    def add_player(self, player_id):
-        self.__server.add_player_to_game(player_id, self.__name)
+    def add_player(self, player):
+        self.__server.add_player_to_game(player.name, self.name)
+        self.__player = player
+        self.prompt = f'({player.name} playing {self.name}) '
+
+    def do_hand(self, arg):
+        'Show playing hand'
+        print(self.__server.get_playing_hand(self.name, self.__player.name))
+
+    def do_top(self, arg):
+        'Show discard pile top'
+        print(self.__server.get_discard_pile_top(self.name))
+
+    def do_buy(self, arg):
+        'Receive card from the game deck'
+        self.__server.make_buy(self.name, self.__player.name)
 
     def do_quit(self, arg):
         'Quit the game'
-        self.__server.delete_game(self.__name)
+        self.__server.delete_game(self.name)
         return True
 
 
@@ -74,14 +101,17 @@ class Client(Cmd):
         self.prompt = f'({self.__server.describe()["name"]}) '
 
     def new_game(self):
-        return Game(self.__server, **self.__server.create_game(self.__player.name))
+        game = Game(self.__server, **
+                    self.__server.create_game(self.__player.name))
+        game.add_player(self.__player)
+        return game
 
     def join_game(self, name=None):
         if name:
             game = Game(self.__server, **self.__server.get_game(name))
         else:
             game = Game(self.__server, **self.__server.get_open_games()[0])
-        game.add_player(self.__player.name)
+        game.add_player(self.__player)
         return game
 
     def preloop(self):

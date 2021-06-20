@@ -39,6 +39,9 @@ class Deck:
     def draw(self):
         return self.__cards.pop()
 
+    def top(self):
+        return self.__cards[-1]
+
     def copy(self):
         deck = Deck()
         deck.__cards = self.__cards[:]

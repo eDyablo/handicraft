@@ -47,6 +47,16 @@ class Game:
     def hands_count(self):
         return len(self.__hands)
 
+    def get_hand(self, hand_id):
+        return self.__hands.get(hand_id)
+
+    def get_discard_pile_top(self):
+        return self.__discardpile.top()
+
+    def buy(self, hand_id):
+        hand = self.__hands[hand_id]
+        hand.put(self.__deck.draw())
+
     def __deal_cards(self):
         for i in range(0, 5):
             for (player, hand) in self.__hands.items():
@@ -153,6 +163,31 @@ def add_game_player(game_id):
     }), 200
 
 
+@server.route('/game/<game_id>/hand/<player_id>')
+def get_game_hand(game_id, player_id):
+    game = server.games.get(game_id)
+    if not game:
+        return jsonify({'message': f'game {game_id} not found'}), 404
+    hand = game.get_hand(player_id)
+    if not hand:
+        return jsonify({'message': f'{player_id} hand not found in {game_id} game'}), 404
+    return jsonify({
+        'hand': str(hand),
+        'message': f'hand {player_id} in {game_id} game',
+    }), 200
+
+
+@server.route('/game/<game_id>/discard_pile_top')
+def get_game_discard_pile_top_card(game_id):
+    game = server.games.get(game_id)
+    if not game:
+        return jsonify({'message': f'game {game_id} not found'}), 404
+    return jsonify({
+        'card': str(game.get_discard_pile_top()),
+        'message': f'discard pile top card of {game_id} game',
+    }), 200
+
+
 @server.route('/player/all', methods=['GET'])
 def get_all_players():
     return jsonify([player.serialized() for player in server.players.values()]), 200
@@ -181,6 +216,20 @@ def delete_player(player_id):
         return jsonify({'message': f'player {player_id} had been deleted'}), 200
     else:
         return jsonify({'message': f'player {player_id} not found'}), 404
+
+
+@server.route('/game/<game_id>/buy', methods=['POST'])
+def buy(game_id):
+    data = request.get_json()
+    player_id = data.get('player')
+    game = server.games.get(game_id)
+    if not game:
+        return jsonify({'message': f'game {game_id} not found'}), 404
+    hand = game.get_hand(player_id)
+    if not hand:
+        return jsonify({'message': f'{player_id} hand not found in {game_id} game'}), 404
+    game.buy(player_id)
+    return jsonify({'message': f'player {player_id} did buy in {game_id} game'}), 200
 
 
 if __name__ == '__main__':
