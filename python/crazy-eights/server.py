@@ -130,15 +130,18 @@ def get_games():
 
 @server.route('/game/<game_id>', methods=['DELETE'])
 def delete_game(game_id):
-    del server.games[game_id]
-    return jsonify({'message': f'game {game_id} has been deleted'}), 200
+    if game_id in server.games:
+        del server.games[game_id]
+        return jsonify({'message': f'game {game_id} has been deleted'}), 200
+    else:
+        return jsonify({'message': f'game {game_id} not found'}), 404
 
 
 @server.route('/game/<game_id>/player', methods=['PUT'])
 def add_game_player(game_id):
     game = server.games.get(game_id)
     if not game:
-        return jsonify({'message': 'game not found'}), 404
+        return jsonify({'message': f'game {game_id} not found'}), 404
     data = request.get_json()
     player = server.players.get(data['player'])
     if not player:
@@ -171,10 +174,13 @@ def get_player(player_id):
         return jsonify({'message': 'player not found'}), 404
 
 
-@server.route('/player/<id>', methods=['DELETE'])
-def delete_player(id):
-    del server.players[id]
-    return jsonify({'message': f'player {id} had been deleted'}), 200
+@server.route('/player/<player_id>', methods=['DELETE'])
+def delete_player(player_id):
+    if player_id in server.players:
+        del server.players[player_id]
+        return jsonify({'message': f'player {player_id} had been deleted'}), 200
+    else:
+        return jsonify({'message': f'player {player_id} not found'}), 404
 
 
 if __name__ == '__main__':
