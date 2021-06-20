@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from playcard import Deck, EnglishPattern
 import json
 import random
 import string
@@ -30,21 +31,26 @@ class Player:
 
 
 class Game:
-    def __init__(self, id):
+    def __init__(self, id, pattern):
         self.id = id
-        self.__players = []
+        self.__deck = pattern.build_deck()
+        self.__deck.shuffle()
+        self.__discardpile = Deck()
+        self.__hands = {}
 
     def add_player(self, player):
-        self.__players.append(player)
+        self.__hands[player.id] = Deck()
 
-    def player_count(self):
-        return len(self.__players)
+    def hands_count(self):
+        return len(self.__hands)
 
     def serialized(self):
         return {
             'id': self.id,
-            'player_count': self.player_count(),
-            'players': [player.id for player in self.__players]
+            'deck': str(self.__deck),
+            'discardpile': str(self.__discardpile),
+            'hands_count': self.hands_count(),
+            'hands': {player: str(deck) for (player, deck) in self.__hands.items()},
         }
 
 
@@ -56,7 +62,7 @@ class Server(Flask):
         self.names = NameGenerator()
 
     def create_game(self):
-        game = Game(server.names.generate_game_name())
+        game = Game(server.names.generate_game_name(), EnglishPattern())
         self.games[game.id] = game
         return game
 
@@ -107,9 +113,9 @@ def get_game(game_id):
 @server.route('/game', methods=['GET'])
 def get_games():
     games = server.games.values()
-    if 'player_count' in request.args:
-        player_count = int(request.args['player_count'])
-    games = [game for game in games if game.player_count() == player_count]
+    if 'hands_count' in request.args:
+        hands_count = int(request.args['hands_count'])
+    games = [game for game in games if game.hands_count() == hands_count]
     return jsonify([game.serialized() for game in games]), 200
 
 

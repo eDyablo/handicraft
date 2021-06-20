@@ -28,7 +28,7 @@ class Server:
         return json.loads(self.__connection.getresponse().read())['game']
 
     def get_open_games(self):
-        self.__connection.request('GET', '/game?player_count=1')
+        self.__connection.request('GET', '/game?hands_count=1')
         return json.loads(self.__connection.getresponse().read())
 
     def create_player(self):
