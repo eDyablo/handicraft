@@ -6,9 +6,8 @@ import string
 
 class NameGenerator:
     def __init__(self):
-        self.__adjectives = list(line.strip()
-                                 for line in open('adjectives.txt'))
-        self.__nouns = list(line.strip() for line in open('nouns.txt'))
+        self.__adjectives = [line.strip() for line in open('adjectives.txt')]
+        self.__nouns = [line.strip() for line in open('nouns.txt')]
 
     def generate_game_name(self):
         return f'{random.choice(self.__adjectives)}-{random.choice(self.__nouns)}'
