@@ -38,9 +38,13 @@ class Game:
     def add_player(self, player):
         self.__players.append(player)
 
+    def player_count(self):
+        return len(self.__players)
+
     def serialized(self):
         return {
             'id': self.id,
+            'player_count': self.player_count(),
             'players': [player.id for player in self.__players]
         }
 
@@ -101,10 +105,19 @@ def get_game(game_id):
         return jsonify({'message': 'game not found'}), 404
 
 
-@server.route('/game/<id>', methods=['DELETE'])
-def delete_game(id):
-    del server.games[id]
-    return jsonify({'message': f'game {id} has been deleted'}), 200
+@server.route('/game', methods=['GET'])
+def get_games():
+    games = server.games.values()
+    if 'player_count' in request.args:
+        player_count = int(request.args['player_count'])
+    games = [game for game in games if game.player_count() == player_count]
+    return jsonify([game.serialized() for game in games]), 200
+
+
+@server.route('/game/<game_id>', methods=['DELETE'])
+def delete_game(game_id):
+    del server.games[game_id]
+    return jsonify({'message': f'game {game_id} has been deleted'}), 200
 
 
 @server.route('/game/<game_id>/player', methods=['PUT'])

@@ -27,6 +27,10 @@ class Server:
         self.__connection.request('GET', f'/game/{game_id}')
         return json.loads(self.__connection.getresponse().read())['game']
 
+    def get_open_games(self):
+        self.__connection.request('GET', '/game?player_count=1')
+        return json.loads(self.__connection.getresponse().read())
+
     def create_player(self):
         self.__connection.request('POST', '/player')
         return json.loads(self.__connection.getresponse().read())['player']
@@ -72,8 +76,11 @@ class Client(Cmd):
     def new_game(self):
         return Game(self.__server, **self.__server.create_game(self.__player.name))
 
-    def join_game(self, name):
-        game = Game(self.__server, **self.__server.get_game(name))
+    def join_game(self, name=None):
+        if name:
+            game = Game(self.__server, **self.__server.get_game(name))
+        else:
+            game = Game(self.__server, **self.__server.get_open_games()[0])
         game.add_player(self.__player.name)
         return game
 
@@ -87,9 +94,16 @@ class Client(Cmd):
         'Start a new game'
         self.new_game().cmdloop()
 
+    def do_list(self, arg):
+        'List open games'
+        games = self.__server.get_open_games()
+        if games:
+            print(' '.join(game['id'] for game in games))
+
     def do_join(self, arg):
-        'Join existing game by given name'
-        self.join_game(arg.split()[0]).cmdloop()
+        'Join existing game by given name or first open game found when the name is omitted'
+        name = arg.split()[0] if arg else None
+        self.join_game(name).cmdloop()
 
     def do_exit(self, arg):
         'Exit the program'
