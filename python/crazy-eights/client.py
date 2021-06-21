@@ -25,7 +25,10 @@ class Server:
 
     def get_game(self, game_id):
         self.__connection.request('GET', f'/game/{game_id}')
-        return json.loads(self.__connection.getresponse().read())['game']
+        response = self.__connection.getresponse()
+        if response.status == 200:
+            return json.loads(response.read())['game']
+        return {}
 
     def get_open_games(self):
         self.__connection.request('GET', '/game?hands_count=1')
@@ -75,6 +78,20 @@ class Game(Cmd):
         self.__server = server
         self.name = data.get('id')
         self.prompt = f'({self.name}) '
+
+    def update(self):
+        data = self.__server.get_game(self.name)
+        self.hand_count = data.get('hands_count', 0)
+
+    def precmd(self, line):
+        command = line.split()[0] if line else ''
+        if not command or command == 'quit' or command == 'help':
+            return line
+        self.update()
+        if self.hand_count < 2:
+            print('The game is not started')
+            return ''
+        return line
 
     def add_player(self, player):
         self.__server.add_player_to_game(player.name, self.name)
