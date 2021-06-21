@@ -57,6 +57,10 @@ class Game:
         hand = self.__hands[hand_id]
         hand.put(self.__deck.draw())
 
+    def drop(self, hand_id, card_id):
+        hand = self.__hands[hand_id]
+        return self.__discardpile.put(hand.draw(card_id))
+
     def __deal_cards(self):
         for i in range(0, 5):
             for (player, hand) in self.__hands.items():
@@ -219,7 +223,7 @@ def delete_player(player_id):
 
 
 @server.route('/game/<game_id>/buy', methods=['POST'])
-def buy(game_id):
+def game_buy(game_id):
     data = request.get_json()
     player_id = data.get('player')
     game = server.games.get(game_id)
@@ -230,6 +234,21 @@ def buy(game_id):
         return jsonify({'message': f'{player_id} hand not found in {game_id} game'}), 404
     game.buy(player_id)
     return jsonify({'message': f'player {player_id} did buy in {game_id} game'}), 200
+
+
+@server.route('/game/<game_id>/drop', methods=['POST'])
+def game_drop(game_id):
+    game = server.games.get(game_id)
+    if not game:
+        return jsonify({'message': f'game {game_id} not found'}), 404
+    data = request.get_json()
+    player_id = data.get('player')
+    hand = game.get_hand(player_id)
+    if not hand:
+        return jsonify({'message': f'{player_id} hand not found in {game_id} game'}), 404
+    card_id = int(data.get('card'))
+    card = game.drop(player_id, card_id)
+    return jsonify({'message': f'player {player_id} has droped {card} in {game_id} game'}), 200
 
 
 if __name__ == '__main__':

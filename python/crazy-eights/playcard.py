@@ -60,7 +60,11 @@ class Deck(object):
     def shuffle(self):
         shuffle(self.__cards)
 
-    def draw(self):
+    def draw(self, card_id=None):
+        if card_id and card_id > 0 and card_id < len(self.__cards):
+            card = self.__cards[card_id]
+            self.__cards.remove(card)
+            return card
         if len(self.__cards):
             return self.__cards.pop()
 

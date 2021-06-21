@@ -57,6 +57,11 @@ class Server:
             {'game': game_id, 'player': player_id}), {'content-type': 'application/json'})
         self.__connection.getresponse().read()
 
+    def game_drop(self, game_id, player_id, card_id):
+        self.__connection.request('POST', f'/game/{game_id}/drop', json.dumps(
+            {'player': player_id, 'card': card_id}), {'content-type': 'application/json'})
+        self.__connection.getresponse().read()
+
 
 class Player:
     def __init__(self, server, **data):
@@ -87,6 +92,11 @@ class Game(Cmd):
     def do_buy(self, arg):
         'Receive card from the game deck'
         self.__server.make_buy(self.name, self.__player.name)
+
+    def do_drop(self, arg):
+        'Place card from hand on top of discard pile'
+        card_id = int(input('select a card: '))
+        self.__server.game_drop(self.name, self.__player.name, card_id)
 
     def do_quit(self, arg):
         'Quit the game'
