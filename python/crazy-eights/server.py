@@ -57,6 +57,12 @@ class Game:
         hand = self.__hands[hand_id]
         hand.put(self.__deck.draw())
 
+    def can_drop(self, hand_id, card_id):
+        hand = self.__hands[hand_id]
+        card = hand.cards[card_id]
+        top = self.get_discard_pile_top()
+        return card.rank == 8 or card.rank == top.rank or card.suite == top.suite
+
     def drop(self, hand_id, card_id):
         hand = self.__hands[hand_id]
         return self.__discardpile.put(hand.draw(card_id))
@@ -247,6 +253,8 @@ def game_drop(game_id):
     if not hand:
         return jsonify({'message': f'{player_id} hand not found in {game_id} game'}), 404
     card_id = int(data.get('card'))
+    if not game.can_drop(player_id, card_id):
+        return jsonify({'message': f'player {player_id} can not drop card'}), 406
     card = game.drop(player_id, card_id)
     return jsonify({'message': f'player {player_id} has droped {card} in {game_id} game'}), 200
 

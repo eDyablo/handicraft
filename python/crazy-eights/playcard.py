@@ -61,7 +61,7 @@ class Deck(object):
         shuffle(self.__cards)
 
     def draw(self, card_id=None):
-        if card_id and card_id > 0 and card_id < len(self.__cards):
+        if card_id is not None and card_id >= 0 and card_id < len(self.__cards):
             card = self.__cards[card_id]
             self.__cards.remove(card)
             return card
