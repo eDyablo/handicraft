@@ -83,7 +83,11 @@ class Game(Cmd):
 
     def do_hand(self, arg):
         'Show playing hand'
-        print(self.__server.get_playing_hand(self.name, self.__player.name))
+        hand = self.__server.get_playing_hand(self.name, self.__player.name)
+        cards = list(map(str.strip, hand.split()))
+        print(' '.join([f'{card:3}' for card in cards]))
+        print(
+            ' '.join([f'{str(number):3}' for number in range(1, len(cards)+1)]))
 
     def do_top(self, arg):
         'Show discard pile top'
@@ -98,8 +102,9 @@ class Game(Cmd):
         if arg:
             card_id = int(arg.split()[0])
         else:
+            self.do_hand(None)
             card_id = int(input('select a card: '))
-        self.__server.game_drop(self.name, self.__player.name, card_id)
+        self.__server.game_drop(self.name, self.__player.name, card_id-1)
 
     def do_quit(self, arg):
         'Quit the game'
