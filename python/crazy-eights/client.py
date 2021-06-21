@@ -95,7 +95,10 @@ class Game(Cmd):
 
     def do_drop(self, arg):
         'Place card from hand on top of discard pile'
-        card_id = int(input('select a card: '))
+        if arg:
+            card_id = int(arg.split()[0])
+        else:
+            card_id = int(input('select a card: '))
         self.__server.game_drop(self.name, self.__player.name, card_id)
 
     def do_quit(self, arg):
