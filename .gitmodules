@@ -6,3 +6,6 @@
 	path = cpp/SFML
 	url = https://github.com/SFML/SFML.git
 	branch = master
+[submodule "cpp/googlelog"]
+	path = cpp/googlelog
+	url = https://github.com/google/glog.git
