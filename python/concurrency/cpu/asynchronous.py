@@ -23,7 +23,7 @@ def main():
     result = asyncio.run(find_sums(numbers))
     end_time = time.time()
     duration = end_time - start_time
-    print(f"Result {list(result)}")
+    print(f"Result {result}")
     print(f"Duration {duration} seconds")
 
 

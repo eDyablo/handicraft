@@ -8,16 +8,16 @@ def find_sum(number):
 
 
 def find_sums(numbers):
-    for number in numbers:
-        find_sum(number)
+    return [find_sum(number) for number in numbers]
 
 
 def main():
     numbers = [5_000_000 + x for x in range(20)]
     start_time = time.time()
-    find_sums(numbers)
+    result = find_sums(numbers)
     end_time = time.time()
     duration = end_time - start_time
+    print(f"Result {result}")
     print(f"Duration {duration} seconds")
 
 
