@@ -22,7 +22,7 @@ def main():
         "http://olympus.realpython.org/dice",
     ] * 100
     start_time = time.time()
-    asyncio.get_event_loop().run_until_complete(download_all_pages(pages))
+    asyncio.run(download_all_pages(pages))
     end_time = time.time()
     duration = end_time - start_time
     print(f"Downloaded {len(pages)} in {duration} seconds")
