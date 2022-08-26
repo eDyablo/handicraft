@@ -2,7 +2,7 @@ package main
 
 import (
   "bufio"
-  "./command"
+  "ed/command"
   "os"
 )
 
