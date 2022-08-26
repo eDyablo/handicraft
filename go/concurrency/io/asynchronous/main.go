@@ -35,8 +35,8 @@ func download_page(page string, wg *sync.WaitGroup) {
 
 func download_pages(pages []string) {
 	var wg sync.WaitGroup
+	wg.Add(len(pages))
 	for _, page := range pages {
-		wg.Add(1)
 		go download_page(page, &wg)
 	}
 	wg.Wait()
