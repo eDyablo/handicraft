@@ -76,10 +76,11 @@ func (api DogAPI) GetSubBreeds(breed string) chan string {
 func (api DogAPI) getList(listURL string) []string {
 	var data struct {
 		Message []string
+		Status  string
 	}
 	err := json.Unmarshal(GetContent(listURL), &data)
-	if err != nil {
-		panic(fmt.Sprint("failed to unmarshall from", api.breedsListURL))
+	if err != nil || data.Status != "success" {
+		panic(fmt.Sprint("failed to unmarshall from ", api.breedsListURL))
 	}
 	return data.Message
 }
@@ -87,15 +88,15 @@ func (api DogAPI) getList(listURL string) []string {
 func GetContent(URL string) []byte {
 	response, err := http.Get(URL)
 	if err != nil {
-		panic(fmt.Sprint("failed to get from", URL))
+		panic(fmt.Sprint("failed to get from ", URL))
 	}
 	if response.StatusCode != http.StatusOK {
-		panic(fmt.Sprint("failed to get from", URL, response.Status))
+		panic(fmt.Sprint("failed to get from ", URL, " ", response.Status))
 	}
 	defer response.Body.Close()
 	content, err := io.ReadAll(response.Body)
 	if err != nil {
-		panic(fmt.Sprint("failed to read content from", URL))
+		panic(fmt.Sprint("failed to read content from ", URL))
 	}
 	return content
 }
