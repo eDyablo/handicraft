@@ -30,12 +30,12 @@ func GetBreeds() chan Breed {
 		for url != "" {
 			response, err := http.Get(url)
 			if err != nil {
-				panic(fmt.Sprint("failed to get", url))
+				panic(fmt.Sprint("failed to get from ", url))
 			}
 			defer response.Body.Close()
 			content, err := io.ReadAll(response.Body)
 			if err != nil {
-				panic(fmt.Sprint("failed to read content from", url))
+				panic(fmt.Sprint("failed to read content from ", url))
 			}
 			var data struct {
 				CurrentPage int     `json:"current_page"`
@@ -44,7 +44,7 @@ func GetBreeds() chan Breed {
 			}
 			err = json.Unmarshal(content, &data)
 			if err != nil {
-				panic(fmt.Sprint("failed to unmarshal from", url))
+				panic(fmt.Sprint("failed to unmarshal from ", url))
 			}
 			for _, breed := range data.Breeds {
 				channel <- breed
