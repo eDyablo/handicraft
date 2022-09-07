@@ -9,3 +9,6 @@
 [submodule "cpp/googlelog"]
 	path = cpp/googlelog
 	url = https://github.com/google/glog.git
+[submodule "cpp/folly"]
+	path = cpp/folly
+	url = https://github.com/facebook/folly.git
