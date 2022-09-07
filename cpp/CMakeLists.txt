@@ -14,3 +14,4 @@ include_directories(
 add_subdirectory(coin)
 add_subdirectory(SFML)
 add_subdirectory(spanchart)
+add_subdirectory(pool)

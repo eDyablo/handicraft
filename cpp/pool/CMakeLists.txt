@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.7)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(pool VERSION 1.0.0 LANGUAGES CXX)
+add_executable(pool src/pool.cpp)
