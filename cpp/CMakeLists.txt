@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(handicraft)
 
+add_subdirectory(googlelog)
 add_subdirectory(googletest)
 
 include_directories(
@@ -12,5 +13,6 @@ include_directories(
     "googletest/googletest/include")
 
 add_subdirectory(coin)
+add_subdirectory(samples)
 add_subdirectory(SFML)
 add_subdirectory(spanchart)
