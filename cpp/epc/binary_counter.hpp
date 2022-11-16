@@ -44,6 +44,9 @@ namespace epc {
 
     template <typename I>
     T reduce(I first, I last) const {
+      while (first != last and *first == zero) {
+        ++first;
+      }
       if (first == last) {
         return zero;
       }

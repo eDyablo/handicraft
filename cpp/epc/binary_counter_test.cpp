@@ -82,8 +82,9 @@ namespace epc {
 
       counter.add(2);
       counter.add(zero);
-      EXPECT_THAT(counter, SizeIs(1));
-      EXPECT_THAT(counter.reduce(), Eq(2));
+      counter.add(3);
+      EXPECT_THAT(counter, SizeIs(2));
+      EXPECT_THAT(counter.reduce(), Eq(5));
     }
   }  // namespace
 }  // namespace epc
