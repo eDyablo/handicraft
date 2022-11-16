@@ -3,6 +3,7 @@
 #include <gmock/gmock.h>
 
 #include <functional>
+#include <limits>
 #include <string>
 
 namespace epc {
@@ -85,6 +86,19 @@ namespace epc {
       counter.add(3);
       EXPECT_THAT(counter, SizeIs(2));
       EXPECT_THAT(counter.reduce(), Eq(5));
+    }
+
+    template <typename T>
+    struct min {
+      T operator()(T const& x, T const& y) const { return (y < x) ? y : x; }
+    };
+
+    TEST(BinaryCounter, FindMinimalElement) {
+      binary_counter_t<int, min<int>> counter(std::numeric_limits<int>::max());
+      for (const auto i : {5, 2, 4, 3, 1, 0}) {
+        counter.add(i);
+      }
+      EXPECT_THAT(counter.reduce(), Eq(0));
     }
   }  // namespace
 }  // namespace epc
