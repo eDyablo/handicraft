@@ -27,6 +27,9 @@ namespace epc {
    private:
     template <typename I>
     T add(I first, I last, T carry) {
+      if (carry == zero) {
+        return zero;
+      }
       for (; first != last; ++first) {
         if (*first == zero) {
           *first = carry;
@@ -41,9 +44,6 @@ namespace epc {
 
     template <typename I>
     T reduce(I first, I last) const {
-      while (first != last and *first == zero) {
-        ++first;
-      }
       if (first == last) {
         return zero;
       }

@@ -8,6 +8,7 @@
 namespace epc {
   namespace {
     using ::testing::Eq;
+    using ::testing::SizeIs;
 
     TEST(BinaryCounter, ReduceToZeroWhenNothingAdded) {
       char zero = '0';
@@ -66,6 +67,21 @@ namespace epc {
         counter.add({symbol});
       }
       EXPECT_THAT(counter.reduce(), Eq(symbols));
+    }
+
+    TEST(BinaryCounter, SkipsZeros) {
+      int const zero = 1;
+      binary_counter_t<int, std::plus<int>> counter(zero);
+
+      counter.add(zero);
+      counter.add(zero);
+      EXPECT_THAT(counter, SizeIs(0));
+      EXPECT_THAT(counter.reduce(), Eq(zero));
+
+      counter.add(2);
+      counter.add(zero);
+      EXPECT_THAT(counter, SizeIs(1));
+      EXPECT_THAT(counter.reduce(), Eq(2));
     }
   }  // namespace
 }  // namespace epc
