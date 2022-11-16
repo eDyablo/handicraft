@@ -13,6 +13,7 @@ include_directories(
     "googletest/googletest/include")
 
 add_subdirectory(coin)
+add_subdirectory(epc)
 add_subdirectory(samples)
 add_subdirectory(SFML)
 add_subdirectory(spanchart)
