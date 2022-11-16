@@ -3,12 +3,13 @@
 #include <gmock/gmock.h>
 
 #include <functional>
+#include <string>
 
 namespace epc {
   namespace {
     using ::testing::Eq;
 
-    TEST(BinaryCounter, ReduceToZeroWhenNothinAdded) {
+    TEST(BinaryCounter, ReduceToZeroWhenNothingAdded) {
       char zero = '0';
       binary_counter_t<char, std::plus<char>> counter(zero);
       EXPECT_THAT(counter.reduce(), Eq(zero));
@@ -55,6 +56,16 @@ namespace epc {
       // [0, 0, 0, 8]
       EXPECT_THAT(counter.size(), Eq(4));
       EXPECT_THAT(counter.reduce(), Eq(8));
+    }
+
+    TEST(BinaryCounter, RetainsOrder) {
+      binary_counter_t<std::string, std::plus<std::string>> counter(
+          std::string{});
+      std::string const symbols = "abcdefghijklmnopqrstuvwxyz";
+      for (auto const symbol : symbols) {
+        counter.add({symbol});
+      }
+      EXPECT_THAT(counter.reduce(), Eq(symbols));
     }
   }  // namespace
 }  // namespace epc

@@ -27,7 +27,7 @@ namespace epc {
    private:
     template <typename I>
     T add(I first, I last, T carry) {
-      for (;first != last; ++first) {
+      for (; first != last; ++first) {
         if (*first == zero) {
           *first = carry;
           return zero;
@@ -47,7 +47,7 @@ namespace epc {
       T result = *first;
       for (++first; first != last; ++first) {
         if (*first != zero) {
-          result = operation(result, *first);
+          result = operation(*first, result);
         }
       }
       return result;
