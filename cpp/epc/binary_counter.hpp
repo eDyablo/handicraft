@@ -12,7 +12,7 @@ namespace epc {
    public:
     binary_counter_t(const T& zero) : zero(zero), operation() {}
 
-    binary_counter_t add(T carry) {
+    binary_counter_t& add(T carry) {
       carry = add(counter.begin(), counter.end(), carry);
       if (carry != zero) {
         counter.push_back(carry);
