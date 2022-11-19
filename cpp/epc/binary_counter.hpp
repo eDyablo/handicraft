@@ -10,7 +10,8 @@ namespace epc {
     std::vector<T> counter;
 
    public:
-    binary_counter_t(const T& zero) : zero(zero), operation() {}
+    binary_counter_t(const T& zero, Op operation = Op())
+        : zero(zero), operation(operation) {}
 
     binary_counter_t& add(T carry) {
       carry = add(counter.begin(), counter.end(), carry);
