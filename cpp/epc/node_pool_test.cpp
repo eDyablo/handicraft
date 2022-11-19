@@ -83,35 +83,4 @@ namespace epc {
     ASSERT_THAT(pool.value(head), Eq(5));
     ASSERT_THAT(pool.value(pool.next(head)), Eq(4));
   }
-
-  template <typename T, typename N, typename Compare>
-  auto min_value_node(node_pool_t<T, N> const& pool,
-                      typename node_pool_t<T, N>::node_ref head,
-                      Compare compare) {
-    auto min = head;
-    for (; head != pool.end(); head = pool.next(head)) {
-      if (compare(pool.value(head), pool.value(min))) {
-        min = head;
-      }
-    }
-    return min;
-  }
-
-  TEST(NodePool, Min) {
-    node_pool_t<int> pool;
-    auto const compare = std::less<int>();
-
-    auto min = min_value_node(pool, pool.end(), compare);
-    ASSERT_THAT(min, Eq(pool.end()));
-
-    auto const one_element_list = pool.allocate(1, pool.end());
-    min = min_value_node(pool, one_element_list, compare);
-    ASSERT_THAT(min, Eq(one_element_list));
-
-    auto const first = pool.allocate(1, pool.end());
-    auto head = pool.allocate(2, first);
-    head = pool.allocate(3, head);
-    min = min_value_node(pool, head, compare);
-    ASSERT_THAT(min, Eq(first));
-  }
 }  // namespace epc
