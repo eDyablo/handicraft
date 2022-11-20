@@ -67,7 +67,7 @@ namespace epc {
   template <typename T>
   auto allocate_list(node_pool_t<T>& pool,
                      std::initializer_list<T> const& values) {
-    typename node_pool_t<T>::node_ref node = pool.end();
+    typename node_pool_t<T>::node_ref_t node = pool.end();
     for (const auto& value : values) {
       node = pool.allocate(value, node);
     }
