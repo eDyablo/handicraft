@@ -74,8 +74,7 @@ def parse_args():
 
 
 def main(args):
-    data = bytes()
-    data = "hello world".encode()
+    data = input().encode()
     worker_count = os.cpu_count()
     nonce_min = 0
     nonce_max = 0xFFFFFFFF + 1  # 4,294,967,296
@@ -89,8 +88,9 @@ def main(args):
     workers = (Worker(data, nonce_range) for nonce_range in nonce_ranges)
     workers = list(worker.start() for worker in workers)
     workers = (worker.join() for worker in workers)
-    for worker in workers:
-        print(worker.nonce, hexlify(worker.digest))
+    winner = next(filter(lambda worker: worker.nonce, workers), None)
+    if winner:
+        print(winner.nonce, hexlify(winner.digest).decode())
 
 
 if __name__ == "__main__":
