@@ -3,11 +3,12 @@
 from argparse import ArgumentParser
 from threading import Thread
 import hashlib
-from binascii import hexlify
+from binascii import hexlify, unhexlify
 from itertools import chain
 import os
 
 
+pattern = bytes()
 resolved = False
 
 class CompletedWorker:
@@ -21,7 +22,7 @@ class CompletedWorker:
 
     @property
     def nonce(self):
-        return self._nonce if self._nonce else None
+        return self._nonce
 
 
 def get_hash(data, nonce):
@@ -29,8 +30,8 @@ def get_hash(data, nonce):
 
 
 def is_resolved(a_hash):
-    pattern = bytes([0xED, 0x76])
-    return a_hash.digest()[0: len(pattern)] == pattern
+    global pattern
+    return len(pattern) == 0 or a_hash.digest()[0: len(pattern)] == pattern
 
 
 class RunningWorker(Thread):
@@ -39,7 +40,7 @@ class RunningWorker(Thread):
         self._data = data
         self._nonce_range = nonce_range
         self._hash = None
-        self._nonce = None
+        self._nonce = 0
 
     def run(self):
         global resolved
@@ -49,7 +50,7 @@ class RunningWorker(Thread):
             if is_resolved(a_hash := get_hash(self._data, nonce)):
                 resolved = True
                 self._hash = a_hash
-                self._nonce = nonce
+                self._nonce = nonce          
                 break
 
     def join(self, timeout=0) -> CompletedWorker:
@@ -70,10 +71,13 @@ class Worker:
 
 def parse_args():
     parser = ArgumentParser()
+    parser.add_argument("-p", "--prefix", type=str, metavar="HEXADECIMALS", default=bytes())
     return parser.parse_args()
 
 
 def main(args):
+    global pattern
+    pattern = unhexlify(args.prefix)
     data = input().encode()
     worker_count = os.cpu_count()
     nonce_min = 0
@@ -88,7 +92,7 @@ def main(args):
     workers = (Worker(data, nonce_range) for nonce_range in nonce_ranges)
     workers = list(worker.start() for worker in workers)
     workers = (worker.join() for worker in workers)
-    winner = next(filter(lambda worker: worker.nonce, workers), None)
+    winner = next(filter(lambda worker: worker.digest, workers), None)
     if winner:
         print(winner.nonce, hexlify(winner.digest).decode())
 
