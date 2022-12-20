@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from threading import Thread
-import hashlib
 from binascii import hexlify, unhexlify
 from itertools import chain
+from threading import Thread
+import hashlib
 import os
 
 
@@ -63,7 +63,7 @@ class Worker:
         self._data = data
         self._nonce_range = nonce_range
 
-    def start(self):
+    def start(self) -> RunningWorker:
         worker = RunningWorker(self._data, self._nonce_range)
         worker.start()
         return worker
@@ -81,7 +81,7 @@ def main(args):
     data = input().encode()
     worker_count = os.cpu_count()
     nonce_min = 0
-    nonce_max = 0xFFFFFFFF + 1  # 4,294,967,296
+    nonce_max = 0xFFFFFFFF + 1  # 4,294,967,296I
     nonce_delta = -(
         (nonce_max - nonce_min + 1) // -worker_count
     )  # do ceiling instead of flooring
@@ -92,8 +92,7 @@ def main(args):
     workers = (Worker(data, nonce_range) for nonce_range in nonce_ranges)
     workers = list(worker.start() for worker in workers)
     workers = (worker.join() for worker in workers)
-    winner = next(filter(lambda worker: worker.digest, workers), None)
-    if winner:
+    if (winner := next(filter(lambda worker: worker.digest, workers), None)):
         print(winner.nonce, hexlify(winner.digest).decode())
 
 
