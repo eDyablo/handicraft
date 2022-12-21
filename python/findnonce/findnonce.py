@@ -7,9 +7,9 @@ from threading import Thread
 import hashlib
 import os
 
-
 pattern = bytes()
 resolved = False
+
 
 class CompletedWorker:
     def __init__(self, a_hash, nonce):
@@ -50,7 +50,7 @@ class RunningWorker(Thread):
             if is_resolved(a_hash := get_hash(self._data, nonce)):
                 resolved = True
                 self._hash = a_hash
-                self._nonce = nonce          
+                self._nonce = nonce
                 break
 
     def join(self, timeout=0) -> CompletedWorker:
@@ -83,7 +83,7 @@ def main(args):
     nonce_min = 0
     nonce_max = 0xFFFFFFFF + 1  # 4,294,967,296I
     nonce_delta = -(
-        (nonce_max - nonce_min + 1) // -worker_count
+            (nonce_max - nonce_min + 1) // -worker_count
     )  # do ceiling instead of flooring
     nonce_ranges = (
         range(i * nonce_delta, min(nonce_max, (i + 1) * nonce_delta))
@@ -92,7 +92,7 @@ def main(args):
     workers = (Worker(data, nonce_range) for nonce_range in nonce_ranges)
     workers = list(worker.start() for worker in workers)
     workers = (worker.join() for worker in workers)
-    if (winner := next(filter(lambda worker: worker.digest, workers), None)):
+    if winner := next(filter(lambda worker: worker.digest, workers), None):
         print(winner.nonce, hexlify(winner.digest).decode())
 
 
