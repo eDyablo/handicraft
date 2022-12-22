@@ -1,3 +1,6 @@
+/*
+https://superfastpython.com/thread-busy-waiting-in-python/
+*/
 #include <algorithm>
 #include <chrono>
 #include <condition_variable>
@@ -16,7 +19,7 @@ struct randomizer_t {
   float operator()() { return std::generate_canonical<float, 10>(engine); }
 };
 
-struct work_t {
+struct task_t {
   std::string name;
   randomizer_t &randomizer;
   std::condition_variable &condition;
@@ -47,8 +50,10 @@ int main() {
   std::mutex mutex;
   std::vector<std::string> data;
   std::vector<std::thread> workers;
-  workers.emplace_back(work_t{"Thread-1", randomizer, condition, mutex, data});
-  workers.emplace_back(work_t{"Thread-2", randomizer, condition, mutex, data});
+  for (auto const &name :
+       {"Thread-1", "Thread-2", "Thread-3", "Thread-4", "Thread-5"}) {
+    workers.emplace_back(task_t{name, randomizer, condition, mutex, data});
+  }
   std::this_thread::sleep_for(std::chrono::duration<float>(randomizer()));
   {
     std::unique_lock<std::mutex> lock(mutex);
