@@ -12,20 +12,23 @@ from functools import reduce
 from math import floor, sqrt
 
 
-def find_primes(number):
+def factorize(number):
     primes = []
 
     for factor in range(2, floor(sqrt(number))+1):
         if number % factor == 0:
             primes.append(factor)
             while number % factor == 0:
-                number /= factor
+                number //= factor
 
-    return primes or [number]
+    if number > 1:
+        primes.append(number)
+
+    return primes
 
 
 if __name__ == "__main__":
     number = 600851475143
-    primes = find_primes(number)
+    primes = factorize(number)
     assert reduce(lambda a, b: a*b, primes) == number
     print(primes[-1])
